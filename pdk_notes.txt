@@ -1,0 +1,57 @@
+3. PDK Install Directory Structure
+
+   Techfile/            : Includes all temporary files which are used for install program
+   Assura/              : Assura LVS/QRC command files
+   Calibre/             : Calibre DRC/LVS/XRC command files
+   CCI/                 : Calibre Star-RCXT CCI flow technology files directory
+   PDK_doc/             : Includes all documents, please check ReleaseNote 
+                          before using this PDK.
+   REVISION             : Revision history
+   cds.lib              : cds library mapping file
+   display.drf          : Virtuoso display file
+   readme               : readme file
+   ReleaseNote.txt      : PDK detail information
+   pdkInstall.pl        : PDK installation utility
+   pdkInstall.cfg       : PDK installation configuraion
+   skill/               : skill directory includes all callback and utility
+   models/              : hspice/spectre/eldo models
+   techfile             : Virtuoso tech file
+   mapfile              : layout editor mapfile
+   tsmcN65/             : PDK library
+
+
+   1.1 Spice model:
+         PROCESS  : 65nm Mixed Signal RF SALICIDE Low-K IMD (1.2/2.5/over-drive 3.3V) (CRN65LP)
+         MODEL    : BSIM4 ( V4.5 )
+         DOC. NO. : T-N65-CM-SP-007
+         VERSION  : V1.7
+         DATE     : March 21, 2012
+
+         PROCESS  : 65nm Mixed Signal RF SALICIDE Low-K IMD (1.2/3.3V) (CRN65LP)
+         MODEL    : BSIM4 ( V4.5 )
+         DOC. NO. : T-N65-CM-SP-012
+         VERSION  : v1.5
+         DATE     : March 21, 2012
+
+         SPECTRE VERSION : 7.1.0.048
+         HSPICE  VERSION : A-2008.03
+         ELDO    VERSION : v2009.2a
+         
+         These are the list of simulators that are supported!
+         
+  Moreover, this PDK has been tested to work with the following software
+  versions:
+
+
+       *ICFB              IC6.1.5.500.5			cadence
+       *Spectre           sub-version  7.2.0.477.isr16 	cadence	
+       *Hspice            2008.03-SP1			sysnopsys
+       *ELDO              2009.2			mentor
+       *Calibre           v2009.3_15.12			cadence
+       *Assura            AV4.1_USR2_HF9-615		mentor
+       *QRC               EXT101_2_HF3			mentor (for resistance specifically)
+       *StarRC            E-2010.12-SP2			synopsys
+       *Perl              v5.12.2
+       *ncsim             08.20-s003			for digital sim, from cadence
+
+ncsim is for 
