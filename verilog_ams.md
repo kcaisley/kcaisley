@@ -44,7 +44,7 @@ Unified/Commond Power Format (https://www.techdesignforums.com/practice/guides/u
 
 Spectre AMS connect connects the uniform timestep SPICE/Spectre Simulator with an event based Xcelium simulator.
 
-Spectre AMS Simulator/Design is not just an interprocess communication between two seperate kernels, but instead a pair of tightly coupled enginge which access a shared memory storing the state of the circuit during simulation.
+Spectre AMS Simulator/Design is not just an interprocess communication between two separate kernels, but instead a pair of tightly coupled enginge which access a shared memory storing the state of the circuit during simulation.
 
 
 Two ways to run AMS Design/Simulator:

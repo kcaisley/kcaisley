@@ -91,3 +91,4 @@ perhaps i should learn to play with top more in the future
 who
 
 whoami
+whereis
