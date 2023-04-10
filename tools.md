@@ -21,7 +21,7 @@ List of open-source projects tools for analog/mixed-signal circuit design.
 * [ngspice]()
 * [xbase]()
 * [laygo2]()
-* [Layout21[https://github.com/dan-fritchman/Layout21](https://github.com/dan-fritchman/Layout21) Rust library w/ GDS, LEF, etc support
+* [Layout21](https://github.com/dan-fritchman/Layout21](https://github.com/dan-fritchman/Layout21) Rust library w/ GDS, LEF, etc support
 * [PyCells]()
 * [Skywater130 PDK]()
 * [IcarusVerilog]()
