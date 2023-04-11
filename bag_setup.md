@@ -2096,3 +2096,10 @@ tokenizer
 
 I give up for now. I can't install Boost with vcpkg. It's too frustrating. Boost 1.75 is the oldest I can install with a built-in baseline, and for some reason manually specifying the baseline with overrides requires me to write out each of the packages in Boost.
 
+
+## Building on April 10
+cp -r /cadence/mentor/ixl_cal_2016.1_14.11/shared/pkgs/icv_oa.ixl/22.50p001/. .
+
+find . -type d -name "*example*"
+
+

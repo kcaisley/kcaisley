@@ -1002,32 +1002,138 @@ My end goal is to minimize my effort to output ratio, and then work a normal amo
 
 I'm interested in system modeling that homogenizes across a range of time scales (like a pll), in a range of detail scales (semiconductor, analog, digital, Em, heat), using various mathematical represenations
 
-09.03.2023
-
-Fundamentally all modeling can be done in C or C++.
-
-When we write code at higher levels, like in Python or in Verilog, or Verilog-A, it is typically either compiling down to binaries which are then linked against the simulator, or they are interpreted by a compiled program (ie Python) which connects back to C or C++.
-
-21.03.2023
-
-Julia is the perfect workspace for designing integrated circuits.
-
-Like MatLab it has inline plotting, symbolic mathematics support, intuitive notation for mathematics (matrixes, DEQ, etc), interactivity
-
-Like Python it has machine learning, large library support, plotting, interactivity, general purpose programming capability, REPL
-
-Like C it has speed.
 
 
-Like Verilog-A it allows arbitrary modeling of devices, but it has the benefit of extensibility to operators and primitives. Also the JIT Julia language compiler, alongside the necessary libraries, IS the interpreter for the model. This means you don't need to have some sort of division between the model and simulator. They share a representation.
 
-I like the composability of this tool because it allows the user to dig down into understanding mathematical algorithms for their work without having to switch language (like Python bindings around C/C++ extensions). It also allows homogenous integration of other domains like EM solvers, thermal modeling, wireline channels, etc.
 
-Most interesting chip design problems require the combination of multiple problem domains, and proprietary tools will often not be able to keep up with this.
 
-Even within a chip, you can easily run into problems like those seen in a PLL, where you need to simultaneously consider fs-scale jitter and us-scale feedback system dynamics. Another example is modeling on-chip pixels detectors which need to be modeled at the semiconductor level, which then drive circuit-level signal processing, and then feed digital level controls and data output.
 
-Layout generators are critical because they significantly restrict the degrees of freedom of optimization. Even though sub-65nm design are more sensitive than ever to parasitics, the range of solutions for a "good layout" is minimal, and so layout generators increasingly are able generate optimal layouts with minimal exceptions for a wide range of device sizing.
+
+
+
+
+# March 2
+
+
+
+
+I am developing a collection of circuit synthesis engines which are able to produce complete radiation hardened IP blocks including PLLs, TDCs, and readout pixels signal chains.
+
+Top level design of the system is initially completed in Verilog-A. The trick is that we need to be able to make sure that we write Verilog-A which is actually then synthesizable down into an analog layout.
+
+Each parameter of the high level verilog-A model is something that will serve as a parameter which is then passed down to the low level analog implementation.
+
+The high-level specification will populate the high level 
+
+The clearly parameterized Verilog-A model is the the input to the analog generator, and the output, which is a complete layout alongside an extracted schematic, is then characterized and the absolute values are back propogated to the Verilog-A behavioral model.
+
+28nm and 65nm are going to be the target processes, and one should note that 28nm has a more restricted method of 
+
+1. Developing a Verilog-A model a ROSC VCO, which is then able to be simulated in both Cadence and Xyce and NGSpice. I can only use built-in analysis techniques from Cadence/Xyce/ngspice if they are features that are available across all three, beyond that, my evalutation/post processing pipline should be written in Python. Critically, I shouldn't be trying to predict realistic values for the VCO based on some input parameters, or trying to model the internal structure of the VCO. I just want to have a terminal and pin accurate behavior model.
+
+2. Taking an existing VCO design, which was designed in Spectre, and making in cross platform simulatable. This is necessary because I've never built a VCO before, and I want to be able to be able to verify the precision of my model. Once my model matches the real VCO, including parameters that might matter for which it is nested in a PLL (like phase delay, and phase jitter, and power consumption.)
+
+3. When specifying this model, some of the parameters should be input parameters, and some of them should be 'output' calculated parameters. For example, you can't achieve any artibtray combination of bandwidth/speed, power, and gain in an amplifier. Trying an artibrary combination will likely result in an over constrained specification, and so we should be clear about what are the parameters that become fixed (like frequency) and which parameters are 
+
+
+Okay, so I want to put together a simple and lightweight chip design environment which is 'IDE aware'. I should look into being inspired by the rust compiler and analyzer. That software apparently works quite well.
+
+
+In terms of top and bottom up design, I think I still have a log of thinking to do in this regard. However, it appears that properly working with high-level Verilog-A models of devices isn't something that I can make cross platform right now. ADMS is deprecated, and it appears OpenVAF still has a ways to go before being integrated into Xyce, and even in the ngspice integration, doesn't support higher level modeling concepts. It just doesn't low-level compact models, for individual devices. Furthermore, working with Verilog-A models at a high level is less-useful if I don't have a library of components from which I can extra operating parameters. I will struggle to know if my Verilog-A models are accurate, if I can't compare them.
+
+Therefore, what I aim to do is build some simple low-level generators, particularly VCOs to get started. By working in bottom up, I eliminate the need to worry about Verilog-A compatility of my simulators. I can simply generate layouts, using TSMC28 and TSMC65 and then extract their performance characteristics.
+
+I should work inside of Cadence virtuoso, but restrict myself to only using scs netlists, Spectre command line input, and Spectre commandline output. Then I will handle all of the generation of a circuit in Python, and analyze the results in Python. For analysis, I should only use fundamental analysis types in Spectre, and should do all pos processing beyond these in Python, including plotting.
+
+It looks like ngspice has a Spectre and Hspice compatibility mode, and that Xyce support Hspice too, with respect to netlist formats. However, I don't want to spend a bunch of time manually modifying Spectre style netlists into compatibility. 
+
+Therefore, at least for the time being, I want to create my netlists in a Spectre compatible fashion, and verify I'm doing so by using the schematics XL tool, but at least when I start I will only be building a couple different classes of VCO, which are relatively low in transistor count. If I later migrate away from the Spectre netlist format, with OA cells, I won't have made a huge investment.
+
+Actually, on second though, I think I should just write raw netlist files, and not extract them from a schematic GUI. Is this even possible, if I want to use the BAG primitive template transistors? My motivation is that I'm working remotely at the moment, and a full gui is very connection intensive. Perhaps Spectre is even flexible when it comes to the netlist format, and so I can write in a non-Spectre format.
+
+I should look at the code of BAG with OA, and try to understand how it is 'removing' the OA dependency. Is the OA code still there? Or has it just been decoupled, such that an a parrallel implementation could be written? I can find these answers on Github, I suppose.
+
+Another thing I still need to understand is how BAG and TSMC PDK would behave differently in creating individual transistor layouts. Does XBase build on the PDK Pcells, and how are these Pcells written? If not, how do the final netlist for simulations gurantee model accuracy? I think I can rewatch the two BAG tutorials on Youtube to figure out the answer to this question.
+
+One reason why VCOs are a great circuit for me to start with is that they are rather small in terms of transistor count, and also have a fairly well defined interface. For a standard VCO, I simply need three amplifiers. Perhaps with an auxilarry biasing circuit. Then I can also try implementing a DCO circuit, which will have a different transfer function type, and my job is to understand how to homogonize them.
+
+Even this relatively simple circuit will have a whole world of optimization for me to learn about. I can get quite sophisticated in how I analyze and construct this device. I could even learn how to write my own optimization routines, so that the generator isn't just feedforward. Something with generations of the design, perturbing around each point to optimize it. I can try building it in different processes, optimizing it for different oscillation frequencies, and try different architectures. Even just this simple VCO/DCO space could take years of my life. We'll try to limit it to within 10 months though. 
+
+Once I figure out how to properly build BAG and start it, I can successfully limit the scope of knowledge that I need to work on. To just build a bottom-up VCO and DCO generator, I can cut out Verilog-A, semicondutor physics, standard cells, Verilog-D, detector physics, Cadence ADE/assembler, mixed signal simulation, etc.
+
+1: Analog circuit design: Razavi Analog, to size transistors and simulate VCO
+2: PLL circuit design: Razavi PLL, to understand design/application space, in substition for hands on higher level models and test benches
+3: Python Programming: Python docs, Chat gpt, BAG codebase and docs?
+4: PDK organization: BSIM, TSMC65/28nm, PCells, DFM files, layers
+
+This is much more servicble.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I want to be retentionally familiar with the fundamentals, and so I will aim to build cards to review information of the basics.
+
+
+
+
+General Analog: Razavi Analog
+Semicondutor Devices:
+Transitor Modeling:
+PLL Analog: Razavi PLL
+
+
+Verilog-A modeling
+SPICE simulator and methods
+Python, C, and C++ programming
+
+
+The reality of the situation is that even a single journal will publish papers encapsulating knowledge beyond what I could even hope to learn in my lifetime.
+
+If I really want to do science that matters, I need to clearly define what I'm interested in accomplishing. To summarize, I want to work on monolithic pixel detectors, and I want to design them using intelligent algorithms, and want to understand, explain, and even modify the software that I use to accomplish that goal.
+
+I need to reduce the scope even more, but I am running into the fundamental issues of the fact that I'm in a physics PhD, and so I need to understand the physics well enough to design chips that will make a difference. No, but I can successfully reduce the scope, because I can rely on the expertise of others in my group to design chips that matter. What I need to be is an expert on chip design.
+
+To that end, I need Razavi Analog, Razavi PLL, Verilog-A modeling, and a passing understanding of Python, C++, and Linux so that I can properly integrate the software that I hope to use.
+
+My productive output is characterized by my github commits, as everything I want to do I aim to do in code. From here, all the necessary mathematics will follow. Verilog-A is important, because it gives a domain specific modeling and synthesis input. Python is important because it gives me a glue language to analyze everything I'm doing at a high level.
+
+My goal is to make my python code work, so I will learn only 'what I need', within reason, to get unstuck. This is why chatgpt is so useful. It allows me to get unstuck quickly.
+
+As I delve more deeply into working with Verilog-A and SPICE, I want to learn about the analysis techniques used by Spectre, Xyce, and ngspice, to know how the method works, and what it's limitations are. But this isn't to write my own code. It just to simply to make sure that I'm using the analyses correctly, and not pushing them beyond their limits.
+
+I should pursue mixed-signal implementations of my PLL. This doesn't mean that I need to use synthesized digital logic, but it does mean that I should try to use digital control, calibration, and measurement throughout my design.
+
+I'm especially interested in small footprint, low power designs with intelligent calibration algorithms. Take something that's ideally compact and low-power, and then figure out a clever way to reuse and calibrate my way to excellence.
+
+If I stick in the area of TDCs, and PLLs, I can become an expert at mixed signal design and simulation, and can get experience building compacts ADC, TDCs, Ring VCOs, and simple implementations of charge pumps, amplifiers, etc. This is good because I'll constantly be needing to thinks and design in mixed signal domains, and will build up a library of generates and their high levels models in Bag and Verilog-A, so that over time I'm able to quickly experiment with different architectures and pick the best one for a certain application.
+
+These thoroughly mixed signal generators are ideal because they are more portable across different processes and it seems that some people in physics are still sort of stuck in the only way of doing things. For boiler plate circuit functionality, like a PLL for running a chip, it's important that we be able to quickly produce something that just works. Also, if I'm able to see one design flow targetting multiple applications and processes, then I think that I will grow more as an engineer.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1084,3 +1190,77 @@ ISCAS: Late May
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+09.03.2023
+
+Fundamentally all modeling can be done in C or C++.
+
+When we write code at higher levels, like in Python or in Verilog, or Verilog-A, it is typically either compiling down to binaries which are then linked against the simulator, or they are interpreted by a compiled program (ie Python) which connects back to C or C++.
+
+21.03.2023
+
+Julia is the perfect workspace for designing integrated circuits.
+
+Like MatLab it has inline plotting, symbolic mathematics support, intuitive notation for mathematics (matrixes, DEQ, etc), interactivity
+
+Like Python it has machine learning, large library support, plotting, interactivity, general purpose programming capability, REPL
+
+Like C it has speed.
+
+
+Like Verilog-A it allows arbitrary modeling of devices, but it has the benefit of extensibility to operators and primitives. Also the JIT Julia language compiler, alongside the necessary libraries, IS the interpreter for the model. This means you don't need to have some sort of division between the model and simulator. They share a representation.
+
+I like the composability of this tool because it allows the user to dig down into understanding mathematical algorithms for their work without having to switch language (like Python bindings around C/C++ extensions). It also allows homogenous integration of other domains like EM solvers, thermal modeling, wireline channels, etc.
+
+Most interesting chip design problems require the combination of multiple problem domains, and proprietary tools will often not be able to keep up with this.
+
+Even within a chip, you can easily run into problems like those seen in a PLL, where you need to simultaneously consider fs-scale jitter and us-scale feedback system dynamics. Another example is modeling on-chip pixels detectors which need to be modeled at the semiconductor level, which then drive circuit-level signal processing, and then feed digital level controls and data output.
+
+Layout generators are critical because they significantly restrict the degrees of freedom of optimization. Even though sub-65nm design are more sensitive than ever to parasitics, the range of solutions for a "good layout" is minimal, and so layout generators increasingly are able generate optimal layouts with minimal exceptions for a wide range of device sizing.
+
+
+
+# March 27
+With a convolutional neural network approach, I need to decide what my different input nodes are.
+
+Having multiple channels inside a single pixel is likely not the best approach, unless my goal is simply to overcome the device mismatch issues.
+
+That means, my neural network should either act on the different signals present in adjacent pixels, or it should be be monitoring different versions of the signal temporally. Perhaps some delayed copies of the signal could be acted on to identify the character of the pulse.
+
+But this is tricky, as signals are extremely fast. In the current system, they amplify and temporality stretch the pulse, to then feed it into a comparator with inferior input noise and jitter. Finally this is just reset by a global 40Mhz clock edge cycling every 25 nano seconds.
+
+What if there were some way to observe the gradient across local pixels to extremely quickly discover a hit in the matrix. Hmm, this might not work well though, as a perfectly aligned particle track could hit only a single pixel, and then we could have no comparison? Oh wait, so we would have an extremely good comparison. Adjacent pixels staying static is the ideal case.
+
+The minimum activation concept seems to be necessary for neural links, and this is the same basic concept as a discriminator. If this is just one building block of a full neural network (as it is in a detector), perhaps it wouldn't be less hardware intensive.
+
+While discriminator and thresholds seems mandatory, maybe the part we still can cut out is the amplification and pulse shaping. Perhaps we can "directly" monitor the input and feed it into a convolutional network? 
+
+Current signal processing systems are essentially monitoring the input continuously, and upon hit, saturate, and then reduce the time and amplitude dimensionality of the data to a single pair of coarse resolution time stamps.
+
+
+
+
+# April 7
+
+Quote: "Real artists ship."
+
+I've identified the following responsibilities which I'm tending to take on:
+* setting up servers with RAID, NFS, Backups, FreeIPA Identity Management, License Server, and "Fleet Management?"
+* setting up and installing EDA and TCAD tools, and PDK kits, and init/containers
+* configuring workstations to connect to the server, run each of the commercial tools
+* working with bag code base, and building it for our internal use, a Python project with C++ extensions
+* writing generator scripts which generate and simulate AMS designs, and binding against 28nm PDK
+* designing real systems which need to be simulated, integrated, debugged, tested, and interacted upon
+* teaching and reviewing fundamentals of analog electronics, digital, signal processing, simulation engines, semiconductor devices, detector physics
+* doing example problems, perhaps with Julia, in order to refine my knowledge, in tandem with coursework
+* writing blogs and papers about my work, and presenting at conferences
