@@ -2112,3 +2112,13 @@ So, assuming it is mounted on my machine at `/cadence`, I can do:
 cp -r /cadence/mentor/aoi_cal_2016.4_38.25/shared/pkgs/icv_oa.aoi/22.50p001/* .
 ```
 
+
+## Multiple defenitions errors:
+
+I'm finding some possible recommendations about how to figure out this multiple definitions issue:
+
+
+https://stackoverflow.com/questions/69326932/multiple-definition-errors-during-gcc-linking-in-linux
+https://stackoverflow.com/questions/37525922/how-to-handle-gcc-link-optionslike-whole-archive-allow-multiple-definition
+
+The idea to hack it with `--allow-multiple-definition` in `target_link_libraries` doesn't work as `g++` doesn't support it.

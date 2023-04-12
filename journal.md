@@ -1264,3 +1264,103 @@ I've identified the following responsibilities which I'm tending to take on:
 * teaching and reviewing fundamentals of analog electronics, digital, signal processing, simulation engines, semiconductor devices, detector physics
 * doing example problems, perhaps with Julia, in order to refine my knowledge, in tandem with coursework
 * writing blogs and papers about my work, and presenting at conferences
+
+
+# Tuesday, April 11
+
+I need to put out requests for help to get unstuck. And there are a number of places I can probably ask for help.
+
+I'm looking for mentoring/tutoring in debugging/troubleshooting the install of a rather complicated and poorly documented C++/CMake/Pybind11 code base which I've inherited.
+
+Ayan Biswas
+Other Berkeley student
+Thomas Party
+Mariana on open source design
+Other guy from Pakistan
+Open source chip design slack
+Maybe even Klayout dev?
+Boost::spirit issue tracker
+Hans and FTD, like Klaas?
+Elsewhere in Bonn (ask Georgi, and informatics department)
+
+Not everybody has oa libs
+Also I need to document more
+
+
+Real artists ship:
+
+I'm getting excited about Julia's composability and homogenous modeling concept, but it appears that area a long way off in terms of having a full stack solution.
+
+And gdstk + gdsfactory seems super impressive, but the reality is my PDKs are distributed with device Spectre models/SCS files, Virtuoso schematic symbols (OA), and Open Access layout Pcells.
+
+I only get 1-2 innovation tokens, and I don't want to spent it trying a process other than TSMC 28nm/65nm or writing my own simulation engine, and therefor I should work within the Cadence toolchain to be productive.
+
+As my group already uses Python, it would be a poorly compatible contribution to their workflow if I worked in Julia.
+
+I want to spend my "innovation tokens" on:
+
+    building a framework for modeling a pixel detector signal chain, which can be used to compare designs using FOMs and discover room for improvements. This would be using a combination of Python and Verilog-AMS. I can use Verilog-AMS not just to behaviorally model transistor circuits, but also to homogenize with complex digital circuits and device level simulators while staying in Spectre.
+    generate designs which improve on this signal chain using BAG and Xbase. Xbase is the tool for the job, because I want to be able to tune transistor sizes in Python.
+    slowly and interatively learn programming and contribute to BAG/Xbase, especially in the vein of refactoring the code into one self-contained library, with convenient packaging. Ultimately programming is programming, and I will learn morning being pragmatic and working with other people, then I will ever by myself off in Julia land.
+    
+# Wednesday, April 12
+
+Presentation from Dan Fritchman on Hdl21, Hdl21Schematics, and Vlsir. Given on Tuesday December 6, 2022, during the Chips alliance Analog working group meeting.  [Link Here.](https://www.youtube.com/watch?v=FnLz2Wx2DxY)
+
+* [Hdl21](https://github.com/dan-fritchman/Hdl21)
+* [HDL21Schematics](https://github.com/Vlsir/Hdl21Schematics)
+* [VLSIR](https://github.com/Vlsir/Vlsir)
+* [Layout21](https://github.com/dan-fritchman/Layout21) meta crate containing GDS, LEF, raw layout, and tetris layout crates written in Rust
+* [BAG->HDL21](https://github.com/Vlsir/Hdl21BagPorting)
+
+
+I want to look into this work more. Apparently data serialization and compilers come together to allow for intermediate representations (IR).
+
+It appear there are many different representations for data serialization, and they can be broadly classified as such:
+
+So here's how I think this fits into all the other different types of data serialization, aka 'binary formats'.
+
+* Schema-ful, copying: Protobuf, Thrift, plenty more
+* Schema-ful, zero-copy: Cap'n'proto, Flatbuffers
+* Schema-less, copying: Json (binary and other variants included), XML
+* Schema-less, zero-copy: Flexbuffers (Any others? This seems new to me) 
+
+I'm not sure how these compare relative to like OpenLane/OpenRoad's database thing called 'OpenDB'. But it must be on the same axis?
+
+## Chips Alliance Analog Working Group
+
+There are additionally 6 other presentations which I think are worth watching.
+
+One day after the Dan Fritchman presentation, there was this: https://www.mos-ak.org/silicon_valley_2022/
+
+It was given on [December 7 2022](https://www.youtube.com/watch?v=pJ7S_usjEps)
+
+Then watch the series of 5 presentations from 01.24 until 04.04
+
+* 24 January: Open Source Tools for Modeling - Hands on Overview. with Markus Muller hosting. First discussion of Open VAF.
+* 31 January: Silicon CMOS Operating at Cryogenic Temperatures
+* 28 February: Han-Chi Han & Professor Christian Enz will present their work on SKY130 silicon measurements and associated data. 
+* 21st March: Pascal and Ken on OpenVAF
+* 4th April: Update from Tim Edwards on Magic and PEX extraction
+* 18th April: Ecosystem of compact model development from Sadayuki Yoshitomi <----- Next presentation
+* 2nd May (tentative): Update from EPFL C. Enz and test structures measurements
+
+## Met with Hans, same day as above.
+
+Asked about power consumption limit of 500mW per square centimeter. Hans said the basic problem of power consumption is that the operating temperature of the detector layers must be kept at around -20Celcius during operation, or else thermal runaway in the sensors will lead to irreversable damage. As the operating temperature is limited to -20 C, then therefore the available material budget (which must be limited to prevent multiple scattering), especially in e+ e- colliders like Belle, determines the amount of power dissipation that can be allowed, between the sensor and the hybrid readout electronics. The leakage current of the sensors can range in the nano-amps, and increases over the radiated lifetime of the sensor, but it also runs at a much higher voltage. Overall, about half the power dissapation originates in the sensor and the other half in the readout chip.
+
+Next we talked about coupling of the sensors, to the readout electronics, and how the leakage current in the sensor affects the system. In systems that are DC coupled, which is the majority of the sensors, any additional current will manifest as error signal in the integration period, and so you need a compensation circuit. It sounds like charge-sensitive amplifiers somehow manage to work around this partially, by somehow ignoring the dc component using their 'bandpass' characteristic. But I suppose this isn't perfect?
+
+The other approach, which has been tried, is AC coupling the sensor which prevents the DC leakage from affecting the readout electronics. However, this will form a capacitive divider with the pixel sensor capacitance. The ratio of sensor_cap:coupling_cap roughly forms the ratio of signal loss so a much larger coupling cap is needed. For example a 1:10 ratio means that 10% of the signal charge is lost (I think???).  Seeing as typical pixels have a capacitance on the order of 50fF, we would need a coupling capacitance of around 5 pF (100x) in order to get around only a 1% loss in the sensor's signal charge.
+
+Finally, we discussed the issue of tracking. The majority of hits in the sensor will not be read out, but we can't know which hits to discard until we recieve the tracking data. In super high luminosity experiments, however, there is no way to readout all of the hits, as we would quickly hit our limit on the digital IO. Therefor a huge amount of chip are and space is spent holding the potential hit data in memories, which then are mostly discarded when tracking data is recieved after a fixed delay. Some people have investigated different ways of acquiring simple tracking information on-chip, so that a larger portion of the hits can be discarded immediately.
+
+Tomorrow, I want to chat with Hans about the potential for looking at a free-running integrating VCO. A couple ideas I have:
+
+1) Using nearby pixels to infer false/true positives? Perhaps from the gradient?
+2) Using inter-pixel signal gradients to do baseline correct/cancellation. Think of it sort of link correlated double sampling, but using adjacent pixels during the same time references, rather than the same pixel twice.
+3) Alleviating the need for a pixel-wide clock, by using neighbors as a reference? But perhaps neighbors can't be used for both 'double-sampling' noise reduction and and referencing for 
+4) other ideas?
+
+
+
