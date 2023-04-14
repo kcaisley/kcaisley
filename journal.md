@@ -1362,5 +1362,72 @@ Tomorrow, I want to chat with Hans about the potential for looking at a free-run
 3) Alleviating the need for a pixel-wide clock, by using neighbors as a reference? But perhaps neighbors can't be used for both 'double-sampling' noise reduction and and referencing for 
 4) other ideas?
 
+## 13 April
+
+I should add GitHub to my phone, so that I can take notes and read docs in a centralized but limited fashion
+
+—-
+
+The primary limitations on my workflow is the speed at which I am able to iterate on layouts. Accurate simulation relies on parasitic extraction, and right now I'm dis-incentivized to modify the layout many times because it takes so long to tweak.
+
+If instead, my layout was scripted with a significant degree of constraining the dimensions in the layout, then I think I could quickly try wildly different different layouts. In the current approach, I tend to lock myself into a certain region within which I can only optimize marginally.
+
+The code base.
+  PyBag
+  Version without OA? (Do diff to understand)
+  Purpose of each block, w/ description
+  We are concerned with pybag down
+  Versions of OpenAccess libraries
+  
+
+The pre-build project setup steps
+  Dependency Versions
+  Folders
+
+The build process (follow the log, warns and w/o)
+  Setup.py (understand and explain)
+  CMake
+    G++
+    Linking error
+        Examination of compiler flags
+        Code purpose of Spirit
+        recursive inclusion
+
+## HDL21
+
+The scope is the construction of a netlist, but not one of a SPICE variety. I can export to a netlist, which then can be fed to SPECTRE for simulation. Critically, it is compatible with foundary BIM models, because the BSIM is handled internally inside of the SPECTRE files
+
+# 14.04.2023
+
+I think that this SPICE netlist simulation could be something of interest to Dominic. I am interested if he would be willing to invest 1 day in building out a model of his circuit, and running a simulation of it in ngspice. I should try to understand what his device models are, build his schematic in the netlister, and then attempt to run a simulation which reproduces what he has built in his LTSpice setup.
+
+He might even help me with learning to use and debug the library.
 
 
+# I need to think about how I want to produce my layouts. I need to consider that I have Pcells for transistors, caps, and resistors. I need someway to translate these into Python-based Parameterized cells. I wonder if I could somehow import into Synopsys PyCell designer, and get a python version?
+
+Alternatively, I could somehow extract a fixed library of transistor GDS files, hopefully constrained within reason on the limited/fixed sizing of small 28nm process node?
+
+1. Klayout python scripting. Even not using GUI, I think the Python scripting is very manual and limited. On the brigt side, python PCells appear to be supported? But perhaps not in the same format.
+
+2. BAG, which directly reads and writes to the OA format (or Skill, if using without OA). But this is very cadence dependent still, even so far as requiring a OA schematic to begin from. Perhaps I could instead read in a SPICE netlist, generated from HDL21, as my starting point?
+
+3. GDSFactory / GDSTk. Appear focused on low level devices and architecturally simple microwave/optical circuits, but it is very mature.
+
+4. Layout21 and VLSIR.
+
+## Potential problems:
+
+The HDL21 system doesn't seem at all concerned with abstraction macro models for simulation. But perhaps that is the point. As it is an embedded DSL, it assumes that anything else needed can be satisfied by the general-purpose programming language status of python. It's pragmatic because it doesn't try to model devices, it assumes they are black boxes. At it doesn't try to simulate them either. It just produces an industry standard netlist and lets to feed and recieve back from standard simulators. The pragmatism comes from simplifying but fundamentally accepting the paradigm of circuit designers. And perhaps I need to do this too, if I want to get anything done.
+
+But one question then - what is the BAG conversion tool doing? It's just importing the schematic generator component of BAG! It doesn't deal with the layout component.
+
+## The plan (14.04.2022)
+
+Alright, so I think that the best approach then for me is to just get started with the Schematic and Simulation workflows with HDL21 and VLSIR simulation. I need to be able to show that I can genereate Spectre netlists, and run Spectre simulations, with 28nm device models, in order for Hans to approve and support me.
+
+I will then use python to do some higher level system modeling. This will prevent me from having to learn another language like Verilog-AMS. At this level I will ask and answer questions like, what is the best arch. for pixel detectors. I want a plot show where you would use certain architectures built in both 65 and 28nm, depending on the maximum power dissapation per unit area (which implies detector type/material budget/cooling). On the Y axis would be the 'performance', which I suppose should be effective resolution. Also, hit rate information should be somehow included. This forms the trifecta FOM of sampling rate, resolution, and power. But somehow pixel size is split between affecting both resolution (spatial quantization noise) and power (via pixel layout density). I think the key to understanding this all is in the originating signal itself. We must understand what we want to know about to particles, with what precision and accuracy, before we can make any meaningful decisions about the readout.
+
+In parrallel I will try and see if I can finish building and setting up BAG. Both of these steps will require me to install and understand the 28nm PDK. But I don't want to actually try designing anything.
+
+Then I will evaluate the layout creation process in both Layout21 and BAG. If BAG seems most appropriate, I will hack around to force it to accept Spectre schematics. Or perhaps just import them. If Layout21 is the most appropriate 
