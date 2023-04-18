@@ -6,6 +6,9 @@ date: 06.04.2023
 
 # Pixel Detector Figure of Merit
 
+
+
+
 ## from RD53A Specs 2015:
 
 "following discussions with ATLAS and CMS sensor developers, for RD53A we have assumed sensors have less than 100 fF per pixel and deliver a single pixel signal greater than 600 e− in at least one pixel for 99% of incident particles"

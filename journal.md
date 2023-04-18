@@ -1372,39 +1372,18 @@ The primary limitations on my workflow is the speed at which I am able to iterat
 
 If instead, my layout was scripted with a significant degree of constraining the dimensions in the layout, then I think I could quickly try wildly different different layouts. In the current approach, I tend to lock myself into a certain region within which I can only optimize marginally.
 
-The code base.
-  PyBag
-  Version without OA? (Do diff to understand)
-  Purpose of each block, w/ description
-  We are concerned with pybag down
-  Versions of OpenAccess libraries
-  
-
-The pre-build project setup steps
-  Dependency Versions
-  Folders
-
-The build process (follow the log, warns and w/o)
-  Setup.py (understand and explain)
-  CMake
-    G++
-    Linking error
-        Examination of compiler flags
-        Code purpose of Spirit
-        recursive inclusion
-
 ## HDL21
 
 The scope is the construction of a netlist, but not one of a SPICE variety. I can export to a netlist, which then can be fed to SPECTRE for simulation. Critically, it is compatible with foundary BIM models, because the BSIM is handled internally inside of the SPECTRE files
 
-# 14.04.2023
+# 13.04.2023
 
 I think that this SPICE netlist simulation could be something of interest to Dominic. I am interested if he would be willing to invest 1 day in building out a model of his circuit, and running a simulation of it in ngspice. I should try to understand what his device models are, build his schematic in the netlister, and then attempt to run a simulation which reproduces what he has built in his LTSpice setup.
 
 He might even help me with learning to use and debug the library.
 
 
-# I need to think about how I want to produce my layouts. I need to consider that I have Pcells for transistors, caps, and resistors. I need someway to translate these into Python-based Parameterized cells. I wonder if I could somehow import into Synopsys PyCell designer, and get a python version?
+I need to think about how I want to produce my layouts. I need to consider that I have Pcells for transistors, caps, and resistors. I need someway to translate these into Python-based Parameterized cells. I wonder if I could somehow import into Synopsys PyCell designer, and get a python version?
 
 Alternatively, I could somehow extract a fixed library of transistor GDS files, hopefully constrained within reason on the limited/fixed sizing of small 28nm process node?
 
@@ -1422,7 +1401,7 @@ The HDL21 system doesn't seem at all concerned with abstraction macro models for
 
 But one question then - what is the BAG conversion tool doing? It's just importing the schematic generator component of BAG! It doesn't deal with the layout component.
 
-## The plan (14.04.2022)
+## The plan (13.04.2022)
 
 Alright, so I think that the best approach then for me is to just get started with the Schematic and Simulation workflows with HDL21 and VLSIR simulation. I need to be able to show that I can genereate Spectre netlists, and run Spectre simulations, with 28nm device models, in order for Hans to approve and support me.
 
@@ -1431,3 +1410,76 @@ I will then use python to do some higher level system modeling. This will preven
 In parrallel I will try and see if I can finish building and setting up BAG. Both of these steps will require me to install and understand the 28nm PDK. But I don't want to actually try designing anything.
 
 Then I will evaluate the layout creation process in both Layout21 and BAG. If BAG seems most appropriate, I will hack around to force it to accept Spectre schematics. Or perhaps just import them. If Layout21 is the most appropriate 
+
+To start making any progress, I need to start sketching out some ideas and tests. The only meaningful place for me to start sketching these ideas, as an electrical engineer is with schematics. As long as my schematics simulate against TSMC28 and potentially TSMC65, I should have no issue getting a fairly accurate estimate of circuit performance.
+
+The primary concern I have of course is widely underestimating layout parasitics, but I should be able to do some basic layout tests in Cadence to get some estimated numbers. Other factors like mismatch and noise will be harder to account for, but not impossible. The simplicity of schematic simulation should be more than worth the potential for inaccuracy.
+
+Along the way, I am encouraged to find mathematical models that simply explain the performance of different blocks.
+
+Once the tool ecosystem matures, I can then start investigating how to create layouts. I should try and put layout off for some time. As long as I don't have to make a real device, I can avoid huge amounts of arduous clicking and non-reproducible work.
+
+To pursue more high-level work and avoid too much drudgery with pad rings and tap out, I should align more with Jochen, so that he can understand what I'm doing and see the value.
+
+Tapeouts are expensive, and so avoiding them unless there is something actually worth testing is a good principle to follow.
+
+A good first step would be working with Dominic to build a Python model and simulation of his  LtSPICE netlist. Pulling in the actual PDK transistor models and then simulating them, and returning to Python is something that could be super high value to Dominic. But it looks like measurements will still be the largest aspect of his thesis.
+
+
+Also.... Do protocol buffers (intermediate representation compilers) actually secretly suck? These are the first I've heard of them, so there must be large downsides to using them? Perhaps I can search online for people's thoughts around protocol buffers. I guess they have both a streaming, in memory, and on-disk representation. That seems like a killer feature. I guess it's part of what is making VSCode so well integrated with language servers, for example? Parsing sucks. So write a single parsing format, and have everybody read and write from it. Have the interchange format be specified separately seems like it would also allow for simple future updates, which applications can choose to support or not?
+
+
+———
+
+Before chatting with Dominic, I should maybe just see if I can simulate an inverter. I hope this is easy with the built int SKY130 PDK. One I know that works, I can customize for my process, or Dominic's. Actually I will want to do both, anyways, and so starting with either is fine. But even before this, I should just try all the defaults so see if HDL21 is even working...
+
+
+———
+
+imec download and check, email them
+C++ email
+chat with Dominic about circuit and hike
+Email jochen about Greece 
+
+Later:
+working on full PDK install
+And HDL21 can wait until later
+
+
+# april 14
+
+
+Parameterized device layouts for Sky130
+
+The purpose of this project is to expand the set of available parameterized devices available in magic for use with the SkyWater Sky130 foundry process. These devices are created using an existing framework written in Tcl/Tk, although most of the code involves magic command-line commands (which are implemented in Tcl). Only a basic understanding of Tcl variables, conditionals, loops, and subroutine calls is needed.
+
+Existing devices could use more thorough checks of DRC cleanliness across a wide range of parameters. FET devices could use an option to have all gate contacts merged into a single net, which would also allow a tighter pitch for the smallest length devices.
+
+New devices of interest that have not yet been done in parameterized cells include (but are not limited to): The photodiode, extended-drain MOSFETs, bipolar transistors, ESD transistors, inductors, metal fuses, UHV (ultra-high-voltage) devices.
+
+Each new device should follow the design specifications for device layout from the SkyWater DRC manual, and needs to implement five routines that (1) define the device parameters and limits, (2) convert parameters from a SPICE netlist, (3) define the user interface dialog (UI) for setting those parameters, (4) check and enforce parameter limits, and (5) draw the device. After implementing, each device needs to be checked for DRC correctness by generating a “torture test” of a large array of devices with different sets of parameters which can be passed to the DRC checkers to make sure that the drawing routine produces DRC clean layouts.
+
+Skill level: Intermediate/Advanced
+
+Duration: medium (175 hours)
+
+Language/Tools: Tcl/Tk, Magic
+
+Mentors: Tim Edwards
+Parameterized device layouts for GF180MCU
+
+The purpose of this project is to expand the set of available parameterized devices available in magic for use with the Global Foundries GF180MCU foundry process. These devices are created using an existing framework written in Tcl/Tk, although most of the code involves magic command-line commands (which are implemented in Tcl). Only a basic understanding of Tcl variables, conditionals, loops, and subroutine calls is needed.
+
+At the moment, even the basic parameterized devices for GF180MCU have not been thoroughly vetted and checked across a large number of parameters.
+
+New devices of interest that have not yet been done in parameterized cells include (but are not limited to): Extended-drain MOSFETs (LDNMOS, LDPMOS), bipolar transistors, schottky diode, ESD devices (salidice-blocked drain (SAB) devices), fuse devices (metal, poly, and eFuse).
+
+Each new device should follow the design specifications for device layout from the GF180MCU DRC manual, and needs to implement five routines that (1) define the device parameters and limits, (2) convert parameters from a SPICE netlist, (3) define the user interface dialog (UI) for setting those parameters, (4) check and enforce parameter limits, and (5) draw the device. After implementing, each device needs to be checked for DRC correctness by generating a “torture test” of a large array of devices with different sets of parameters which can be passed to the DRC checkers to make sure that the drawing routine produces DRC clean layouts.
+
+Time permitting (e.g., 350 hour internship instead of 175 hour), the internship can include general improvements to the methods for Tcl-scripted parameterized devices in Magic.
+​
+
+
+
+
+

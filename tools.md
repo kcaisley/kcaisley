@@ -30,6 +30,8 @@ List of open-source projects tools for analog/mixed-signal circuit design.
 * [SKiDL](https://github.com/devbisme/skidl) Python Library for embedded DSL for schematic entry
 * [Gnucap](https://www.gnu.org/software/gnucap/gnucap.html)
 * [Verilog]() Also called 'Verilog-D'
+* [OpenFASOC]()
+* [OpenROAD]()
 
 
 # Outside of Analog mixed signal design, there is also:
@@ -54,3 +56,6 @@ List of open-source projects tools for analog/mixed-signal circuit design.
 * Method of Moments (MoM), or equivalently, Boundary Element Method (BEM)
 
 It also documents the available solver types.
+
+
+
