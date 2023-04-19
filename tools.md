@@ -59,6 +59,10 @@ It also documents the available solver types.
 
 
 
+# Documentation
+
+[Handout](https://github.com/danijar/handout) Alternative to Pweave (as it is now outdated), which takes a .py file as an input with Mardown in comments, and writes out to an .html page with images added in. Just refresh the browser to see changes after running.
+
 # My needs
 
 as a chip designer, fundamentally, I think and work in different paradigms:
@@ -89,9 +93,48 @@ using a python based netlist generator, we can pull in real device models to be 
 
 
 
+# Julia Simulink alternative
+
+DifferentialEquations.jl is great, but very low level and would require writing all eqs myself
+
+Sims.jl is most similar (uses Sundials and DASKR internally)
+
+Modia.jl, from the creators of Modelica, but it's new. Built onf 
+
+RigidBodySim.jl which uses DifferentialEquations.jl inside
+
+ControlSystems.jl covers a fair amount of the controls toolbox
+
+SimJulia is a discrete event simulator
+
+CppSim seems to combine things in a way I want?
+
+ModelingToolkit.jl?
+
+Modelica (C++ modeling toolkit)
+
+
+
+
+
 # Assembling a Workflow
 
 The scope of this section is the identifying the needs I have have in my research workflow, and what tools I will use to satisfy those needs. First, we will begin by mapping our the sorts of mathematical models I need to tractably work with.
+
+
+
+All data should be pulled back up to a high-level programming language. This is because all of my thought and decision making can be done in an an environment that is highly-flexible. Julia has some really nice features including speed, built in arrays and symbolic computing, and inline docs with Weave.jl. But the ecosystem isn't that mature yet. I'm choosing python for the following reasons:
+
+1) Everybody at FTD, Berkeley, and even Lise uses Python. I have a much higher chance of passing knowledge on and getting help if I work in it.
+2) Stability
+3) Fast parts are fast enough, slow parts hopefully won't matter
+4) Composable enough, without clear issues like Julia
+5) Huge userbase, and chat gpt uses it
+6) More mature tooling, no need to self compile
+
+I can run against low level spice simulators, and then use regression to extract a simple model for high level simulation.
+
+
 
 
 
