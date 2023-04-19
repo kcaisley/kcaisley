@@ -59,3 +59,41 @@ It also documents the available solver types.
 
 
 
+# My needs
+
+as a chip designer, fundamentally, I think and work in different paradigms:
+
+simple mathematically tractable models:
+
+linear transistor models with linear circuit fundamentals
+
+beyond anything but the most simple circuits, we abstract with
+
+discrete and continuously time transfer functions
+
+OR
+
+some sort of quantized non-linear step based output
+
+OR
+
+in limited cases, a nonlinear expression, in the cases of things like VCO gain error
+
+AND
+
+standard deviation for static offset/mistmatchs and standard deviations for timing amplitude noise
+
+netlist based similations:
+
+using a python based netlist generator, we can pull in real device models to be used in Spectre sim,
+
+
+
+# Assembling a Workflow
+
+The scope of this section is the identifying the needs I have have in my research workflow, and what tools I will use to satisfy those needs. First, we will begin by mapping our the sorts of mathematical models I need to tractably work with.
+
+
+
+
+
