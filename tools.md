@@ -169,3 +169,13 @@ In addition to my basic education (Baker and Razavi), my work is defined as:
 Rather than just wandering in the dark, I should embrace the abstractions and tools that I've been given as an Electrical Engineer. I should use SPICE via HDL21 and VLSIR and not try to get too fancy with my modeling,quickly. My goal is to make my work something that is easily communicatable to others.
 
 Minimalism in abstraction means that I try my hardest with a specific model, to really understand and learn where it breaks down.
+
+A snippet from my Verilog-AMS notes came to me:
+
+> SystemVerilog and Verilog-AMS both have support for real number modeling (called real/wreal, respectively). This is faster, but less performant that SPICE or more complex Verilog-AMS models, because real/wreal models don't require 'solvers'. The IO behavior is simply defined by a function, and is evaluted with simple discrete event solver. Therefor it does not behave well for models that involve feedback.
+
+This would essentially be the limitation I would run into if I wrote my own behavioral models. They would only work for a single type of input (DC, Transient, AC, or noise, etc. Perhaps this is okay though. "All models are wrong, some are useful."
+
+At the end of the day, I can always convert everything back into transistor level SPICE for time consuming but accruate and straightforward verification.
+
+I'm curious if any work has be done to produce Verilog-A from Python. Also it looks like Cppsim was a very practical take on composing these solutions at the high level. I guess I will do the same thing, but in Python.
