@@ -139,4 +139,17 @@ Julia the language is quite beautiful, and the tooling is on paper great, but I'
 Therefore, I should use Python.
 
 
+# My use case
+
+There are different solutions of automation in Analogb IC design, and I should be clear about my use case in order to best identify the workflow to choose.
+
+* I am generating for proprietary TSMC 65nm and 28nm PDKs, with a shared NDA between approximately 20 institutions.
+
+* reproducibility: keeping the math and design equations in line with the 
+* process portability: design simultaneously for multiple processes
+* reduced manual layout work
+* Top level modeling, in a language HEP knows.
+    * Additionally, if I shun Verilog AMS, my design simulations should be able to run against NgSPICE and Xyce as well. 
+    * Also, if I use the concept of "regression" I can build block models which I can use to have a high-level pure python model of my system. This will allow simpler reuse of my system models by physics people who just want to work in python.
+
 
