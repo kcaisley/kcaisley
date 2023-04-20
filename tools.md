@@ -134,10 +134,9 @@ All data should be pulled back up to a high-level programming language. This is 
 
 I can run against low level spice simulators, and then use regression to extract a simple model for high level simulation.
 
-This is a test of the github editor.
+Julia the language is quite beautiful, and the tooling is on paper great, but I'm really not an experience software developer, and I don't plan on writing that many lines of library code myself in the coming years. At least for the next 3 years I will spend more time on the application than on the libaries themself, and so I should tolerate some poor composability of interfaces if it means I get in exchange some more popular libraries which I can understand.
 
-
-
+Therefore, I should use Python.
 
 
 
