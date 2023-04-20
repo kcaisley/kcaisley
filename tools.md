@@ -158,8 +158,9 @@ In addition to my basic education (Baker and Razavi), my work is defined as:
 
 * I am generating for proprietary TSMC 65nm and 28nm PDKs, with a shared NDA between approximately 20 institutions.
 
-* reproducibility: keeping the math and design equations, plotting output, and reporting in line with the actual design creation.
+* I am not trying to build a general purpose compilers for pixel signal processing chains, this depends too much on the particle to be detected, and there isn't that much demand for them. But I am trying to build parameterizable compilers for sub-blocks, so that the design space can be more easily explored by humans designers. I want to better understand the limits of the technology.
 
+* reproducibility: keeping the math and design equations, plotting output, and reporting in line with the actual design creation.
 * process portability: design simultaneously for multiple processes
 * reduced manual layout work
 * Top level modeling, in a language HEP knows.
