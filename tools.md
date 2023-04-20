@@ -143,13 +143,29 @@ Therefore, I should use Python.
 
 There are different solutions of automation in Analogb IC design, and I should be clear about my use case in order to best identify the workflow to choose.
 
+
+
+
+There is a reason why SPICE is used for low level transistor accurate simulation, but system level design is still done with design equations and toy models (see Baker CMOS initial vs latter chapters). For my high level system design, which is very applicarion specific, I want to "own" all the code. If I do this in python, I will likely work in a way where all my modeling is still independent. As soon as I start to rely on a "simulation engine" to evalute my models, I will lose that ownership. With large networks of diffrrential equations, it's almost mandatory (although Julia lets you keep it in one language), but the beauty of electrical engineering is that it's given me the tools to fight against that complexity using approximation and math.
+
+This is why feedback systems like PLLs are such a tricky problem. They are almost begging for some type of solver. But laplace transforms and signals/systems math gives one some tools simplify to a subset of differential equations which can be reduced and manipulated in a linear representation.
+
+Spice has no understanding of laplace transforms, etc. It is focused on accurate modeling of real devices. It can handle nonlinearities, but only those naturally arising from the low level transistor arrangement itself. In some ways, it is more like running an experiment and less like writing a model.
+
+One thing I wonder is how can I incorporate things like noise/jitter, nonlinearity(like an ADC), and continous linear systems, discrete systems (z-transforms), etc together? I guess one solution is to just use a simulator, but I get frustrated because I feel like I'm losing and understanding of how to actually compose mathematics together to find a solution.
+
+In addition to my basic education (Baker and Razavi), my work is defined as:
+
 * I am generating for proprietary TSMC 65nm and 28nm PDKs, with a shared NDA between approximately 20 institutions.
 
-* reproducibility: keeping the math and design equations in line with the 
+* reproducibility: keeping the math and design equations, plotting output, and reporting in line with the actual design creation.
+
 * process portability: design simultaneously for multiple processes
 * reduced manual layout work
 * Top level modeling, in a language HEP knows.
     * Additionally, if I shun Verilog AMS, my design simulations should be able to run against NgSPICE and Xyce as well. 
     * Also, if I use the concept of "regression" I can build block models which I can use to have a high-level pure python model of my system. This will allow simpler reuse of my system models by physics people who just want to work in python.
 
+Rather than just wandering in the dark, I should embrace the abstractions and tools that I've been given as an Electrical Engineer. I should use SPICE via HDL21 and VLSIR and not try to get too fancy with my modeling,quickly. My goal is to make my work something that is easily communicatable to others.
 
+Minimalism in abstraction means that I try my hardest with a specific model, to really understand and learn where it breaks down.
