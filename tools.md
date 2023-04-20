@@ -158,7 +158,9 @@ In addition to my basic education (Baker and Razavi), my work is defined as:
 
 * I am generating for proprietary TSMC 65nm and 28nm PDKs, with a shared NDA between approximately 20 institutions.
 
-* I am not trying to build a general purpose compilers for pixel signal processing chains, this depends too much on the particle to be detected, and there isn't that much demand for them. But I am trying to build parameterizable compilers for sub-blocks, so that the design space can be more easily explored by humans designers. I want to better understand the limits of the technology.
+* I am not trying to build a general purpose compilers for pixel signal processing chains, this depends too much on the particle to be detected, and there isn't that much demand for them. But I am trying to build parameterizable compilers (template based) for sub-blocks, so that the design space can be more easily explored by humans designers. I want to better understand the limits of the technology.
+
+* In short, I want tools which keep up with how quickly I think, but I don't want them to think faster than me. I don't want to use automated optimization during this phase of my career.
 
 * reproducibility: keeping the math and design equations, plotting output, and reporting in line with the actual design creation.
 * process portability: design simultaneously for multiple processes
@@ -180,3 +182,5 @@ This would essentially be the limitation I would run into if I wrote my own beha
 At the end of the day, I can always convert everything back into transistor level SPICE for time consuming but accruate and straightforward verification.
 
 I'm curious if any work has be done to produce Verilog-A from Python. Also it looks like Cppsim was a very practical take on composing these solutions at the high level. I guess I will do the same thing, but in Python.
+
+
