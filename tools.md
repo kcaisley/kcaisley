@@ -1,4 +1,4 @@
-# Open Source Analog Design
+# Tools for Analog Design
 
 List of open-source projects tools for analog/mixed-signal circuit design.
 
@@ -182,5 +182,3 @@ This would essentially be the limitation I would run into if I wrote my own beha
 At the end of the day, I can always convert everything back into transistor level SPICE for time consuming but accruate and straightforward verification.
 
 I'm curious if any work has be done to produce Verilog-A from Python. Also it looks like Cppsim was a very practical take on composing these solutions at the high level. I guess I will do the same thing, but in Python.
-
-
