@@ -79,7 +79,7 @@ Assume a standardized jitter for clocks available across the pixel matrix
 * Jitter is short term variation w/ frequencies above 10 Hz, other it is called "wander"
 * Must be characterized w/ statistics (mean, standard deviation $\sigma$, and confidence interval)
 * High pass filter is useful for physical measurement, to cancel "wander"
-* This can be a PLL, which is "nice" because it mimics a real systme
+* This can be a PLL, which is "nice" because it mimics a real system
 * Ideal sinusoid is ideal reference, most often (with same freq. and $\phi$), found via min $\Sigma(error)^2$
 
 $$
@@ -90,7 +90,7 @@ where $\omega_c$ and $\phi_c$ are constants chosen to minimize timer error of po
 
 Jitter can be measured in:
 
-1. Periodic Jitter $J_p$ : Just a histogram of signal peridos of a persistent period, measured often in persistence mode (trigger on one edge/peak of waveform, and then measure 'width' on the subsequent edge/peak)
+1. Periodic Jitter $J_p$ : Just a histogram of signal periods of a persistent period, measured often in persistence mode (trigger on one edge/peak of waveform, and then measure 'width' on the subsequent edge/peak)
 
 2. Cycle-to-Cycle $J_{c2c}$: First order difference of period jitter, which show dynamics from cycle-to-cycle, for a PLL, etc
 
