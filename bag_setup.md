@@ -401,60 +401,97 @@ This completed now, but I still have unanswered questions about several other fi
 ## Chronological origin of files in top level directory, during installation:
 Following steps from: https://github.com/ucb-art/cds_ff_mpt-bag3
 
-#### Mannually making new git repo, and adding git modules, and updating them
+#### Manually making new git repo, and adding git modules, and updating them
 
-* BAG_framework           manually git moduled from my local copy
-* cds_ff_mpt-bag3         manually git moduled from local copy (this is primitives tech repo)
-* .gitmodules
-* .git
+BAG_framework           manually git moduled from my local copy
+
+cds_ff_mpt-bag3         manually git moduled from local copy (this is primitives tech repo)
+
+.gitmodules
+
+.git
 
 #### Running install.sh in workspace directory (many of these files had to be prepared)
 
-* bag_submodules.yaml     copied from worksapce setup, via install.sh
-* .cdsenv.personal        copied from worksapce setup, via install.sh
-* .cdsinit.personal       copied from worksapce setup, via install.sh
-* bag_config.yaml         link from workspace setup, via install.sh, multipurpose config file, used by `setup_submodules.py` during installation, and during BAG runtime.
-* `.bashrc`                 link from workspace setup, via install.sh
-* .bashrc_bag             link from workspace setup, via install.sh
-* .cdsenv                 link from workspace setup, via install.sh
-* .cdsinit                link from workspace setup, via install.sh
-* cds.lib.core            link from workspace setup, via install.sh, included by `cds.lib` on startup
-* .cshrc                  link from workspace setup, via install.sh, unused
-* .cshrc_bag              link from workspace setup, via install.sh, unused
-* display.drf             link from workspace setup, via install.sh
-* .gitignore              link from workspace setup, via install.sh
-* models                  link from workspace setup, via install.sh (is a directory)
-* pvtech.lib              link from workspace setup, via install.sh
-* leBindKeys.il           link from workspace setup, via install.sh
-* start_tutorial.sh       link from workspace setup, via install.sh
-* tutorial_files          link from workspace setup, via install.sh
-* .ipython                created by install.sh (is a diretory, which contains ipython_config.py, which in turn is a link from workspace setup, via install.sh)
-* gen_libs                created by install.sh
-* cds.lib                 created by install.sh (just points to cds.lib.core, which in turn points to )
-* run_bag.sh              link from BAG framework, via install.sh, core script which actually runs BAG, called from core BAG scripts.
-* setup_submodules.py     link from BAG framework, via install.sh, executed in the next step to actually 
-* start_bag.il            link from BAG framework, via install.sh, written in SKILL, seems to call `virt_server.sh`, which in turn starts stuff in framework.
-* start_bag.sh            link from BAG framework, via install.sh, very similar to `run_bag.sh` but appears unused
-* virt_server.sh          link from BAG framework, via install.sh, called by `start_bag.il`, contains 1-line command to start server in BAG framework.
+`bag_submodules.yaml` copied from worksapce setup, via install.sh
+
+`.cdsenv.personal` copied from worksapce setup, via install.sh
+
+`.cdsinit.personal` copied from worksapce setup, via install.sh
+
+`bag_config.yaml` link from workspace setup, via install.sh, multipurpose config file, used by `setup_submodules.py` during installation, and during BAG runtime.
+
+`.bashrc` link from workspace setup, via install.sh
+
+`.bashrc_bag` link from workspace setup, via install.sh
+
+`.cdsenv` link from workspace setup, via install.sh
+
+`.cdsinit` link from workspace setup, via install.sh
+
+`cds.lib.core` link from workspace setup, via install.sh, included by `cds.lib` on startup
+
+`.cshrc` link from workspace setup, via install.sh, unused
+
+`.cshrc_bag` link from workspace setup, via install.sh, unused
+
+`display.drf` link from workspace setup, via install.sh
+
+`.gitignore` link from workspace setup, via install.sh
+
+`models` link from workspace setup, via install.sh (is a directory)
+
+`pvtech.lib` link from workspace setup, via install.sh
+
+`leBindKeys.il` link from workspace setup, via install.sh
+
+`start_tutorial.sh` link from workspace setup, via install.sh
+
+`tutorial_files` link from workspace setup, via install.sh
+
+`.ipython` created by install.sh (is a diretory, which contains ipython_config.py, which in turn is a link from workspace setup, via install.sh)
+
+`gen_libs` created by install.sh
+
+`cds.lib` created by install.sh (just points to cds.lib.core, which in turn points to )
+
+`run_bag.sh` link from BAG framework, via install.sh, core script which actually runs BAG, called from core BAG scripts.
+
+`setup_submodules.py` link from BAG framework, via install.sh, executed in the next step to actually 
+
+`start_bag.il` link from BAG framework, via install.sh, written in SKILL, seems to call `virt_server.sh`, which in turn starts stuff in framework.
+
+start_bag.sh link from BAG framework, via install.sh, very similar to `run_bag.sh` but appears unused
+
+`virt_server.sh` link from BAG framework, via install.sh, called by `start_bag.il`, contains 1-line command to start server in BAG framework.
 
 #### Running setup_submodules.py, which references bag_modules.yaml, both copied/link in the step above.
 
-* bag3_analog             automatic git module added by setup_submodules.py, from bag_modules.yaml
-* bag3_digital            automatic git module added by setup_submodules.py, from bag_modules.yaml
-* xbase                   automatic git module added by setup_submodules.py, from bag_modules.yaml
-* .bashrc_pypath          created by `setup_submodules.py`; contains `PYTHONPATH` env var python copies to sys.path on startup. Later exported by `run_bag.sh` and `start_bag.sh`.
-* bag_libs.def            created by `setup_submodules.py` with plaintext list of OA BAG libraries.
-* cds.lib.bag             created by `setup_submodules.py`, and included by cds.lib.core, which in turn is included by cds.lib.core
+bag3_analog             automatic git module added by setup_submodules.py, from bag_modules.yaml
+
+bag3_digital            automatic git module added by setup_submodules.py, from bag_modules.yaml
+
+xbase                   automatic git module added by setup_submodules.py, from bag_modules.yaml
+
+.bashrc_pypath          created by `setup_submodules.py`; contains `PYTHONPATH` env var python copies to sys.path on startup. Later exported by `run_bag.sh` and `start_bag.sh`.
+
+bag_libs.def            created by `setup_submodules.py` with plaintext list of OA BAG libraries.
+
+cds.lib.bag             created by `setup_submodules.py`, and included by cds.lib.core, which in turn is included by cds.lib.core
 
 #### This finishes all the general BAG3 workspace setup, but for the tutorial, more was needed:
 
 Following steps at at https://github.com/ucb-art/BAG2_cds_ff_mpt/
 
-* BAG2_TEMPLATES_EC       manually git cloned from Github
-* bag_advanced_examples   manually git cloned from Github
-* bag_testbenches         manually git cloned from Github
-* BAG_XBase_demo          manually git cloned from Github
-* bag_startup.py          manually created, and made ipython_config.py call it, based on BAG2 example, adding libraries to pythonpath
+`BAG2_TEMPLATES_EC` manually git cloned from Github
+
+`bag_advanced_examples` manually git cloned from Github
+
+`bag_testbenches` manually git cloned from Github
+
+`BAG_XBase_demo` manually git cloned from Github
+
+`bag_startup.py` manually created, and made ipython_config.py call it, based on BAG2 example, adding libraries to pythonpath
 
 #### Finally, starting up Virtuso
 
@@ -1964,7 +2001,7 @@ https://www.scivision.dev/cmake-fetchcontent-vs-external-project/
 git hashes: b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9 deps/fmt (8.1.1)
 76fb40d95455f249bd70824ecfcae7a8f0930fa3 deps/spdlog (v1.2.1-2055-g76fb40d9)
 
-     
+
 # CMake workflow:
 
 First, download and bootstrap vcpkg itself; it can be installed anywhere, but generally we recommend using vcpkg as a submodule for CMake projects.
