@@ -2,6 +2,9 @@
 
 Verilog-A is the analog component of Verilog-AMS, and can be understood by the SPICE kernel in a AMS simulator.
 
+
+One important thing to know, is that in Virtuoso, if you was a graphical representation of your system, you need to have “SPICE on top”, with the Verilog-A as only “leaf modules.” I think, as least?
+
 `<+` contribution operators assign (and only assign) values/relations to branch potentials or flows.
 
 starting with ` means something is a compiler directive
@@ -95,10 +98,3 @@ But the latter isn't really possible with Verilog-AMS. The prior though can be b
 3. To accelerate simulation: replacing non-examined blocks in each simulation with a more abstract representation. In end, this is part of the testbench, as the  
 4. To verify mixed-signal simulation
 5. To support the top-down design process
-
-
-
-
-
-
-
