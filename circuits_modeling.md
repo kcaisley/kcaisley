@@ -1,8 +1,7 @@
 # Circuit Modeling
 
-Analog work-group meeting
-
-
+Analog work-group 
+April 18, Sadayuki Yoshitomi
 
 In the tape out stage, we are increasingly needing large design margins at high speed, as real silicon is far from actual PDK models.
 
