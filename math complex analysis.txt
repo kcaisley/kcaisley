@@ -1,2 +1,0 @@
-Holomorphic Functions
-Cauchy Riemann @ Differentiability

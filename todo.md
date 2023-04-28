@@ -8,7 +8,7 @@ type: Checklist
 
 - [x] Meeting with CERN for container tutorials
 - [x] SetUp Free IPA Server
-- [ ] Move idm machine to server room
+- [x] Move idm machine to server room
 - [ ] Install/Build BAG3++
 - [ ] Follow up with Matthais/Sam
 - [ ] Test Hans' Electronics Lab
