@@ -1,4 +1,4 @@
-# April 18, Sadayuki Yoshitomi
+# Circuit Modeling
 
 Analog work-group meeting
 
@@ -64,6 +64,3 @@ When you draw a schematic in EDA software, you are essentially defining the arra
 This [course](https://web.stanford.edu/group/sisl/k12/optimization/#!index.md) explains in detail a lot of optimization concepts.
 
 9. Another note: Notice how there is a transition between system modeling, system solving, and analysis, and then finally optimization? This parallels what we see on the [SciML](https://docs.sciml.ai/Overview/stable/overview/#overview) page. I'm primarily working at the analysis and optimization stage, but I want to understand how the prior two work as well.
-  
-
-
