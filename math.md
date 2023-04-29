@@ -1,18 +1,16 @@
-The Mathematics of Circuit Analysis
+# The Mathematics of Circuit Analysis
 
-These videos are primarily targeted at electrical engineerinng students and professionals. When I graduated from my undergraduate program I had been exposed to all the concepts I'll be covering in this video
+These videos are primarily targeted at electrical engineering students and professionals. When I graduated from my undergraduate program I had been exposed to all the concepts I'll be covering in this video
 
--When should I be using a fourier transform vs a laplace transform in the analysis of a circuit?
+-When should I be using a Fourier transform vs a Laplace transform in the analysis of a circuit?
 -What is the fundemental difference between the equations that arise from circuit with and without non-liner devices?
-
-If any of those
 
 
 The purpose of this video series is to develop an understanding of the mathematical techniques used in circuit analysis. This video will not be explicitly analyzing the design or performance of specific circuits.
 
-Given a circuit, the objective of circuit analysis is to find the approximate functions for the voltage and current waveforms/signals. Depending on the complexity of the circuit, the devices present in it, and the tools available to us (pen/paper vs computer), we will see that varying levels of detail in our analysis are possible. After watching these videos, you should be to identify what analysis techniques are necessary/available, by visual inspection of the circuit's elements/configuration.
+Given a circuit, the objective of circuit analysis is to find the approximate functions for the voltage and current wave forms/signals. Depending on the complexity of the circuit, the devices present in it, and the tools available to us (pen/paper vs computer), we will see that varying levels of detail in our analysis are possible. After watching these videos, you should be to identify what analysis techniques are necessary/available, by visual inspection of the circuit's elements/configuration.
 
-1) Our first task is to appreciate the limitations of circuit theory. It is important to understand that circuit theory is an approximation of maxwell's equations, called the 'lumped circuit discipline' is only valid with these assumptions, compare an electromagnetics simulation to the circuit analysis. In general, the smaller the dimensions of your physical devices, and the higher frequency your exciting signal, the worse our lumped circuit model will perform. At a certain theshold, typically in the single digit GHz region for circuit board level designs
+1) Our first task is to appreciate the limitations of circuit theory. It is important to understand that circuit theory is an approximation of Maxwell's equations, called the 'lumped circuit discipline' is only valid with these assumptions, compare an electromagnetic simulation to the circuit analysis. In general, the smaller the dimensions of your physical devices, and the higher frequency your exciting signal, the worse our lumped circuit model will perform. At a certain threshold, typically in the single digit GHz region for circuit board level designs
 
 This of course depends on your tolerance for error. The more accuracy you demand, the sooner you'll be making that switch 
 
@@ -69,7 +67,6 @@ So then what is a dominant pole?
 
 Holomorphic Functions
 Cauchy Riemann @ Differentiability
-
 
 
 
