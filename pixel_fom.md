@@ -71,10 +71,9 @@ Should radiation hardness be a factor? Or should be simply just perform our meas
 
 Assume a standardized jitter for clocks available across the pixel matrix
 
-
 ## Jitter
 
-'Understanding and Characterizing Timing Jitter - Primer by Tektronix'
+'Understanding and Characterizing Timing Jitter' - Primer by Tektronix
 
 * Jitter is short term variation w/ frequencies above 10 Hz, other it is called "wander"
 * Must be characterized w/ statistics (mean, standard deviation $\sigma$, and confidence interval)
