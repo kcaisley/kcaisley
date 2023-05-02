@@ -1,5 +1,15 @@
 # The Mathematics of Circuit Analysis
 
+Rememebr the difference between numerical (approximate) and symbolic (analytic) solutions. Wow many symbolic manipulations are done on paper, there is actually synbolic computation:
+
+> These distinctions, however, can vary. There are increasingly many theorems and equations that can only be solved using a computer; however, the computer doesn't do any approximations, it simply can do more steps than any human can ever hope to do without error. This is the realm of "symbolic computation" and its cousin, "automatic theorem proving." There is substantial debate as to the validity of these solutions -- checking them is difficult, and one cannot always be sure the source code is error-free. Some folks argue that computer-assisted proofs should not be accepted. 
+
+> Nevertheless, symbolic computing differs from numerical computing. In numerical computing, we specify a problem, and then shove numbers down its throat in a very well-defined, carefully-constructed order. If we are very careful about the way in which we shove numbers down the problem's throat, we can guarantee that the result is only a little bit inaccurate, and usually close enough for whatever purposes we need.
+
+> Numerical solutions very rarely can contribute to proofs of new ideas. Analytic solutions are generally considered to be "stronger". The thinking goes that if we can get an analytic solution, it is exact, and then if we need a number at the end of the day, we can just shove numbers into the analytic solution. Therefore, there is always great interest in discovering methods for analytic solutions. However, even if analytic solutions can be found, they might not be able to be computed quickly. As a result, numerical approximation will never go away, and both approaches contribute holistically to the fields of mathematics and quantitative sciences.
+
+Older
+
 These videos are primarily targeted at electrical engineering students and professionals. When I graduated from my undergraduate program I had been exposed to all the concepts I'll be covering in this video
 
 -When should I be using a Fourier transform vs a Laplace transform in the analysis of a circuit?
@@ -67,10 +77,3 @@ So then what is a dominant pole?
 
 Holomorphic Functions
 Cauchy Riemann @ Differentiability
-
-
-
-
-
-
-
