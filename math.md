@@ -8,6 +8,15 @@ Rememebr the difference between numerical (approximate) and symbolic (analytic) 
 
 > Numerical solutions very rarely can contribute to proofs of new ideas. Analytic solutions are generally considered to be "stronger". The thinking goes that if we can get an analytic solution, it is exact, and then if we need a number at the end of the day, we can just shove numbers into the analytic solution. Therefore, there is always great interest in discovering methods for analytic solutions. However, even if analytic solutions can be found, they might not be able to be computed quickly. As a result, numerical approximation will never go away, and both approaches contribute holistically to the fields of mathematics and quantitative sciences.
 
+> Although the terms "modeling" and "simulation" are often used as synonyms within disciplines applying M&S exclusively as a tool, within the discipline of M&S both are treated as individual and equally important concepts. Modeling is understood as the purposeful abstraction of reality, resulting in the formal specification of a conceptualization and underlying assumptions and constraints. M&S is in particular interested in models that are used to support the implementation of an executable version on a computer. The execution of a model over time is understood as the simulation. While modeling targets the conceptualization, simulation challenges mainly focus on implementation, in other words, modeling resides on the abstraction level, whereas simulation resides on the implementation level. Conceptualization and implementation – modeling and simulation – are two activities that are mutually dependent, but can nonetheless be conducted by separate individuals
+
+Benefits:
+
+1. cheaper
+2. more accurate, as no environment
+3. faster than realtime
+4. coherent synthetic environment
+
 Older
 
 These videos are primarily targeted at electrical engineering students and professionals. When I graduated from my undergraduate program I had been exposed to all the concepts I'll be covering in this video
