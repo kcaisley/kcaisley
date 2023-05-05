@@ -1,6 +1,12 @@
-# The Mathematics of Circuit Analysis
+# The Mathematics of Electrical Engineering
 
-Rememebr the difference between numerical (approximate) and symbolic (analytic) solutions. Wow many symbolic manipulations are done on paper, there is actually synbolic computation:
+I want to better understand and classify the types of mathematical models that most often arise in electronics, and how they can be classified and solved. This includes stochasticity (arising from measurement error, system noise, and environmental noise), boundaries conditions, linearity/nonlinearity, partial differential equations, etc. Then I will study how numerical methods can be applied to solving the equations.
+
+
+
+
+
+Remember the difference between numerical (approximate) and symbolic (analytic) solutions. Wow many symbolic manipulations are done on paper, there is actually symbolic computation:
 
 > These distinctions, however, can vary. There are increasingly many theorems and equations that can only be solved using a computer; however, the computer doesn't do any approximations, it simply can do more steps than any human can ever hope to do without error. This is the realm of "symbolic computation" and its cousin, "automatic theorem proving." There is substantial debate as to the validity of these solutions -- checking them is difficult, and one cannot always be sure the source code is error-free. Some folks argue that computer-assisted proofs should not be accepted. 
 
@@ -10,12 +16,20 @@ Rememebr the difference between numerical (approximate) and symbolic (analytic) 
 
 > Although the terms "modeling" and "simulation" are often used as synonyms within disciplines applying M&S exclusively as a tool, within the discipline of M&S both are treated as individual and equally important concepts. Modeling is understood as the purposeful abstraction of reality, resulting in the formal specification of a conceptualization and underlying assumptions and constraints. M&S is in particular interested in models that are used to support the implementation of an executable version on a computer. The execution of a model over time is understood as the simulation. While modeling targets the conceptualization, simulation challenges mainly focus on implementation, in other words, modeling resides on the abstraction level, whereas simulation resides on the implementation level. Conceptualization and implementation – modeling and simulation – are two activities that are mutually dependent, but can nonetheless be conducted by separate individuals
 
-Benefits:
+Benefits of simulation:
 
 1. cheaper
 2. more accurate, as no environment
 3. faster than realtime
 4. coherent synthetic environment
+
+
+
+## Symbolic regression, is the finding of a mathematical analytic expression which best matches data, using numerical methods:
+
+https://astroautomata.com/SymbolicRegression.jl/stable/
+
+
 
 Older
 

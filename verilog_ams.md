@@ -13,7 +13,10 @@ starting with ` means something is a compiler directive
 functions with $ start are not synthesizable?
 
 base units of time, and the time precision are specified like this:
+
+```
 `timescale 1s / 1ns
+```
 
 It isn't mandatory to use a base of 1 second, but since Verilog-AMS allows SI uni suffixes, we normally stick to this.
 The second unit is used for rounding/quantization of the time

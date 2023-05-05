@@ -1,8 +1,4 @@
----
-created: 2023-04-23T17:06:20+02:00
-modified: 2023-04-23T19:24:16+02:00
-type: Journal
----
+## Config management basics
 
 I read a [blog](https://blog.nelhage.com/post/declarative-configuration-management/) about configuration management and it explained that Kubernetes strictly defines the layer for defining state of libraries, the intermediate streaming layer which is protocol buffers, and the layer which implements the config on the actual system. This is useful because the decoupling allows a user to use whatever language they prefer and easily refactor/verify the library state generation code. 
 
