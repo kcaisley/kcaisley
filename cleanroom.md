@@ -1,3 +1,9 @@
+---
+title: Clean Room Theoretical
+date: 2022-06-30
+author: Kennedy Caisley
+---
+
 ## FTD Cleanroom Theoretical
 
 #### (Thursday June 30th, 2022)
