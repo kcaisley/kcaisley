@@ -1,3 +1,9 @@
+# Journal
+
+optimization, generator-based design, front end sensors/signal processing, open source, tools, modeling
+
+
+
 # Conversation about circuit design software w/ Tomek
 
 simulation	 xelicum  (c v 
@@ -1478,8 +1484,3 @@ Each new device should follow the design specifications for device layout from t
 
 Time permitting (e.g., 350 hour internship instead of 175 hour), the internship can include general improvements to the methods for Tcl-scripted parameterized devices in Magic.
 ​
-
-
-
-
-
