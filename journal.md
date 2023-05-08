@@ -2,6 +2,7 @@
 
 optimization, generator-based design, front end sensors/signal processing, open source, tools, modeling
 
+somewhere in the intersection of those interests is a specific problem, which pushes the boundary of human knowledge, which is small enough for me to be productive in, and is non-competitive enough for me to actually have the time to learn.
 
 
 # Conversation about circuit design software w/ Tomek
