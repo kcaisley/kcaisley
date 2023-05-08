@@ -3,16 +3,18 @@
 ## here is the .def file:
 
 ```
-#bag3++_centos7.def
 Bootstrap: docker
 From: centos:7
-    
+
+# build me with the command: apptainer build /tmp/virtuoso_centos7.sif ./bag3++_centos7.def
+# and start me with: apptainer shell -B /tools,/users /tmp/bag3++_centos7.sif
+
 %setup
     #run on the host system after base image. Filepaths are relative to host.
     mkdir ${APPTAINER_ROOTFS}/users
     mkdir ${APPTAINER_ROOTFS}/tools
 %post
-	#CentOS 7 image on dockerhub isn't updated, so run this first
+    #CentOS 7 image on dockerhub isn't updated, so run this first
     yum -y update && yum clean all
     
     # Extras repo needed to provide some packages below
@@ -22,7 +24,13 @@ From: centos:7
     yum install -y devtoolset-8 httpd24-curl httpd24-libcurl rh-git218
     
     # additional tools
-    yum install -y conda curl make wget
+    yum install -y curl make wget which
+    
+    # needed to install conda
+    yum install -y python3-pip python3-devel
+    
+    # Installing as user doesn't work. But will it work?
+    pip3 install conda
 ```
 
 ## Immutable mode

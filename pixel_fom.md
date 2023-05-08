@@ -33,11 +33,16 @@ I'm adding TDC's in here, because their single shot precision requirement helps 
 
 Also, I think I can take an ADC and reduce it down to a 1-bit design, in order to better compare it to a detector.... Meaning I can look at the charts of ADCs, but at the 1-bit level to understand the theoretical limits?
 
+>  What is the poisson limit? The Poisson limit is a statistical concept that describes the behavior of a counting process when the number of events being counted is large and the probability of any one event occurring is small. In this limit, the counting process can be well-approximated by a Poisson distribution, which describes the probability of a certain number of events occurring in a given time period or space. 
+>
+> In the Poisson limit, the variance of the counting process is approximately equal to the mean of the process, which means that the standard deviation of the counting process is proportional to the square root of the mean. This has important implications for the measurement of low light levels, as it means that the signal-to-noise ratio (SNR) of the measurement is proportional to the square root of the number of photons detected.
+>
+> For example, in a typical photon-counting experiment, the number of photons detected in a given time period will be proportional to the intensity of the light source multiplied by the detection efficiency of the detector. In the Poisson limit, the distribution of the number of photons detected will be well-approximated by a Poisson distribution, and the standard deviation of the number of photons detected will be proportional to the square root of the mean. This means that as the intensity of the light source decreases, the SNR of the measurement will also decrease, and the measurement will become increasingly noisy.
+>
+> The Poisson limit is an important concept in many areas of physics and engineering, particularly in the measurement of low light levels and the detection of weak signals. Understanding the Poisson limit can help researchers to design experiments and instruments that are optimized for low light-level measurements and other applications where signal-to-noise ratio is critical.
 
-
-
-
-
+In pixel detectors, ENC or Equivalent Noise Charge (ENC), which is defined as the
+input charge for which the front-end Signal-to-Noise ratio is equal to 1. It's not 'dependent' on input charge level, because it, itself, is specified at a certain input charge level. But perhaps it's dependent on the threshold level? Yes I think it is. So we can compare the 
 
 | Parameters | ADC's | TDC's | Imagers | Detectors |
 | :--------: | :---: | :---: | :-----: | :-------: |
@@ -48,7 +53,21 @@ Also, I think I can take an ADC and reduce it down to a 1-bit design, in order t
 |            |       |       |         |           |
 |            |       |       |         |           |
 
+This might be worth a read: https://ieeexplore.ieee.org/document/5204577/
 
+More importantly though, I want to examine this paper from Andrea Galliani: https://www.mdpi.com/2079-9292/12/9/2054
+
+I met him at CERN! This would be super helpful, as it would allow me to compare the performance of such a design against that I can do with a VCO. I need to look at the linearity, speed, size, signal to noise ratio, etc. It's only 6.5 um by 22.5 um! It consumes 2.2uA, which works out to 2uW off a 0.9V supply.
+
+A... also rivetti's groups is at it as well: https://iopscience.iop.org/article/10.1088/1748-0221/17/03/C03022 It uses 1.2-> 2.5 W/cm^2:
+
+> The Timespot1 ASIC has been tested in standalone configuration. The TDC resolution is below
+> 50 ps, with an average of 23 ps. From the point of view of the AFE the resolution has been
+> quantified to be under 100 ps with an average of 43 ps. All measures have been performed within
+> the specified power consumption constraint of 40 μW per pixel. The tests illustrated in the present
+> paper show the possibility of improving the performance of the proposed architecture with minor
+> corrections. Measurements with the actual sensor matrix and particle generated signals will be
+> performed in the near future.
 
 # Discoveries
 
