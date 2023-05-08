@@ -25,7 +25,7 @@ From: centos:7
     yum install -y conda curl make wget
 ```
 
-## Unwritable mode
+## Immutable mode
 
 Build the container, in an immutable mode:
 
@@ -50,8 +50,64 @@ sudo apptainer build --sandbox /tmp/bag3++_centos7_sandbox.sif ./bag3++_centos7.
 And start a shell inside this writable container, as root, so that you can install and modify contents:
 
 ```
-apptainer shell -B /tools,/users --fakeroot --writable /tmp/bag3++_centos7_sandbox.sif/
+apptainer shell -B /tools,/users --writable /tmp/bag3++_centos7_sandbox.sif/
 ```
+
+
+
+## Some notes on building:
+
+```
+kcaisley > sudo apptainer build bag3++_centos7_test.sif bag3++_centos7.def
+```
+
+works, with permissions kcaisley:base
+
+```
+kcaisley > sudo apptainer build --sandbox bag3++_centos7_sandbox.sif bag3++_centos7.def
+```
+
+works, but makes with permissions root:root. Can this be run with sudo shell?
+
+
+
+targeting the main .sif with this command seems to work?:
+
+```
+apptainer shell -B /tools,/users --writable-tmpfs bag3++_centos7.sif
+```
+
+
+
+
+
+```
+asiclab > apptainer build bag3++_centos7.sif bag3++_centos7.def
+```
+
+works and makes permissions asiclab:asiclab
+
+```
+asiclab > apptainer build --sandbox bag3++_centos7_sandbox.sif bag3++_centos7.def
+```
+
+works and makes with permissions asiclab:asiclab
+
+
+
+```
+WARNING: The sandbox contain files/dirs that cannot be removed with 'rm'.
+WARNING: Use 'chmod -R u+rwX' to set permissions that allow removal with 'rm -rf'
+WARNING: Use the '--fix-perms' option to 'apptainer build' to modify permissions at build time.
+```
+
+
+
+
+
+
+
+
 
 ## Pkg install
 
@@ -70,3 +126,8 @@ conda env create -f environment.yml --force
 ```
 
 No don't make it a sandbox, as this will cause plocate to use so much space
+
+
+
+
+

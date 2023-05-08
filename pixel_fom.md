@@ -1,8 +1,120 @@
----
-title: Pixel FOM
-author: Kennedy Caisley
-date: 06.04.2023
----
+# Pixel FOM
+
+There is a correspondence/connection between:
+
+**Detector**: granularity, ENC, detection efficiency, timing resolution, timewalk, power per mm^2
+
+**Imagers**: Noise Equivalent Quanta, Detective Quantum Efficiency, and Quantum Effienciy.
+
+**ADCs**: Technology (getting better or worse?) vs architecture front, ENOB, Nyquist limit, fundamental limit on kT noise, 
+
+* https://www.analog.com/en/technical-articles/a-12-b-10-gss-interleaved-pipeline-adc-in-28-nm-cmos-tech.html
+* https://ewh.ieee.org/r5/dallas/sscs/slides/20120829dallas.pdf
+* http://www.hit.bme.hu/~papay/edu/DSP/adc2000.htm
+* https://www.youtube.com/watch?v=doTHd0W9QhA
+
+
+
+In general, arbitrarily high resolution is achievable up to the noise floor, at the maximum single stage speed can be achieved, if you if you are willing to spend more power via pipelines. Put differently, pipe-lining is a way to improve resolution, at a fixed speed, by spending more power. It is limited by device noise, most probably dominated by the those in the first stage. 
+
+Double sampling, flat-field correction, dark frame subtration, noise shaping, and oversampling are a way to reduce noise, by taking subsequent measurements. Correlated double sample is primarily to fixed each pixel's offset (although it does a bit of noise shaping), just as flat-field correction and dark frame subtraction.
+
+* Dark frame correction corrects variations in thermal noise, which originates from lattice vibrations, and occurs every when there is no signal exposure. In devices where charge is passed from pixels, pixels at the end of the chain will have worse additive thermal noise as they are bucket brigaded the longest along the array. In images this is possible, because images are integrated, and so we will be able to measure a higher than average noise power over the integration period in those pixels. ADCs, the equivalent to this thermal noise problem is solved by noise shaping, where again multiple measurements are averaged to improve confidence in the measurement. This comes at the expense of added power (I think, obviously?) as you must oversample.
+  * I'm not sure how the 'order' of the noise shaping affects this.
+* Flat field correction, in turn, fixes sensitivity variation which originates from random offsets in the devices, but not dynamic noise sources, typically. (Of course this will change with environmental conditions and radiation damage, etc.) 
+* In imaging, the additive error (dark current noise power) and multiplicative effect are removed via the expression $(input-dark)/(flatfield)$. Notes that the input frame and dark frame should have had the same exposure time.
+* Note that these are post processing techniques, not in hardware, and that they are both removing 'fixed pattern noise' in the sensor. The hardware equivalent to this is pixel calibration techniques, although this mainly applies to sensitivity i.e. threshold tuning. I don't know if there's a good way to correct 'hot pixels' as detectors are inherently single shot. I think that this latter parameter is expressed as ENC?
+
+ For example, if a single stage has an uncertainty, 
+
+The can be done either by improving a single stage, or by chaining 
+
+I'm adding TDC's in here, because their single shot precision requirement helps me connect to 
+
+Also, I think I can take an ADC and reduce it down to a 1-bit design, in order to better compare it to a detector.... Meaning I can look at the charts of ADCs, but at the 1-bit level to understand the theoretical limits?
+
+
+
+
+
+
+
+| Parameters | ADC's | TDC's | Imagers | Detectors |
+| :--------: | :---: | :---: | :-----: | :-------: |
+|            |       |       |         |           |
+|            |       |       |         |           |
+|            |       |       |         |           |
+|            |       |       |         |           |
+|            |       |       |         |           |
+|            |       |       |         |           |
+
+
+
+# Discoveries
+
+VCOs **have** been used for CSAs in detectors: https://oparu.uni-ulm.de/xmlui/handle/123456789/3224;jsessionid=123DA682C20AD08FC79D12EFCDEFCD98
+
+And here is an interesting paper, talking about similar problems but for mass spectrometers: https://nano.lab.indiana.edu/wp-content/uploads/2020/07/Todd_2020_JASMS.pdf
+
+
+
+
+
+
+
+# Monopix2 Notes
+
+* The resistivity and the voltage determines how much you can deplete. Depletion is necessary because it allows all of your signal to be swept by drift, rather than some of it being collected by diffusion.
+* The limit on voltage is the punch through effect, where the diode break down. Is this the dielectric breaking down? 
+
+* Ivan Peric first published work on HV-CMOS, where people said 'well it doesn't matter if you have high-resistivity, because we can just apply a large external voltage to modern processes
+
+* Other people, around the same time (2005-ish) said, whoah, wait, what if you just tuned the resistivity, but doesn't use a high voltage. They created what's called "HR-CMOS" detectors.
+* These two detectors camps acted similarly after being irradiated, but did differ some during the beginning of their operation.
+
+* Over time, these two MAPS camps have come together, and the byproduct is detectors with both HR and HV. Primarily these ones of interest are TJMonopix and LFMonopix/MALTA. (MALTA is essentially the same, but has had peripheral circuits designed.) Dr. Norbert Wermes likes to call this 'DMAPS', or Depletable Monolithic Active Pixel Sensors, as the combination of HV and HR allows for full or near full depletion.
+* The Czochralski (CZ) method is a way to make substrates. It can be used to make high or low resistivity substrates. The alternative is using an epitaxial layer, which allows for a high-quality but thin layer of high resistivity material to construct a portion of the diode.
+* LF monopix
+  * Large fill factor, RO electronics are actually inside the collection node, which is sort of 'underneath'
+  * Rev2 versions tested are backthinned to 100um thick, to reduce material
+  * uses a standard CSA, as the large collection format creates a large pixel capacitance (~250 fF).
+  * Power consumption of 370 mW/cm^2 or 28 uW /pixel. 
+* TJ monopix
+  * is a Small Fill Factor design, which has only a portion of it's pixel area action as the collection node.
+  * Electronics are fully seperated from collection node
+  * Process modification used to enhance charge collection ability... I this the epitaxy?
+  * Additionally, it is a bit strange because it has two opposing voltage applied, rather than one large bias voltage. (How big is this voltage?).
+  * One issue with this is the fact that small collection node causes some areas to be far from the node, and the horizontal field isn't strong enough to sweep up the charge properly. 
+    * Some process modification, with either a opposite doped region, or just no epitaxial deposition (allowing regular p type to remain) counteracts this by removing the areas that were previous acting as dead-zones trapping signal charge
+  * Uses the concept of 
+
+
+
+#### Questions:
+
+* Is the TDAC in both LF/TJ reused across the entire array? How is that calibration done? Is this essentially just 'flat-field' correction from basic image processors?
+
+* What exactly is the punch through effect?
+
+* What is the power consumption per pixel and per unit area for RD53? How does the width of the sensor stack compare?
+
+* Christian is testing...if the epi layer is fully depleting?
+
+* What is 'collection efficiency?' How does it relate to charge trapping?
+
+* What is threshold overdrive, how does it relate to speed, and why is it measured in electrons?
+
+* How does the size of a capacitor affect noise? What is 'equivalent noise charge'?
+* Threshold dispersions/tuning (~100e)
+* How does a beam telescope work? How do you ensure even energy of particles hitting the sensor? Is it one particle at a time, or a calibrated and continous fixed flux? How does a beam telescope differ from 
+
+* For time walk calculations, is the 'seed pixel' considered the pixel with the highest value hit, and assumed to have 'no time walk' as a reference?
+
+
+
+I'm reading about Noise Equivalent Quanta, Detective Quantum Efficiency, and Quantum Effienciy. The difference is, these are imaging measurements. We are no-fundamentally 'imagining', because we aren't reflecting particle off something, to measure something else. We want to learn about the particles themselves. This means our system measurement is 'single shot'. We don't to take another frame, in order to improve SNR. (Or do we??..) Also, we have radiation to deal with, and the fact that our measurements are 
+
+
 
 # Pixel Detector Figure of Merit
 
@@ -44,7 +156,7 @@ pixel pitch/area may also be able to be combined into this parameter too, as the
 ## questions:
 
 * are the values for threshold (i.e. 600e-) input referred?
-* why is power limited to 0.5-1.0W per cm^2?
+* why is power limited to 0.5-1.0W per cm^2?   A: Because of the 
 
 
 
