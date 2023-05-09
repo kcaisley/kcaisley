@@ -5,6 +5,56 @@ optimization, generator-based design, front end sensors/signal processing, open 
 somewhere in the intersection of those interests is a specific problem, which pushes the boundary of human knowledge, which is small enough for me to be productive in, and is non-competitive enough for me to actually have the time to learn.
 
 
+
+#### Thesis Statement
+
+Physics-aware generator-based workflows for pixel detector design are novel, feasible, and useful.
+
+hmm... Maybe I want to emphasize better: Mechanistic modeling, top-down design, top-level system modeling, FOM design, and optimization framework for specific applications.
+
+
+
+This domain would allow me to:
+
+* work primarily with software
+* work alongside designers who are more experienced and/or focused than me, to capture their knowledge
+* perhaps visit/embed at Berkeley, CERN, and other institutions in Italy, like Rivetti's group, for example
+* learn about a wide range of detector design, without competing directly with others
+* Perhaps even touch/connect to TCAD?
+* Focus on higher level automation and optimization, as others can help build the individual building blocks, and I can just help them parameterize it.
+* Liberates me from having to innovate in software, methodology, circuit arch, and circuit design all simultaneously. I can focus on higher level design.
+* Allows me to work almost as an archaeologist, re-documenting and understanding past designs.
+
+
+
+The danger here, is that this work borders on 'not really physics'. And so what I would like to do, is study the physics more deeply, and create an optimization framework which is very 'physics-aware'. I want to front-load the physics work, not backload it in testing. This will mean I will need to study the physics of detectors, and be able to create accurate models of how they interact to properly.
+
+
+
+So let's try it again: My thesis introduces:
+
+* System-level application-specific optimization for pixel detectors:
+
+  * Physics based framework for calculating ideal desired specs
+    * Using knowledge of physics to infer specs needed to not bottleneck measurement
+      * what pitch is ideal? What sampling rate is needed? Which 
+    * Inspired by ADC, TDC, and image sensor specs to give a FOM, to know the horizon?
+    * Also built in part by reviewing existing designs, to understand/model physical trade-offs
+
+  * System level model/optimization routine for picking architecture with approximate block specs
+    * Data readout modeling for calculating if block level modeling is possible
+    * Area consumption calculation, to know what 
+  * 
+
+* FOM
+* System model/transfer function (requires generators for implementation and regression?)
+* Optimization routine (requires FOM for objective function)
+* Generators for subblocks (required for optimization)
+
+
+
+
+
 # Conversation about circuit design software w/ Tomek
 
 simulation	 xelicum  (c v 
@@ -562,9 +612,9 @@ I've decided that the best way to provide a literate programming framework it to
 
 
 This is how [`mdsh`](https://github.com/bashup/mdsh#processing-non-shell-languages) handles it, a multi-lingual tool. I like how it supports both bash and python, but I don't think this will allow things like documentation weaving for .html, or inline plots from python. The file is prefixed by `\#!/usr/bin/env mdsh` so users don't have to do anything special when running it. Any non-shell language (i.e. not Bash/Zsh) like Python or C will be executed by running 
-
-````
+```
 #!/usr/bin/env mdsh
+```
 
 # Hello World in Python
 
@@ -593,7 +643,7 @@ Yet another option is [`lmt`](https://github.com/driusan/lmt), written in Go, wh
 
 #### Quarto:
 
-This is my tool!!!!
+This is my tool!!!!  I should also look at 'Handout' in Python, and Weave.jl in Julia.
 
 https://quarto.org/docs/get-started/hello/text-editor.html
 
@@ -1175,9 +1225,10 @@ pull requests to github
 3. use it to build small circuit
 4. share with group for feedback + feeling good	
 5. leads to conference poster/sumissions to competition
+   
       
-      
-      
+   
+
 DPG conference smuk23.dpg-tagugen.de
 
 bttb11, AIDAInnova
@@ -1309,7 +1360,7 @@ I want to spend my "innovation tokens" on:
     building a framework for modeling a pixel detector signal chain, which can be used to compare designs using FOMs and discover room for improvements. This would be using a combination of Python and Verilog-AMS. I can use Verilog-AMS not just to behaviorally model transistor circuits, but also to homogenize with complex digital circuits and device level simulators while staying in Spectre.
     generate designs which improve on this signal chain using BAG and Xbase. Xbase is the tool for the job, because I want to be able to tune transistor sizes in Python.
     slowly and interatively learn programming and contribute to BAG/Xbase, especially in the vein of refactoring the code into one self-contained library, with convenient packaging. Ultimately programming is programming, and I will learn morning being pragmatic and working with other people, then I will ever by myself off in Julia land.
-    
+
 # Wednesday, April 12
 
 Presentation from Dan Fritchman on Hdl21, Hdl21Schematics, and Vlsir. Given on Tuesday December 6, 2022, during the Chips alliance Analog working group meeting.  [Link Here.](https://www.youtube.com/watch?v=FnLz2Wx2DxY)

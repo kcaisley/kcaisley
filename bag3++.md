@@ -24,14 +24,22 @@ From: centos:7
     yum install -y devtoolset-8 httpd24-curl httpd24-libcurl rh-git218
     
     # additional tools
-    yum install -y curl make wget which
-    
-    # needed to install conda
-    yum install -y python3-pip python3-devel
-    
-    # Installing as user doesn't work. But will it work?
-    pip3 install conda
+    yum install -y curl make wget
 ```
+
+
+
+## .def notes:
+
+* rh-git218 (git with nice visual colors; newer git versions don't track symlinks)
+
+Note: rh-git29 is not longer available, so update to rh-git218.
+
+Note, these packages are available in the SCL repository, which must be installed: yum install centos-release-scl-rh centos-release-scl
+
+rh-git29 didn't exist: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
+
+
 
 ## Immutable mode
 
@@ -111,29 +119,68 @@ WARNING: Use the '--fix-perms' option to 'apptainer build' to modify permissions
 
 
 
+### Final build:
+
+(in /scratch and as kcaisley)
+
+```
+sudo apptainer build --force bag3++_centos7.sif bag3++_centos7.def
+```
+
+then just
+
+```
+apptainer shell -B /tools,/users bag3++_centos7.sif
+```
+
+I left out the idea of building a sandbox, and just debugged what I needed before building
 
 
 
 
 
 
-## Pkg install
 
-* rh-git218 (git with nice visual colors; newer git versions don't track symlinks)
+I need to get conda, which isn't easily available from pip, as it appears corrupted. Therefore:
 
-Note: rh-git29 is not longer available, so update to rh-git218.
+From inside the container, and while at the 
 
-Note, these packages are available in the SCL repository, which must be installed: yum install centos-release-scl-rh centos-release-scl
+```
+Apptainer > wget https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-x86_64.sh
+```
 
-rh-git29 didn't exist: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
+run the script
+
+```
+Apptainer > bash Miniconda3-py37_23.1.0-1-Linux-x86_64.sh -b -f -p /tools/foss/bag/miniconda3
+```
+
+and manually set the install location
+
+```
+Miniconda3 will now be installed into this location:
+/users/kcaisley/miniconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/users/kcaisley/miniconda3] >>> /tools/foss/bag/miniconda3
+```
+
+I'm not even sure if 
+
+
 
 conda install doesn't work well: https://github.com/ContinuumIO/anaconda-issues/issues/9480
 
 ```
-conda env create -f environment.yml --force
+conda env create -f environment.yml --force -p /tools/foss/bag/miniconda3/envs/bag_py3d7_c
 ```
 
-No don't make it a sandbox, as this will cause plocate to use so much space
+
+
+
 
 
 
