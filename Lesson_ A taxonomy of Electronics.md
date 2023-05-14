@@ -1,13 +1,13 @@
 ---
 created: 2023-05-14T10:25:34+02:00
-modified: 2023-05-14T11:35:06+02:00
+modified: 2023-05-14T15:16:14+02:00
 ---
 
 # Lesson: A taxonomy of Electronics
 
 Overview and Scope of this conversation: What I want to help you understand. We’ll do it with no math. What we’ll ignore.
 
-Paradigms, abstractions, disciplines.
+Paradigms, abstractions, disciplines. The fork between analog and digital. Symbols imply representation/model, model implies underlying maths.
 
 A basic example: Common Source Amplifier?
 Symbols, math, language, design method
@@ -17,7 +17,9 @@ Symbols, math, word choice, design method
 
 A combined example: Analog circuit into digital. Probably amplifier into inverter into flip flop.
 
-—————
+Increasing levels of complexity/integration. Taking an example chip (RD53A?). 
+
+———
 
 I’d like to break down and categorize the ways in which we think about circuits. I want to provide a bit of historical context (mechanical switches, vacumm tubes, older transistors, and BJTs) and a bit of introduction to the fact that MEMS, microfluidics, integrated optics, integrated magnetics, antennas, photodiodes, and detectors, bio sensors, all exist as well. Pretty much any thing you can image can be ‘integrated’ on a chip. But for todays discussions we are going to restrict ourselves to:
 
