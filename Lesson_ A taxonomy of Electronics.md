@@ -1,11 +1,11 @@
 ---
 created: 2023-05-14T10:25:34+02:00
-modified: 2023-05-14T11:33:46+02:00
+modified: 2023-05-14T11:35:06+02:00
 ---
 
 # Lesson: A taxonomy of Electronics
 
-Overview and Scope of this conversation: What I want to help you understand. What we’ll ignore.
+Overview and Scope of this conversation: What I want to help you understand. We’ll do it with no math. What we’ll ignore.
 
 Paradigms, abstractions, disciplines.
 
