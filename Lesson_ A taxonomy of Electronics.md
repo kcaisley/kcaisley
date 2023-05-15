@@ -1,9 +1,14 @@
 ---
 created: 2023-05-14T10:25:34+02:00
-modified: 2023-05-14T15:16:14+02:00
+modified: 2023-05-15T13:00:01+02:00
 ---
 
 # Lesson: A taxonomy of Electronics
+
+Start with questions. How many of you:
+
+FPGA. ASIC. Mixed Signal. VLSI. CMOS, HDL, SPICE, 
+
 
 Overview and Scope of this conversation: What I want to help you understand. We’ll do it with no math. What we’ll ignore.
 
