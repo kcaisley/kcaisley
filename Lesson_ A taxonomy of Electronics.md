@@ -1,6 +1,6 @@
 ---
 created: 2023-05-14T10:25:34+02:00
-modified: 2023-05-15T13:23:28+02:00
+modified: 2023-05-15T13:54:38+02:00
 ---
 
 # Lesson: A taxonomy of Electronics
@@ -10,7 +10,6 @@ Start with questions. How many of you:
 FPGA. ASIC. Mixed Signal. VLSI. CMOS, HDL, SPICE, RFIC, RF, Combinational logic,
 
 Passive vs active. Discrete va monolithic.
-
 
 Overview and Scope of this conversation: What I want to help you understand. We’ll do it with no math. What we’ll ignore.
 
@@ -64,3 +63,21 @@ Remember: Everthing is a model. All models are wrong. Some are useful. You can a
 Remember: You should use abstractions, even the pros do. But you must know know when your abstraction breaks down.
 
 Addendum: RF design is a family of analog design where you think in the ‘frequency’ domain, as signals aren’t at baseband, and typically you’re modulating periodic signals. Not pulse based signals.
+
+
+What are these words? What are these symbols. What are these diagrams. What are these disciplines and mode
+
+Vertical axis is model abstraction level.
+
+All models are wrong, some are useful, some of the time.
+
+How do we determine the usefulness?
+
+Symbolic and numerical tractabillity. (how much human and or human power/time do we have?)
+
+
+Complexity (infer integration, and tools)
+model (driven by appliction/fuction)
+
+
+How fast, power consuming, old, hot, large/small complex, and how operating are the devices in these systems?
