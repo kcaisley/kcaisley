@@ -1,8 +1,4 @@
----
-title: Kennedy Caisley
----
-
-**Hello, I'm Kennedy.**
+# **Hello, I'm Kennedy.**
 
 I am a second-year PhD student working on mixed-signal integrated circuit design at the Research and Technology Center for Detector Physics ([FTD](https://www.ftd.uni-bonn.de/en/homepage?set_language=en)), University of Bonn, Germany.
 
