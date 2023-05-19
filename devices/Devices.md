@@ -1,7 +1,3 @@
----
-created: 2023-05-15T12:22:07+02:00
-modified: 2023-05-15T13:32:26+02:00
----
 
 # junctions
 
@@ -22,3 +18,13 @@ bjt  bipolar because there are teo currenet.  Want to make tge base as thin as p
 
 
 fet. Mosfet or jfet. Unipolar.
+
+
+[[Device Physics ]]
+
+[[Device Fabrication and Process]]
+
+[[Device Simulation and TCAD]]
+
+[[Irrandiation and Detection]]
+

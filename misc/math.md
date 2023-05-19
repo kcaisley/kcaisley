@@ -1,4 +1,3 @@
-My primary goal in understanding math is to provide an template for reusable models, optimizations, frameworks, etc for 
 
 
 

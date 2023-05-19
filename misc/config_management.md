@@ -6,9 +6,6 @@ Because the constructs of a language are often super well equipped to deal with 
 
 This same paradigm exists in circuits. We have clearly define inputs and outputs in the various phases of the circuits. We would benefit from standadizing the interfaces of these stages so that we can more easily interchange between them.
 
-# Baysian Optimization
-
-I’ve also read about baysian optimization, in which you generate a prior guess at the output distribution of a hard to compute function, and then you poll random points and progressively update your understanding of the output function until you have a good idea. BoTorch can be used for this.
 
 # Work Plan
 
