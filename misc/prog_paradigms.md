@@ -50,8 +50,6 @@ the Lanugage Server Protocol (LSP) is a standardized with for an IDE to communic
 
 Pylance, Pyright (superceded), and Jedi are the main examples of python language servers
 
-Pylance features:
-
 * Docstrings
 * Signature help, with type information
 * Parameter suggestions
@@ -65,42 +63,6 @@ Pylance features:
 * IntelliCode compatibility
 * Jupyter Notebooks compatibility
 * Semantic highlighting
-
-
-
-Alt tab is first generation
-
-Second generation is :bnext` & `:bprev
-
-third is Fuzzy finders (cmd line option is fzf) allow me to find any file by just typing the contents of it. 
-
-Third generation is harpoon
-
-https://github.com/ThePrimeagen/harpoon
-
-
-
-i3-like setup on mac
-
-https://cbrgm.net/post/2021-05-5-setup-macos/
-
-
-
-i3 replacement:
-
-https://github.com/koekeishiya/yabai
-
-
-
-nix for package/environement management:
-
-https://builtwithnix.org
-
-
-
-how similar Yabai and skhd are to Bspwm and sxhkd
-
-https://github.com/koekeishiya/skhd
 
 
 

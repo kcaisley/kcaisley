@@ -54,11 +54,5 @@ not sure where these are:
 
 ​	gemfor production, 'gem foils' or 'gen foils'?
 
-
-
-
-
-
-
 What is backside processing?
 

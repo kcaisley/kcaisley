@@ -1,0 +1,3 @@
+[submodule "asiclab-docs"]
+	path = asiclab-docs
+	url = git@github.com:SiLab-Bonn/asiclab-docs.git

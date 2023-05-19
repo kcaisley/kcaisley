@@ -1,0 +1,191 @@
+{
+  "main": {
+    "id": "3099f1904b6d74de",
+    "type": "split",
+    "children": [
+      {
+        "id": "dacb5a3f784213f5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "da1ede475f8cb1ea",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "knowledge/core.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "17e626d3439cd7dc",
+    "type": "split",
+    "children": [
+      {
+        "id": "f0990e424b72f87c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8fc51bfc28c532cb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a234a5b07a2408fe",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c0c4d99eb058860f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6351abd52e6fda28",
+    "type": "split",
+    "children": [
+      {
+        "id": "1702cae3dabc26ff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "83852ca9bd834104",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "knowledge/core.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3727f6b88a6b2be5",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "knowledge/core.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b82f687410a9d2b4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2cf0862029b92aa4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "knowledge/core.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "da1ede475f8cb1ea",
+  "lastOpenFiles": [
+    "knowledge/Mental Map.md",
+    "knowledge/core.md",
+    "misc/math.md",
+    "misc/Lesson_ A taxonomy of Electronics.md",
+    "misc/journal.md",
+    "misc/fdsoi_stdcell.md",
+    "misc/config_management.md",
+    "misc/prog_paradigms.md",
+    "asiclab-docs/xilinx_setup.md",
+    "asiclab-docs/user_management.md",
+    "asiclab-docs/third_party.md",
+    "asiclab-docs/remote_connection.md",
+    "asiclab-docs/readme.md",
+    "asiclab-docs/printer_config.md",
+    "asiclab-docs/playbook.yaml",
+    "asiclab-docs/pdk_install.md",
+    "asiclab-docs/network_configuration.md",
+    "asiclab-docs/network debugging.md",
+    "asiclab-docs/license_server.md",
+    "asiclab-docs/lab_courses.md",
+    "asiclab-docs/inventory.yaml",
+    "asiclab-docs/inventory.ini",
+    "asiclab-docs/install-client.yml",
+    "asiclab-docs/git.md",
+    "asiclab-docs/file_server.md",
+    "asiclab-docs/containerized_cadence.md",
+    "asiclab-docs/clonezilla.md",
+    "asiclab-docs/boot sequence.md",
+    "asiclab-docs/ansible.md",
+    "asiclab-docs/admin.md",
+    "asiclab-docs",
+    "sysadmin/playbook.yaml",
+    "sysadmin/inventory.yaml",
+    "sysadmin/inventory.ini",
+    "sysadmin/install-client.yml",
+    "sysadmin",
+    "Untitled.canvas",
+    "images/image-20230418181857736.png",
+    "images/image-20230418183246467.png"
+  ]
+}
