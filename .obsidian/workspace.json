@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "849935307e46598f",
+        "id": "93a432287c534f7d",
         "type": "tabs",
         "children": [
           {
-            "id": "8f550b1fae5f47d9",
+            "id": "7062cfde2dba2190",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "analog design/Jitter.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "analog design/Jitter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "analog design/Jitter.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "analog design/Jitter.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -146,8 +138,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8fc51bfc28c532cb",
+  "active": "7062cfde2dba2190",
   "lastOpenFiles": [
+    "sysadmin/admin.md",
+    "sysadmin/boot sequence.md",
+    "sysadmin/containerized_cadence.md",
+    "sysadmin/readme.md",
+    "sysadmin/remote_connection.md",
+    "sysadmin/third_party.md",
+    "sysadmin/user_management.md",
+    "sysadmin/xilinx_setup.md",
+    "sysadmin/git.md",
+    "sysadmin/pdk_install.md",
+    "sysadmin/network debugging.md",
+    "sysadmin/network_configuration.md",
+    "analog design/Jitter.md",
     "misc/knowledge base plan.md",
     "analog design/vs Digital Design.md",
     "misc/circuits_basics.md",
@@ -161,22 +166,9 @@
     "misc/Lesson_ A taxonomy of Electronics.md",
     "misc/math.md",
     "misc/package_management.md",
-    "misc/pixel_fom.md",
-    "misc/prog_paradigms.md",
-    "misc/verilog_ams.md",
-    "misc/general_software_dev.md",
-    "misc/tools.md",
-    "misc/todo.md",
-    "analog design/Jitter.md",
-    "Untitled.md",
-    "physics/Radiation Damage.md",
     "analog design",
-    "devices/Devices.md",
-    "computing/Computing.md",
-    "Particle Detectors Readout Electronics.md",
     "devices",
     "computing",
-    "asiclab-docs/Bash, etc.md",
     "misc/CadenceLayoutTips.pdf",
     "engineering",
     "images/image-20230418181857736.png",
@@ -185,8 +177,8 @@
     "maths",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "asiclab-docs/playbook.yaml",
-    "asiclab-docs/inventory.yaml",
-    "asiclab-docs/inventory.ini"
+    "sysadmin/playbook.yaml",
+    "sysadmin/inventory.yaml",
+    "sysadmin/inventory.ini"
   ]
 }
