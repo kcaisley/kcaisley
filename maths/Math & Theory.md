@@ -8,6 +8,6 @@ I should delve deeply enough to understand the math I see in my electronics, dev
 
 [[Linear Algebra]]
 
-[[Optimization Theory]]
+[[Optimization]]
 
 

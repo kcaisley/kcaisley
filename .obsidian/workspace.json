@@ -11,8 +11,12 @@
             "id": "7062cfde2dba2190",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "physics/semiconductor/Semiconductor Physics.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "physics/semiconductor/Semiconductor Physics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "physics/semiconductor/Semiconductor Physics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "physics/semiconductor/Semiconductor Physics.md"
+              }
             }
           }
         ]
@@ -140,45 +148,44 @@
   },
   "active": "7062cfde2dba2190",
   "lastOpenFiles": [
-    "sysadmin/admin.md",
-    "sysadmin/boot sequence.md",
-    "sysadmin/containerized_cadence.md",
-    "sysadmin/readme.md",
-    "sysadmin/remote_connection.md",
-    "sysadmin/third_party.md",
-    "sysadmin/user_management.md",
-    "sysadmin/xilinx_setup.md",
-    "sysadmin/git.md",
-    "sysadmin/pdk_install.md",
-    "sysadmin/network debugging.md",
-    "sysadmin/network_configuration.md",
-    "analog design/Jitter.md",
-    "misc/knowledge base plan.md",
-    "analog design/vs Digital Design.md",
-    "misc/circuits_basics.md",
-    "misc/circuits_modeling.md",
-    "misc/config_management.md",
-    "misc/drc_rules_45nm.md",
-    "misc/fdsoi_stdcell.md",
-    "misc/foss_layout.md",
-    "misc/hdl21.md",
-    "misc/journal.md",
-    "misc/Lesson_ A taxonomy of Electronics.md",
-    "misc/math.md",
-    "misc/package_management.md",
+    "devices/Devices.md",
+    "physics/semiconductor/Semiconductor Physics.md",
+    "physics/em/Electromagnetic Theory.md",
+    "physics/particle/Particle-Matter Interaction.md",
+    "physics/particle/Particle Physics.md",
+    "physics/particle/Radiation Damage.md",
+    "physics/semiconductor",
+    "physics/em",
+    "physics/particle",
+    "physics/particle/Radiation & Particle Detectors.md",
+    "physics/Physics.md",
+    "physics/Radiation Detectors.md",
+    "Particle/Radiation Detectors.md",
+    "Particle",
+    "physics/particle/Particle Classification.md",
+    "physics/Detectors.md",
+    "physics/Untitled.md",
+    "analog design/to know.md",
+    "devices/cleanroom.md",
+    "maths/Math & Theory.md",
+    "maths/Statistics, Probability, and Randomness.md",
+    "maths/Optimization.md",
+    "maths/Linear Algebra.md",
+    "maths/Calculus and Differential Equations.md",
+    "Optimization Theory.md",
+    "maths/Optimization Theory.md",
+    "asiclab-docs/third_party.md",
+    "asiclab-docs/user_management.md",
+    "asiclab-docs/xilinx_setup.md",
+    "website/index_typora.html",
+    "website/index.html",
+    "analog design/Jitter_typora.html",
     "analog design",
     "devices",
     "computing",
-    "misc/CadenceLayoutTips.pdf",
-    "engineering",
     "images/image-20230418181857736.png",
     "images/image-20230418183246467.png",
-    "physics",
-    "maths",
     "Untitled 1.canvas",
-    "Untitled.canvas",
-    "sysadmin/playbook.yaml",
-    "sysadmin/inventory.yaml",
-    "sysadmin/inventory.ini"
+    "Untitled.canvas"
   ]
 }

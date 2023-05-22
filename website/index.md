@@ -1,4 +1,7 @@
-**Hello, I’m Kennedy**
+
+
+
+## Hello, I’m Kennedy
 
 I am a second-year PhD student working on mixed-signal integrated circuit design at the Research and Technology Center for Detector Physics ([FTD](https://www.ftd.uni-bonn.de/en/homepage?set_language=en)), University of Bonn, Germany.
 
@@ -8,7 +11,7 @@ I want to explain first my research interests, and then talk about where I am. W
 
 Give github link?
 
-# Posts
+### Posts
 
 [Cadence in a Container]()
 
@@ -18,9 +21,7 @@ Give github link?
 
 [Pixel Detectors FOM]()
 
-
-
-# Papers
+### Papers
 
 [A Fast, Low Jitter, and Low Time-Walk Multi-Channel Front-End IC for Diamond and Silicon Radiation Detectors]().
 Mo’men Mansour, Shane Smith, Harris Kagan, Kennedy Caisley, Bora Tar, Ahmed Naguib, Andrej Gorišek, Bojan Hiti, Miha Mali, Marko Mikuž, Michael Ziolkowski, Jens Winter, and Waleed Khalil. Submitted Dec 2022.

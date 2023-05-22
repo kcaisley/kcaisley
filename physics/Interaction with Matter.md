@@ -1,3 +1,0 @@
-[[Radiation Damage]]
-
-[[Detection Mechanisms]]

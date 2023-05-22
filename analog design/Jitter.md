@@ -25,7 +25,7 @@ $$
 3. Time-Interval Error (TIE): uses deviation from ideal reference. Difficult to observe directly with oscilloscope in experimental setup, but is good as it reveals cumulative effect of jitter
 
 $$
-TIE_n=\sum\limits_{0}^{n}(J_{p_{n}}-t_{ideal_{n}})
+TIE_n = \sum\limits_{0}^{n}(J_{p_{n}}-t_{ideal_{n}})
 $$
 
 where $n$ is the cumulative edge number, in time. The more cycles go by, the further we will likely find ourselves from the ideal
@@ -36,3 +36,4 @@ x = range(0, 10, length=100)
 y = sin.(x)
 plot(x, y)
 ```
+
