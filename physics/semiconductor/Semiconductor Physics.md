@@ -9,8 +9,5 @@ The scope is wave functions to juctions. At the top end, this is:
 * ms junction. schottky barrier vs ohmic state. called a ohmic contact if metal workfunction is less than SC workfunciton
 * pin (or ptype-oxide-ntype)
 
-
-	[[]]
-
 One important link, after studying devices in a vaccum, is to study them under radiation from incident particles, i.e. [[Particle-Matter Interaction]]
 

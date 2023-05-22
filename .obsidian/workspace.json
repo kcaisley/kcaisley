@@ -13,8 +13,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "physics/semiconductor/Semiconductor Physics.md",
+                "file": "physics/em/Electromagnetic Theory.md",
                 "mode": "source",
+                "backlinks": false,
                 "source": false
               }
             }
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "physics/semiconductor/Semiconductor Physics.md",
+                "file": "physics/em/Electromagnetic Theory.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "physics/semiconductor/Semiconductor Physics.md",
+                "file": "physics/em/Electromagnetic Theory.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "physics/semiconductor/Semiconductor Physics.md"
+                "file": "physics/em/Electromagnetic Theory.md"
               }
             }
           }
@@ -146,12 +147,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7062cfde2dba2190",
+  "active": "8fc51bfc28c532cb",
   "lastOpenFiles": [
-    "devices/Devices.md",
-    "physics/semiconductor/Semiconductor Physics.md",
-    "physics/em/Electromagnetic Theory.md",
     "physics/particle/Particle-Matter Interaction.md",
+    "physics/semiconductor/Semiconductor Physics.md",
+    "devices/Devices.md",
+    "physics/em/Electromagnetic Theory.md",
     "physics/particle/Particle Physics.md",
     "physics/particle/Radiation Damage.md",
     "physics/semiconductor",
