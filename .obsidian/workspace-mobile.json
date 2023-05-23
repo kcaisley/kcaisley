@@ -1,0 +1,138 @@
+{
+  "main": {
+    "id": "e55cd2d124e93f44",
+    "type": "split",
+    "children": [
+      {
+        "id": "30a0fdb60eb3c7bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3690be21c45a52fe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "physics/semiconductor/Semiconductor Physics.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "92b464724bdfa122",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "ff039fe2a4fa87f6",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "12b6aec0685256f9",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "8cd5ae7b3f7b2e09",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "93d3f4375f337f26",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {}
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "180e360565d5f949",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "fd6df208c2a7249c",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "physics/semiconductor/Semiconductor Physics.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "9dfb41fe41546211",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "physics/semiconductor/Semiconductor Physics.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "073528906bd3139e",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "physics/semiconductor/Semiconductor Physics.md"
+          }
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "3690be21c45a52fe",
+  "lastOpenFiles": [
+    "physics/Physics.md"
+  ]
+}

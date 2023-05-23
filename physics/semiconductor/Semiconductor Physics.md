@@ -11,5 +11,7 @@ The scope is wave functions to juctions. At the top end, this is:
 
 One important link, after studying devices in a vaccum, is to study them under radiation from incident particles, i.e. [[Particle-Matter Interaction]]
 
+$x + y$
 
-$ x + y $
+
+
