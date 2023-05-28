@@ -15,3 +15,6 @@ $x + y$
 
 
 
+$$
+-\frac{d^2\phi}{dx^2}=\frac{dE}{dx}=\frac{\rho}{\epsilon}
+$$

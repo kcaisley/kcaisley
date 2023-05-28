@@ -59,7 +59,6 @@ List of open-source projects tools for analog/mixed-signal circuit design.
 It also documents the available solver types.
 
 
-
 # Misc. to be sorted
 
 adms - Automatic device model synthesizer for Verilog-AMS

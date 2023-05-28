@@ -4,17 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "30a0fdb60eb3c7bb",
+        "id": "a5fbab38477c35d1",
         "type": "tabs",
         "children": [
           {
-            "id": "3690be21c45a52fe",
+            "id": "79c106f7b5e046d1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "physics/semiconductor/Semiconductor Physics.md",
-                "mode": "preview",
+                "file": "physics/particle/Particle Classification.md",
+                "mode": "source",
+                "backlinks": true,
                 "source": false
               }
             }
@@ -85,7 +86,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "physics/semiconductor/Semiconductor Physics.md",
+            "file": "physics/particle/Particle Classification.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "physics/semiconductor/Semiconductor Physics.md",
+            "file": "physics/particle/Particle Classification.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +115,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "physics/semiconductor/Semiconductor Physics.md"
+            "file": "physics/particle/Particle Classification.md"
           }
         }
       }
@@ -131,8 +132,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3690be21c45a52fe",
+  "active": "79c106f7b5e046d1",
   "lastOpenFiles": [
-    "physics/Physics.md"
+    "physics/particle/Particle Physics.md",
+    "physics/Physics.md",
+    "analog design/Jitter.md",
+    "Top.md",
+    "electronics/Electronics.md",
+    "electronics/Circuit Theory.md",
+    "electronics/devices/Devices.md",
+    "electronics/Microwave & Optics.md",
+    "electronics/Signal and Systems.md",
+    "physics/semiconductor/Semiconductor Physics.md",
+    "maths/Mathematics.md",
+    "computing/Computing.md",
+    "physics/particle/Radiation Damage.md",
+    "physics/em/EM Simulation Types.md",
+    "misc/tools.md",
+    "Untitled.md",
+    "Untitled"
   ]
 }

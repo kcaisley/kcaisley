@@ -1,3 +1,4 @@
+This is the base level of the electronics discipline. Everything below should be considered as physics. Devices exist due to human intent.
 
 bjt  bipolar because there are teo currenet.  Want to make tge base as thin as possible, as if it’s not fully depleted, we want to avoid recombination so that IC ~ IE
 
