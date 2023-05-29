@@ -13,14 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "physics/particle/Particle Classification.md",
+                "file": "website/writing.md",
                 "mode": "source",
-                "backlinks": true,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "820607c5ce39d59d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "mathematics/Algebra.md",
+                "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "physics/particle/Particle Classification.md",
+            "file": "mathematics/Algebra.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -103,7 +115,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "physics/particle/Particle Classification.md",
+            "file": "mathematics/Algebra.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -115,7 +127,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "physics/particle/Particle Classification.md"
+            "file": "mathematics/Algebra.md"
           }
         }
       }
@@ -132,24 +144,28 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "79c106f7b5e046d1",
+  "active": "820607c5ce39d59d",
   "lastOpenFiles": [
+    "Slides Test.md",
+    "mathematics/Algebra.md",
+    "website/writing.md",
+    "Top.md",
+    "electronics/Signal and Systems.md",
+    "mathematics/stats",
+    "electronics/Circuit Theory.md",
+    "electronics/lumped",
+    "electronics/analog design/Jitter.md",
+    "physics/particle/Particle Classification.md",
     "physics/particle/Particle Physics.md",
     "physics/Physics.md",
-    "analog design/Jitter.md",
-    "Top.md",
     "electronics/Electronics.md",
-    "electronics/Circuit Theory.md",
     "electronics/devices/Devices.md",
     "electronics/Microwave & Optics.md",
-    "electronics/Signal and Systems.md",
     "physics/semiconductor/Semiconductor Physics.md",
-    "maths/Mathematics.md",
+    "mathematics/Mathematics.md",
     "computing/Computing.md",
     "physics/particle/Radiation Damage.md",
     "physics/em/EM Simulation Types.md",
-    "misc/tools.md",
-    "Untitled.md",
-    "Untitled"
+    "misc/tools.md"
   ]
 }
