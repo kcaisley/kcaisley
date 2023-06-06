@@ -1,6 +1,6 @@
 # Slides
 
-# Prior Work: Background
+# Prior Work: Tech
 - 2007-2011: 130nm, 2012-Present: 65nm
 - 28nm available now, but:
 	- 2-4x transistors -> longer simulation, layout, verification
@@ -104,7 +104,7 @@ Schematic vs layout
 - Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear around the 
 - Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
 
-![](IMG_1502 1.jpeg)
+![](IMG_1502.jpeg)
 
 [B. Razavi, Design of CMOS Phase-Locked Loops](https://doi.org/10.1017/9781108626200)
 
