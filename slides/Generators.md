@@ -10,10 +10,10 @@
 - ISSCC stats reflect this
 
 # Prior Work: PLL Designs
-![Image](./0f56b9cc9321f44724d5e18e1737ae2b.png)
+![./dhptpll.png]
 *Early DHP PLL, in 90nm, later ported to 65nm*
 
-![IMG_1495.jpeg]
+![./rd53pll.jpeg]
 *Early RD53 PLL, 65nm, layer grew to 600x150u*
 
 |Design|Fin(Hz)|Fout(Hz)|Jitter(s)|Power(W)|TID(Rad)|
