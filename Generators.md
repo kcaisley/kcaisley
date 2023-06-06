@@ -29,27 +29,7 @@
 - General-purpose tooling (Python, C++, YAML)
 
 ## Example Workflow
-```mermaid
-graph TD
 
-A[("Design Specs
-(.yaml)")]-->B("Schematic Generator (.py)")
-C[("Circuit Template
-i.e. Unsized Netlist
-(.cir | .oa)")]-->B
-D[("Device Params.
-(.yaml)")]-->B
-B-->E[("Sized Netlist
-(.cir | .oa)")]
-
-W[("Placement Template
-(.yaml)")]-->Y("Layout Generator (.py)")
-E-->Y
-X[("Routing Grid
-(.yaml)")]-->Y
-Y-->V[("Layout
-(.gdsii | .oa)")]
-```
 
 # Generators: Procedural
 
@@ -58,7 +38,7 @@ Y-->V[("Layout
 - Limited simulation for parameters -> Fast
 - Top-to-bottom: 'feedforward'
 
-![[IMG_1500.jpeg]]
+![](IMG_1500.jpeg)
 *Rare 'procedural generator' specimen, circa 2013*
 
 # Generators: Synthesis 
@@ -70,7 +50,7 @@ Y-->V[("Layout
 	3. Retain best performing
 	4. Iterate if necessary: 'feedback'
 
-![[IMG_1501.png]]
+![](IMG_1501.png)
 [https://en.m.wikipedia.org/wiki/Metaheuristic](https://en.m.wikipedia.org/wiki/Metaheuristic)
 
 # Generators: When to use which type?
@@ -118,15 +98,13 @@ Schematic vs layout
 
 # Next Steps: Application
 
-![PLL Diagram]
-
 - Phase/Freq. Detector:  Depending on Linear, Bang-Nonlinear. Noise Margin Suppresses Voltage Noise, mostly digital, this is a irregular but structural block, low gate/stage block, so this is best followed via a strictly procedural generation for schematic and layout. Can likely build from standard cells. Jitter does matter though.
 - Charge Pump: 
 - Low Pass Filter: Passive, and so can be considered linear quite easily. Relatively straiforward to  solved with procedural sizing and layout.
 - Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear around the 
 - Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
 
-![[IMG_1502 1.jpeg]]
+![](IMG_1502 1.jpeg)
 
 [B. Razavi, Design of CMOS Phase-Locked Loops](https://doi.org/10.1017/9781108626200)
 
