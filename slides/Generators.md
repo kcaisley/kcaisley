@@ -10,7 +10,7 @@
 - ISSCC stats reflect this
 
 # Prior Work: PLL Designs
-![IMG_1496.png]
+![image](IMG_1496.png)
 *Early DHP PLL, in 90nm, later ported to 65nm*
 
 ![IMG_1495.jpeg]
