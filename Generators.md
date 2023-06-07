@@ -30,6 +30,27 @@
 
 ## Example Workflow
 
+```mermaid
+graph TD
+
+A[("Design Specs
+(.yaml)")]-->B("Schematic Generator (.py)")
+C[("Circuit Template
+i.e. Unsized Netlist
+(.cir | .oa)")]-->B
+D[("Device Params.
+(.yaml)")]-->B
+B-->E[("Sized Netlist
+(.cir | .oa)")]
+
+W[("Placement Template
+(.yaml)")]-->Y("Layout Generator (.py)")
+E-->Y
+X[("Routing Grid
+(.yaml)")]-->Y
+Y-->V[("Layout
+(.gdsii | .oa)")]
+```
 
 # Generators: Procedural
 
@@ -55,17 +76,11 @@
 
 # Generators: When to use which type?
 
-Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
-Linear ⇔ Non-Linear: 
-
-
-
-Linear vs non-linear: aligns with structural vs functional
-System vs device
-structural (does the block compose, like digital circuits, or does the functionality need to be analyzed after) vs functional 
-
-regular vs non-regular): This is more common in 28nm!!
-Schematic vs layout
+- Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
+- Linear ⇔ Non-Linear 
+- System vs device
+- Regular vs non-regular: This is more common in 28nm!!
+- Schematic vs layout
 
 # Generators: Dos and don'ts
 - **DO** create a deterministic generator (e.g. avoid random optimization convergence)
@@ -99,9 +114,9 @@ Schematic vs layout
 # Next Steps: Application
 
 - Phase/Freq. Detector:  Depending on Linear, Bang-Nonlinear. Noise Margin Suppresses Voltage Noise, mostly digital, this is a irregular but structural block, low gate/stage block, so this is best followed via a strictly procedural generation for schematic and layout. Can likely build from standard cells. Jitter does matter though.
-- Charge Pump: 
+- Charge Pump: functional
 - Low Pass Filter: Passive, and so can be considered linear quite easily. Relatively straiforward to  solved with procedural sizing and layout.
-- Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear around the 
+- Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear
 - Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
 
 ![](IMG_1502.jpeg)
@@ -113,23 +128,3 @@ Schematic vs layout
 - Design generator that is 28 nm + 65 nm compatible
 - TSMC 28 nm submission of demonstrator PLL via Europractice
 - Apply generator concepts to new FE designs
-
-# Questions
-
-- Ratio of PLL power to chip as a whole?
-- How big is analog chip bottom in RD53?
-- Target timeline for submission?
-- Use knowledge to build time based FEs
-- Al's Hans about CERN PLL!
-
-
-
-Code and diagram of layout
-Know synthesis types
-It work: nfs/backup, ldap users, PDK, Fedora linux, containerized cadence, doccumentation
-Bag workflow diagram
-
-0.1-0.7w /cm2 typical
-
-
-Obelix has no pll, what is ddr design for driver?
