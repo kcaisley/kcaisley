@@ -37,3 +37,21 @@ y = sin.(x)
 plot(x, y)
 ```
 
+Once jitter is measured, it can be defined either by the RMS of the distribution, or by looking further out to encapsulate some number allowable BER. 68% percent of distribution is within one standard deviation, but a BER of 0.32 would be unacceptable.
+
+JitterP-P = α * JitterRMS
+
+Where
+
+|BER|α|
+|---|---|
+|10-3|6.180|
+|10-4|7.438|
+|10-5|8.530|
+|10-6|9.507|
+|10-7|10.399|
+|10-8|11.224|
+|10-9|11.996|
+|10-10|12.723|
+|10-11|13.412|
+|10-12|14.069|
