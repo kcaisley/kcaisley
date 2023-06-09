@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mathematics/Mathematics.md",
+                "file": "misc/2023-06-09.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "mathematics/Mathematics.md",
+                "file": "misc/2023-06-09.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "mathematics/Mathematics.md",
+                "file": "misc/2023-06-09.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "mathematics/Mathematics.md"
+                "file": "misc/2023-06-09.md"
               }
             }
           }
@@ -147,6 +147,8 @@
   },
   "active": "697058cf6c9df687",
   "lastOpenFiles": [
+    "2023-06-09.md",
+    "mathematics/Mathematics.md",
     "Top.md",
     "reports/Writing & Publishing.md",
     "reports/Website.md",
@@ -183,8 +185,6 @@
     "Particle",
     "physics/particle/Particle Classification.md",
     "physics/Detectors.md",
-    "physics/Untitled.md",
-    "analog design/to know.md",
     "reports/index_typora.html",
     "reports/index.html",
     "analog design/Jitter_typora.html",
