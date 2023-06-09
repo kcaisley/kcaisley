@@ -56,5 +56,3 @@ At the macroscopic systems level, most blocks can't be properly defined by any o
 - RF blocks will have Noise Figure (NF), IP2, IP3, etc to characterize power saturation (gain compression, not tied to frequency, and IM2 and IM3 which are intermodulation for harmonic distortion.
 - PLL will have phases noise, jitter, 
 - Pixel detectors have ENC, time walk, dead time, etc!
-
-**p** = m_rel_**v**

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "misc/pixel_fom.md",
+                "file": "mathematics/Mathematics.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "misc/pixel_fom.md",
+                "file": "mathematics/Mathematics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "misc/pixel_fom.md",
+                "file": "mathematics/Mathematics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "misc/pixel_fom.md"
+                "file": "mathematics/Mathematics.md"
               }
             }
           }
@@ -147,12 +147,18 @@
   },
   "active": "697058cf6c9df687",
   "lastOpenFiles": [
+    "Top.md",
+    "reports/Writing & Publishing.md",
+    "reports/Website.md",
+    "reports/Generators.md",
+    "reports/upload.md",
+    "asiclab-docs/git.md",
+    "asiclab-docs/network_configuration.md",
+    "asiclab-docs/admin.md",
+    "misc/pixel_fom.md",
     "misc/CadenceLayoutTips.pdf",
-    "reports/writing.md",
     "slides/Slides Test.md",
     "misc/2023-06-09.md",
-    "Top.md",
-    "reports/Generators.md",
     "slides/Generators 1.md",
     "images/flow.png",
     "images/rd53pll.jpeg",
@@ -179,17 +185,11 @@
     "physics/Detectors.md",
     "physics/Untitled.md",
     "analog design/to know.md",
-    "devices/cleanroom.md",
-    "maths/Math & Theory.md",
-    "maths/Statistics, Probability, and Randomness.md",
-    "maths/Optimization.md",
-    "maths/Linear Algebra.md",
     "reports/index_typora.html",
     "reports/index.html",
     "analog design/Jitter_typora.html",
     "analog design",
     "devices",
-    "computing",
     "images/image-20230418181857736.png",
     "images/image-20230418183246467.png",
     "Untitled 1.canvas",

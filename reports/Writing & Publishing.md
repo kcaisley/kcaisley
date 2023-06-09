@@ -1,3 +1,6 @@
+You can use YAML blocks to head slides:
+
+```yaml
 ---
 title:
 - Writing in Simple format
@@ -10,6 +13,8 @@ fonttheme:
 date:
 - 3 May, 2023
 ---
+```
+
 
 # Simple Writing
 
@@ -43,10 +48,17 @@ pandoc -t beamer writing.md -o writing.pdf
 
 Use the following script, with SSH keys.
 
-```
 pandoc to generate (make sure to git ignore)
-scp to copy
+
+```bash
+pandoc -s -f markdown -t html -o index.html index.md
 ```
+
+scp to copy
+```bash
+$ rsync -r /Users/kcaisley/export/website/site/ kcaisley_kcaisley@ssh.phx.nearlyfreespeech.net:/home/public/
+```
+
 
 # More
 

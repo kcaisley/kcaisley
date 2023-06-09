@@ -87,8 +87,8 @@ Y-->V[("Layout
 - **DO** combine the procedural + synthesis (Mimics what designers already do intuitive)
 - **DO** partition generator code by cell view
 - **DON'T** hide method in opaque neural networks (human or machine)
-	- Overconstrained procedural not reusable and ignores useful abstraction (e.g. drawing raw GDSII)
-	- Underconstrained statistical approach time-consuming and meaningless, (e.g. unsupervised learning
+	- Over-constrained procedural not reusable and ignores useful abstraction (e.g. drawing raw GDSII)
+	- Under-constrained statistical approach time-consuming and meaningless, (e.g. unsupervised learning
 - **DON'T** use for one-off/unique blocks or top-level
 - **DON'T** expect SOTA performance, power, area
 
