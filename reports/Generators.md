@@ -8,10 +8,10 @@
 - ISSCC stats reflect this
 
 # Prior Work: PLL Designs
-![testing](dhptpll.png)
+![](../images/dhptpll.png)
 *Early DHP PLL, in 90nm, later ported to 65nm*
 
-![](rd53pll.jpeg)
+![](../images/rd53pll.jpeg)
 *Early RD53 PLL, 65nm, layer grew to 600x150u*
 
 |Design|Fin(Hz)|Fout(Hz)|Jitter(s)|Power(W)|TID(Rad)|
@@ -57,7 +57,7 @@ Y-->V[("Layout
 - Limited simulation for parameters -> Fast
 - Top-to-bottom: 'feedforward'
 
-![](IMG_1500.jpeg)
+![](../images/IMG_1500.jpeg)
 *Rare 'procedural generator' specimen, circa 2013*
 
 # Generators: Synthesis 
@@ -69,7 +69,7 @@ Y-->V[("Layout
 	3. Retain best performing
 	4. Iterate if necessary: 'feedback'
 
-![](IMG_1501.png)
+![](../images/IMG_1501.png)
 [https://en.m.wikipedia.org/wiki/Metaheuristic](https://en.m.wikipedia.org/wiki/Metaheuristic)
 
 # Generators: When to use which type?
@@ -77,7 +77,7 @@ Y-->V[("Layout
 - Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
 - Linear ⇔ Non-Linear 
 - System vs device
-- Regular vs non-regular: This is more common in 28nm!!
+- Regular vs non-regular: more common in 28nm!!
 - Schematic vs layout
 
 # Generators: Dos and don'ts
@@ -94,15 +94,13 @@ Y-->V[("Layout
 
 # Generators: Survey of Tools
 
-* **PCell & PyCell**: W&L -> OA Layout+BSIM6, SKILL or Python/OA
-- BAG: OA Schem Template -> OA Schem, Python+SKILL
-- Hdl21 / Layout21
-
-* **gdstk(prev. gdspy)**: Python -> GDSII, Python
-- MAGICAL: 
-- ALIGN: Netlist -> GDSII, Python, FOSS [1](https://github.com/ALIGN-analoglayout/ALIGN-public)
-- Anagen - ????? Closed source, ) [1](https://m.youtube.com/watch?v=IzJbVG-FHJc)
-- gdstk
+- **PCell & PyCell**: W&L -> OA Layout+BSIM6, SKILL or Python/OA [Site](https://www.synopsys.com/cgi-bin/pycellstudio/req1.cgi) [Paper](https://arxiv.org/pdf/1607.00859.pdf)
+- **BAG**: OA Schem Template -> OA Schem, Python+SKILL [Docs](https://bag3-readthedocs.readthedocs.io/en/latest/workspaces.html) [Code](https://github.com/ucb-art/bag/tree/without_OA)
+- **Hdl21** / **Layout21**: [Code](https://github.com/dan-fritchman/Hdl21)
+- **gdstk(prev. gdspy)**: Python -> GDSII, Python [Code](https://github.com/heitzmann/gdstk)
+- **MAGICAL**: [Code](https://github.com/magical-eda/MAGICAL)
+- **ALIGN**: Netlist -> GDSII, Python, FOSS [Code](https://github.com/ALIGN-analoglayout/ALIGN-public)
+- **Anagen** - (Closed source, Infineon) [Pres](https://m.youtube.com/watch?v=IzJbVG-FHJc)
 
 ## Potential Issues
 - OpenAccess & Cadence
@@ -117,7 +115,7 @@ Y-->V[("Layout
 - Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear
 - Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
 
-![](IMG_1502.jpeg)
+![](../images/IMG_1502.jpeg)
 
 [B. Razavi, Design of CMOS Phase-Locked Loops](https://doi.org/10.1017/9781108626200)
 
