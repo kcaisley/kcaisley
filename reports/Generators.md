@@ -1,6 +1,4 @@
-# Slides
-
-# Prior Work: Background
+# Prior Work: Tech
 - 2007-2011: 130nm, 2012-Present: 65nm
 - 28nm available now, but:
 	- 2-4x transistors -> longer simulation, layout, verification
@@ -10,11 +8,10 @@
 - ISSCC stats reflect this
 
 # Prior Work: PLL Designs
-![images](./dhptpll.png)
+![testing](dhptpll.png)
 *Early DHP PLL, in 90nm, later ported to 65nm*
 
-![Image](./rd53pll.jpeg) 
-
+![](rd53pll.jpeg)
 *Early RD53 PLL, 65nm, layer grew to 600x150u*
 
 |Design|Fin(Hz)|Fout(Hz)|Jitter(s)|Power(W)|TID(Rad)|
@@ -30,6 +27,7 @@
 - General-purpose tooling (Python, C++, YAML)
 
 ## Example Workflow
+
 ```mermaid
 graph TD
 
@@ -59,7 +57,7 @@ Y-->V[("Layout
 - Limited simulation for parameters -> Fast
 - Top-to-bottom: 'feedforward'
 
-![[IMG_1500.jpeg]]
+![](IMG_1500.jpeg)
 *Rare 'procedural generator' specimen, circa 2013*
 
 # Generators: Synthesis 
@@ -71,22 +69,16 @@ Y-->V[("Layout
 	3. Retain best performing
 	4. Iterate if necessary: 'feedback'
 
-![[IMG_1501.png]]
+![](IMG_1501.png)
 [https://en.m.wikipedia.org/wiki/Metaheuristic](https://en.m.wikipedia.org/wiki/Metaheuristic)
 
 # Generators: When to use which type?
 
-Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
-Linear ⇔ Non-Linear: 
-
-
-
-Linear vs non-linear: aligns with structural vs functional
-System vs device
-structural (does the block compose, like digital circuits, or does the functionality need to be analyzed after) vs functional 
-
-regular vs non-regular): This is more common in 28nm!!
-Schematic vs layout
+- Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
+- Linear ⇔ Non-Linear 
+- System vs device
+- Regular vs non-regular: This is more common in 28nm!!
+- Schematic vs layout
 
 # Generators: Dos and don'ts
 - **DO** create a deterministic generator (e.g. avoid random optimization convergence)
@@ -119,15 +111,13 @@ Schematic vs layout
 
 # Next Steps: Application
 
-![PLL Diagram]
-
 - Phase/Freq. Detector:  Depending on Linear, Bang-Nonlinear. Noise Margin Suppresses Voltage Noise, mostly digital, this is a irregular but structural block, low gate/stage block, so this is best followed via a strictly procedural generation for schematic and layout. Can likely build from standard cells. Jitter does matter though.
-- Charge Pump: 
+- Charge Pump: functional
 - Low Pass Filter: Passive, and so can be considered linear quite easily. Relatively straiforward to  solved with procedural sizing and layout.
-- Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear around the 
+- Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear
 - Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
 
-![[IMG_1502 1.jpeg]]
+![](IMG_1502.jpeg)
 
 [B. Razavi, Design of CMOS Phase-Locked Loops](https://doi.org/10.1017/9781108626200)
 
@@ -136,23 +126,3 @@ Schematic vs layout
 - Design generator that is 28 nm + 65 nm compatible
 - TSMC 28 nm submission of demonstrator PLL via Europractice
 - Apply generator concepts to new FE designs
-
-# Questions
-
-- Ratio of PLL power to chip as a whole?
-- How big is analog chip bottom in RD53?
-- Target timeline for submission?
-- Use knowledge to build time based FEs
-- Al's Hans about CERN PLL!
-
-
-
-Code and diagram of layout
-Know synthesis types
-It work: nfs/backup, ldap users, PDK, Fedora linux, containerized cadence, doccumentation
-Bag workflow diagram
-
-0.1-0.7w /cm2 typical
-
-
-Obelix has no pll, what is ddr design for driver?
