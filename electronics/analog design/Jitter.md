@@ -7,7 +7,7 @@
 * Ideal sinusoid is ideal reference, most often (with same freq. and $\phi$), found via min $\Sigma(error)^2$
 
 $$
-A*sin(\omega_c*t+\phi_c)
+A*\sin(\omega_c*t+\phi_c)
 $$
 
 where $\omega_c$ and $\phi_c$ are constants chosen to minimize timer error of positions

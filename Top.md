@@ -24,9 +24,8 @@ Digital computers instead accumulate error through quantization. Herein lies the
 
 Recall: Algorithms, numerical/approximate methods, which existed before Computer science and programming.
 
-## [[Physics]]
+## Physics
 Before considering my field, I must consider the wide range of models used to explain the “why” of electronics and particles. These are two low level to be tractable for design, but are important for my intuition and reasoning.
-
 
 ## [[Electronics]]
 My core knowledge focus is on the design of physical systems which guide electromagnetic waves/photon particles around in order to measure incident particles. This requires a 

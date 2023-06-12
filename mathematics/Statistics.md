@@ -7,5 +7,5 @@ Intersections and unions of sets
 Multiplication rule
 Bayes’ theorem, the central limit theorem and the law of large numbers, covariance and correlation, and maximum likelihood estimation (MLE)
 
-
 Probability density functions and cumulative design functions
+

@@ -1,4 +1,32 @@
-# Pixel FOM
+The purpose of this essay will be to study and quantify the design space of pixel detector systems, including the creation of a FOM. It will draw upon comparisons with other data conversion circuits like Image Sensors, ADCs, and TDCs.
+
+To do this, we must build a model or incident radiation's interaction with matter. This model is in contrast to the discipling of 'gaussian/geometric optics' where beams of light are geometric light rays. This has the concept of [focal and image planes](https://en.wikipedia.org/wiki/Cardinal_point_(optics)#Focal_planes), etc. (Focal plane is the same as image plane but just in case on image coming from infinity.) By contrast are interested in single quanta detection. The other domain of this is the detection medium, which we'll model with a staring/plane array.
+
+What we need to do is fix a temperature, a sensor material, and incoming particle type/energy range direction and radiation environment.
+
+Then we create parametric limits on the thickness (to ensure energy loss doesn't dominate resolution of measuring particle direction, momentum, and energy.)
+
+What resolution on energy does the calorimeter provide? Can a tracking sensor ever provide that?
+
+
+
+
+
+A detector, vs imager, is something which has the concept of 'detection efficiency' take all the way to the quanta. We want every incident particle interacting with the sensor, and generating signal charge.
+
+
+
+We want to measure particle kinematics, so particle direction, momentum, and energy. But we need to strip down and simplify this model to the context of what is definable in a single chip. We're going to abstract away the dimensions of:
+- multiple layers increase in precision
+- mass's decrease on precision
+- recovery time/bunch crossing effect on pile-up/and  -> probability of loss of detection
+
+So we'll essentially compress it down into: power budget, mass budget, detection efficiency by setting a limit below which these parameters will not be the bottleneck on performance.
+
+The first constraint is precision for a single particle, passing through a plane array sensor. 
+
+Basically, you want a high detection probability (low noise, )
+
 
 There is a correspondence/connection between:
 
@@ -44,8 +72,8 @@ Also, I think I can take an ADC and reduce it down to a 1-bit design, in order t
 In pixel detectors, ENC or Equivalent Noise Charge (ENC), which is defined as the
 input charge for which the front-end Signal-to-Noise ratio is equal to 1. It's not 'dependent' on input charge level, because it, itself, is specified at a certain input charge level. But perhaps it's dependent on the threshold level? Yes I think it is. So we can compare the 
 
-| Parameters | ADC's | TDC's | Imagers | Detectors |
-| :--------: | :---: | :---: | :-----: | :-------: |
+| Parameters | ADCs | TDCs | Imagers | Detectors |
+| -------- | --- | --- | ----- | ------- |
 |            |       |       |         |           |
 |            |       |       |         |           |
 |            |       |       |         |           |

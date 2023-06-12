@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "physics/particle/Particle-Matter Interaction.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "physics/particle/Particle-Matter Interaction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "physics/particle/Particle-Matter Interaction.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "misc/2023-06-09.md"
+                "file": "physics/particle/Particle-Matter Interaction.md"
               }
             }
           }
@@ -147,21 +147,35 @@
   },
   "active": "697058cf6c9df687",
   "lastOpenFiles": [
-    "2023-06-09.md",
+    "physics/particle/Particle Classification.md",
+    "images/elementary particle.png",
+    "Pasted image 20230612162404.png",
+    "physics/particle/Particle Physics.md",
+    "physics/particle/Particle-Matter Interaction.md",
+    "electronics/Detector Signal Chain.md",
+    "electronics/applications",
+    "electronics/Detectors.md",
+    "misc/math.md",
+    "misc/2023-06-09.md",
+    "misc/bookmarks.md",
+    "misc/CadenceLayoutTips.pdf",
+    "misc/circuits_basics.md",
+    "misc/circuits_modeling.md",
+    "electronics/analog design/Jitter.md",
+    "mathematics/Algebra.md",
+    "mathematics/Statistics.md",
     "mathematics/Mathematics.md",
     "Top.md",
+    "electronics/Electronics.md",
+    "electronics/Circuit Theory.md",
+    "electronics/Circuit.md",
+    "\"Circuit.md",
+    "Circuit.md",
+    "electroni.md",
+    "physics/Physics.md",
+    "asiclab-docs/user_management.md",
+    "2023-06-09.md",
     "reports/Writing & Publishing.md",
-    "reports/Website.md",
-    "reports/Generators.md",
-    "reports/upload.md",
-    "asiclab-docs/git.md",
-    "asiclab-docs/network_configuration.md",
-    "asiclab-docs/admin.md",
-    "misc/pixel_fom.md",
-    "misc/CadenceLayoutTips.pdf",
-    "slides/Slides Test.md",
-    "misc/2023-06-09.md",
-    "slides/Generators 1.md",
     "images/flow.png",
     "images/rd53pll.jpeg",
     "images/IMG_1502 1.jpeg",
@@ -169,29 +183,15 @@
     "images/IMG_1501.png",
     "images/IMG_1500.jpeg",
     "images/IMG_1495.jpeg",
-    "physics/em/Electromagnetic Theory.md",
-    "physics/particle/Particle-Matter Interaction.md",
-    "physics/semiconductor/Semiconductor Physics.md",
-    "devices/Devices.md",
-    "physics/particle/Particle Physics.md",
-    "physics/particle/Radiation Damage.md",
     "physics/semiconductor",
     "physics/em",
     "physics/particle",
-    "physics/particle/Radiation & Particle Detectors.md",
-    "physics/Physics.md",
-    "physics/Radiation Detectors.md",
-    "Particle/Radiation Detectors.md",
     "Particle",
-    "physics/particle/Particle Classification.md",
-    "physics/Detectors.md",
     "reports/index_typora.html",
     "reports/index.html",
     "analog design/Jitter_typora.html",
     "analog design",
-    "devices",
     "images/image-20230418181857736.png",
-    "images/image-20230418183246467.png",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]
