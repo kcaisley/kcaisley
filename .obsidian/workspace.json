@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "17bf9d55b702b32e",
+        "id": "a5cc3f03aee5d8d0",
         "type": "tabs",
         "children": [
           {
-            "id": "697058cf6c9df687",
+            "id": "509257fbb31467f2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "physics/particle/Particle-Matter Interaction.md",
+                "file": "misc/bag3++.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "reset",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "6351abd52e6fda28",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "physics/particle/Particle-Matter Interaction.md",
+                "file": "misc/bag3++.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "physics/particle/Particle-Matter Interaction.md",
+                "file": "misc/bag3++.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "physics/particle/Particle-Matter Interaction.md"
+                "file": "misc/bag3++.md"
               }
             }
           }
@@ -145,23 +146,31 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "697058cf6c9df687",
+  "active": "509257fbb31467f2",
   "lastOpenFiles": [
+    "asiclab-docs/git.md",
+    "misc/bag3++.md",
+    "misc/2023-06-09.md",
+    "misc/2023-06-14.md",
+    "misc/2023-06-15.md",
+    "electronics/analog design/Jitter.md",
+    "images/Pasted image 20230615132026.png",
+    "computing/Computing.md",
+    "misc/bag_setup.md",
+    "asiclab-docs/license_server.md",
+    "physics/particle/Particle-Matter Interaction.md",
     "physics/particle/Particle Classification.md",
     "images/elementary particle.png",
     "Pasted image 20230612162404.png",
     "physics/particle/Particle Physics.md",
-    "physics/particle/Particle-Matter Interaction.md",
     "electronics/Detector Signal Chain.md",
     "electronics/applications",
     "electronics/Detectors.md",
     "misc/math.md",
-    "misc/2023-06-09.md",
     "misc/bookmarks.md",
     "misc/CadenceLayoutTips.pdf",
     "misc/circuits_basics.md",
     "misc/circuits_modeling.md",
-    "electronics/analog design/Jitter.md",
     "mathematics/Algebra.md",
     "mathematics/Statistics.md",
     "mathematics/Mathematics.md",
@@ -170,12 +179,6 @@
     "electronics/Circuit Theory.md",
     "electronics/Circuit.md",
     "\"Circuit.md",
-    "Circuit.md",
-    "electroni.md",
-    "physics/Physics.md",
-    "asiclab-docs/user_management.md",
-    "2023-06-09.md",
-    "reports/Writing & Publishing.md",
     "images/flow.png",
     "images/rd53pll.jpeg",
     "images/IMG_1502 1.jpeg",
@@ -191,7 +194,6 @@
     "reports/index.html",
     "analog design/Jitter_typora.html",
     "analog design",
-    "images/image-20230418181857736.png",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]

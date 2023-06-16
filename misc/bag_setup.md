@@ -2137,8 +2137,9 @@ I give up for now. I can't install Boost with vcpkg. It's too frustrating. Boost
 ## Building on April 10
 cp -r /cadence/mentor/aoi_cal_2016.4_38.25/shared/pkgs/icv_oa.aoi/22.50p001/ .
 
+```
 find . -type d -name "*example*"
-
+```
 
 This is the location of the binaries I want:
 /mnt/md127/tools/mentor/aoi_cal_2016.4_38.25/shared/pkgs/icv_oa.aoi/22.50p001

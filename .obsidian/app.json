@@ -2,5 +2,8 @@
   "promptDelete": false,
   "alwaysUpdateLinks": true,
   "useMarkdownLinks": true,
-  "newLinkFormat": "relative"
+  "newLinkFormat": "relative",
+  "showInlineTitle": false,
+  "readableLineLength": true,
+  "attachmentFolderPath": "images"
 }

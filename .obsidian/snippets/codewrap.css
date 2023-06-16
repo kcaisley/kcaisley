@@ -1,0 +1,12 @@
+.markdown-rendered pre {
+    position: initial;
+    overflow-x: auto;
+}
+
+.markdown-rendered div {
+    position: relative;
+}
+
+.markdown-rendered code {
+    width: max-content;
+}

@@ -10,9 +10,11 @@ $$
 A*\sin(\omega_c*t+\phi_c)
 $$
 
-where $\omega_c$ and $\phi_c$ are constants chosen to minimize timer error of positions
+where $\omega_c$ and $\phi_c$ are constants chosen to minimize timer error of positions.
 
-Jitter can be measured in:
+## Sampling
+
+Samples in the measurement of jitter can be acquired in three way:
 
 1. Periodic Jitter $J_p$ : Just a histogram of signal periods of a persistent period, measured often in persistence mode (trigger on one edge/peak of waveform, and then measure 'width' on the subsequent edge/peak)
 
@@ -30,18 +32,16 @@ $$
 
 where $n$ is the cumulative edge number, in time. The more cycles go by, the further we will likely find ourselves from the ideal
 
-```julia
-using Plots
-x = range(0, 10, length=100)
-y = sin.(x)
-plot(x, y)
-```
+## Statistics
 
-Once jitter is measured, it can be defined either by the RMS of the distribution, or by looking further out to encapsulate some number allowable BER. 68% percent of distribution is within one standard deviation, but a BER of 0.32 would be unacceptable.
+Mean of the distribution is the reciprocal of the frequency of the signal.
 
-JitterP-P = α * JitterRMS
+Next, regardless of which method you use to measure timing error, the statistical PDF can either be characterized by it's standard deviation (RMS), or by a more stringent metric tied to a BER. For example, 68% percent of distribution is within one standard deviation, but a BER of 0.32 would be unacceptable, so
 
-Where
+$$
+J_{pp} = α * Jitter_{rms}
+$$
+The reason for this peak-to-peak concept is that Gaussian random processes technically have an unbounded peak-to-peak value - one theoretically just needs to take enough samples.
 
 |BER|α|
 |---|---|
@@ -55,3 +55,12 @@ Where
 |10-10|12.723|
 |10-11|13.412|
 |10-12|14.069|
+
+
+## Random vs Determinisitc
+
+The convolution of random data with a deterministic waveform jitter, will create a non-gaussian PDF. For example, in a system with different rise and fall times, the PDF will be Bimodal:
+
+![](../../images/Pasted%20image%2020230615132026.png)
+
+It's instead convolved with a sinusoidal waveform, then you will have a normal area in the middle, with sharp rising gaussian components on the edges.
