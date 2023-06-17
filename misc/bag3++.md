@@ -138,73 +138,6 @@ I left out the idea of building a sandbox, and just debugged what I needed befor
 
 
 
-# Starting container:
-
-Start container
-```
-apptainer shell -B /tools,/users,/run/media /run/media/kcaisley/scratch/bag3++_centos7.sif
-```
-
-Then to enable scl environments (not necessary, as it's added to path in bashrc script)
-
-```
-scl enable devtoolset-8 bash
-```
-
-```
-scl enable rh-git218 bash
-```
-
-clearing and issue with: (not an issue if you don't have conda init put stuff in bashrc)
-
-```
-__vte_prompt_command() { true; }
-```
-
-To activate this environment, use (not necessary, as it's added to path in bashrc script)
-
-
-```
-source ~/.bashrc    #not necessary if done correctly
-conda activate /run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c
-```
-
-To deactivate
-
-```
-conda deactivate
-```
-
-But I don't want to have to have conda init or conda in my path, so this is my case:
-
-[Link to source of material below](https://stackoverflow.com/posts/37230019/timeline)
-
-If `conda` is on your path: (not necessary, as it's added to path in bashrc script)
-
-
-`source activate <env name> && python xxx.py && source deactivate`
-
-If `conda` isn't on your path but is installed: (not necessary, as it's added to path in bashrc script)
-
-
-`source /path/to/conda/bin/activate /path/to/desired/env_name/ && python xxx.py && source deactivate`
-
-The following command will activate the environment: (not necessary, as it's added to path in bashrc script)
-
-```
-source /run/media/kcaisley/scratch/miniconda3/bin/activate /run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c/
-```
-
-```
-cd ~/cadence/bag3_ams_cds_ff_mpt/
-```
-
-
-
-
-
-
-
 # Building server environment
 
 I need to get conda, which isn't easily available from pip, as it appears corrupted. Therefore:
@@ -379,6 +312,102 @@ then fixed the symbolic link at:
 ```
 lrwxrwxrwx.  1 kcaisley base    37 Jun 13 17:12 PDK -> /tools/kits/CADENCE/cds_ff_mpt_v_1.1/
 ```
+
+
+
+
+# Starting container:
+
+```
+xhost +
+```
+
+```
+apptainer shell -B /tools,/users,/run/media /tools/containers/bag_centos7.sif
+```
+
+```
+cd ~/cadence/bag3_ams_cds_ff_mpt
+```
+
+```
+source .bashrc
+```
+
+```
+virtuoso &
+```
+
+
+
+### Deprecated starting steps:
+
+Start container
+```
+apptainer shell -B /tools,/users,/run/media /run/media/kcaisley/scratch/bag3++_centos7.sif
+```
+
+Then to enable scl environments (not necessary, as it's added to path in bashrc script)
+
+```
+scl enable devtoolset-8 bash
+```
+
+```
+scl enable rh-git218 bash
+```
+
+clearing and issue with: (not an issue if you don't have conda init put stuff in bashrc)
+
+```
+__vte_prompt_command() { true; }
+```
+
+To activate this environment, use (not necessary, as it's added to path in bashrc script)
+
+
+```
+source ~/.bashrc    #not necessary if done correctly
+conda activate /run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c
+```
+
+To deactivate
+
+```
+conda deactivate
+```
+
+But I don't want to have to have conda init or conda in my path, so this is my case:
+
+[Link to source of material below](https://stackoverflow.com/posts/37230019/timeline)
+
+If `conda` is on your path: (not necessary, as it's added to path in bashrc script)
+
+
+`source activate <env name> && python xxx.py && source deactivate`
+
+If `conda` isn't on your path but is installed: (not necessary, as it's added to path in bashrc script)
+
+
+`source /path/to/conda/bin/activate /path/to/desired/env_name/ && python xxx.py && source deactivate`
+
+The following command will activate the environment: (not necessary, as it's added to path in bashrc script)
+
+```
+source /run/media/kcaisley/scratch/miniconda3/bin/activate /run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c/
+```
+
+```
+cd ~/cadence/bag3_ams_cds_ff_mpt/
+```
+
+
+
+
+
+
+
+
 
 # It works! Now let's try building a generator
 
