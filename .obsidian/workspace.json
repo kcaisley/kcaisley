@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "electronics/Electronics.md",
                 "mode": "source",
                 "source": true
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "electronics/Electronics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "misc/2023-06-09.md",
+                "file": "electronics/Electronics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "misc/2023-06-09.md"
+                "file": "electronics/Electronics.md"
               }
             }
           }
@@ -146,15 +146,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8fc51bfc28c532cb",
+  "active": "60a9967dba49a8ee",
   "lastOpenFiles": [
-    "misc/2023-06-20.md",
-    "misc/2023-06-09.md",
-    "mathematics/Algebra.md",
+    "electronics/devices/Devices.md",
+    "electronics/devices/cleanroom.md",
     "electronics/Electronics.md",
+    "electronics/Detector Signal Chain.md",
+    "electronics/Circuit Theory.md",
+    "electronics/analog design/vs Digital Design.md",
+    "electronics/analog design/to know.md",
+    "electronics/analog design/Jitter.md",
+    "computing/Computing.md",
+    "misc/2023-06-09.md",
+    "misc/2023-06-20.md",
+    "mathematics/Algebra.md",
     "Top.md",
     "physics/Physics.md",
-    "computing/Computing.md",
     "mathematics/Statistics.md",
     "mathematics/Statistics, Probability, and Randomness.md",
     "mathematics/Mathematics.md",
@@ -168,13 +175,6 @@
     "asiclab-docs/network_configuration.md",
     "asiclab-docs/user_management.md",
     "asiclab-docs/checksum_notes.md",
-    "asiclab-docs/clonezilla.md",
-    "asiclab-docs/containers.md",
-    "asiclab-docs/file_server.md",
-    "asiclab-docs/git.md",
-    "asiclab-docs/lab_courses.md",
-    "asiclab-docs/printer_config.md",
-    "asiclab-docs/readme.md",
     "images/elementary particle.png",
     "Pasted image 20230612162404.png",
     "electronics/applications",
