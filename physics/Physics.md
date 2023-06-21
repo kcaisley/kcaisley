@@ -5,3 +5,7 @@ The scope of these pages is all the underlying physical effects, including radia
 [[Electromagnetic Theory]]
 
 [[Particle Physics]]
+
+
+## Physics
+Before considering my field, I must consider the wide range of models used to explain the “why” of electronics and particles. These are two low level to be tractable for design, but are important for my intuition and reasoning.

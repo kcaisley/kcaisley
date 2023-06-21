@@ -13,9 +13,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "asiclab-docs/bash.md",
+                "file": "misc/2023-06-09.md",
                 "mode": "source",
-                "source": false
+                "source": true
               }
             }
           }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "asiclab-docs/bash.md",
+                "file": "misc/2023-06-09.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "asiclab-docs/bash.md",
+                "file": "misc/2023-06-09.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "asiclab-docs/bash.md"
+                "file": "misc/2023-06-09.md"
               }
             }
           }
@@ -148,6 +148,18 @@
   },
   "active": "8fc51bfc28c532cb",
   "lastOpenFiles": [
+    "misc/2023-06-20.md",
+    "misc/2023-06-09.md",
+    "mathematics/Algebra.md",
+    "electronics/Electronics.md",
+    "Top.md",
+    "physics/Physics.md",
+    "computing/Computing.md",
+    "mathematics/Statistics.md",
+    "mathematics/Statistics, Probability, and Randomness.md",
+    "mathematics/Mathematics.md",
+    "mathematics/Optimization.md",
+    "images/Pasted image 20230615132026.png",
     "asiclab-docs/setup_pdk.md",
     "asiclab-docs/setup_synopsys.md",
     "asiclab-docs/setup_xilinx.md",
@@ -163,18 +175,6 @@
     "asiclab-docs/lab_courses.md",
     "asiclab-docs/printer_config.md",
     "asiclab-docs/readme.md",
-    "misc/2023-06-20.md",
-    "asiclab-docs/remote_connection.md",
-    "asiclab-docs/third_party.md",
-    "asiclab-docs/admin.md",
-    "misc/bag3++.md",
-    "misc/2023-06-09.md",
-    "misc/2023-06-14.md",
-    "misc/2023-06-15.md",
-    "electronics/analog design/Jitter.md",
-    "images/Pasted image 20230615132026.png",
-    "computing/Computing.md",
-    "misc/bag_setup.md",
     "images/elementary particle.png",
     "Pasted image 20230612162404.png",
     "electronics/applications",
