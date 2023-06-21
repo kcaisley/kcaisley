@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "a5cc3f03aee5d8d0",
+        "id": "2ab78739d87c2e7c",
         "type": "tabs",
         "children": [
           {
-            "id": "509257fbb31467f2",
+            "id": "60a9967dba49a8ee",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "misc/bag3++.md",
+                "file": "asiclab-docs/bash.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "reset",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6351abd52e6fda28",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "misc/bag3++.md",
+                "file": "asiclab-docs/bash.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "misc/bag3++.md",
+                "file": "asiclab-docs/bash.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -121,16 +120,17 @@
             }
           },
           {
-            "id": "2cf0862029b92aa4",
+            "id": "9f6e1521365f3d12",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "misc/bag3++.md"
+                "file": "asiclab-docs/bash.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -146,9 +146,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "509257fbb31467f2",
+  "active": "8fc51bfc28c532cb",
   "lastOpenFiles": [
+    "asiclab-docs/setup_pdk.md",
+    "asiclab-docs/setup_synopsys.md",
+    "asiclab-docs/setup_xilinx.md",
+    "asiclab-docs/boot sequence.md",
+    "asiclab-docs/license_server.md",
+    "asiclab-docs/network_configuration.md",
+    "asiclab-docs/user_management.md",
+    "asiclab-docs/checksum_notes.md",
+    "asiclab-docs/clonezilla.md",
+    "asiclab-docs/containers.md",
+    "asiclab-docs/file_server.md",
     "asiclab-docs/git.md",
+    "asiclab-docs/lab_courses.md",
+    "asiclab-docs/printer_config.md",
+    "asiclab-docs/readme.md",
+    "misc/2023-06-20.md",
+    "asiclab-docs/remote_connection.md",
+    "asiclab-docs/third_party.md",
+    "asiclab-docs/admin.md",
     "misc/bag3++.md",
     "misc/2023-06-09.md",
     "misc/2023-06-14.md",
@@ -157,28 +175,10 @@
     "images/Pasted image 20230615132026.png",
     "computing/Computing.md",
     "misc/bag_setup.md",
-    "asiclab-docs/license_server.md",
-    "physics/particle/Particle-Matter Interaction.md",
-    "physics/particle/Particle Classification.md",
     "images/elementary particle.png",
     "Pasted image 20230612162404.png",
-    "physics/particle/Particle Physics.md",
-    "electronics/Detector Signal Chain.md",
     "electronics/applications",
-    "electronics/Detectors.md",
-    "misc/math.md",
-    "misc/bookmarks.md",
     "misc/CadenceLayoutTips.pdf",
-    "misc/circuits_basics.md",
-    "misc/circuits_modeling.md",
-    "mathematics/Algebra.md",
-    "mathematics/Statistics.md",
-    "mathematics/Mathematics.md",
-    "Top.md",
-    "electronics/Electronics.md",
-    "electronics/Circuit Theory.md",
-    "electronics/Circuit.md",
-    "\"Circuit.md",
     "images/flow.png",
     "images/rd53pll.jpeg",
     "images/IMG_1502 1.jpeg",

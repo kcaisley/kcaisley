@@ -1,6 +1,7 @@
 # Bag 3 Install
 
-## here is the .def file:
+# Container
+## Container .def file:
 
 ```
 Bootstrap: docker
@@ -32,7 +33,6 @@ From: centos:7
 
 
 
-## .def notes:
 
 * rh-git218 (git with nice visual colors; newer git versions don't track symlinks)
 
@@ -74,7 +74,7 @@ apptainer shell -B /tools,/users --writable /tmp/bag3++_centos7_sandbox.sif/
 
 
 
-## Some notes on building:
+## Building Container:
 
 ```
 kcaisley > sudo apptainer build bag3++_centos7_test.sif bag3++_centos7.def
@@ -118,9 +118,7 @@ WARNING: Use 'chmod -R u+rwX' to set permissions that allow removal with 'rm -rf
 WARNING: Use the '--fix-perms' option to 'apptainer build' to modify permissions at build time.
 ```
 
-
-
-### Final build:
+Final build
 
 (in /scratch and as kcaisley)
 
@@ -138,7 +136,7 @@ I left out the idea of building a sandbox, and just debugged what I needed befor
 
 
 
-# Building server environment
+# Server Environment
 
 I need to get conda, which isn't easily available from pip, as it appears corrupted. Therefore:
 
@@ -172,16 +170,13 @@ Miniconda3 will now be installed into this location:
 conda install doesn't work well: https://github.com/ContinuumIO/anaconda-issues/issues/9480
 
 
-
 Run this from the working directory, where the conda environmental.yml file is.
 
 ```
-./miniconda3/bin/conda env create -f environment.yml --force -p ./miniconda3/envs/bag_py3d7_c
+./miniconda3/bin/conda env create -f environment.yml --force -p ./miniconda3/envs/bag_python37
 ```
 
-Okay!
-
-
+Okay, this works!
 
 autoreconf fixed for libfyaml: https://askubuntu.com/questions/27677/cannot-find-install-sh-install-sh-or-shtool-in-ac-aux	
 
@@ -207,13 +202,10 @@ notes for things to change in install instructions:
 * perhaps update git version, but does the version I picked track symlinks?
 * write out the command to the conda install prefix in the conda env create
 * clean up the confusion between /path/to/conda/env vs /path/to/programs
-
 * It's HDF5, not the other way arround. Fix this in the install instructions
 * add note about requiring openssl-devel package for building cmake
 
-
-
-# Setting up workspace
+# Workspace
 
 `.bashrc_bag`
 
@@ -316,7 +308,7 @@ lrwxrwxrwx.  1 kcaisley base    37 Jun 13 17:12 PDK -> /tools/kits/CADENCE/cds_f
 
 
 
-# Starting container:
+# Starting Container/Workspace:
 
 ```
 xhost +
@@ -338,9 +330,7 @@ source .bashrc
 virtuoso &
 ```
 
-
-
-### Deprecated starting steps:
+## Deprecated starting steps:
 
 Start container
 ```
@@ -402,16 +392,53 @@ cd ~/cadence/bag3_ams_cds_ff_mpt/
 ```
 
 
+# Debugging Generator
+
+First warning that was noticed was that rpm stopped working. This is because the rpm library depending on liblzma, and the LD_LIBRARY_PATH had some paths added to it in the conda install, which constains a incompatible version.
+
+### RPM and LibLZMA issue
+
+```
+rpm: /tools/packages/miniconda3/envs/bag_py3d7_c/lib/liblzma.so.5: version `XZ_5.1.2alpha' not found (required by /lib64/librpmio.so.3)
+```
+
+```
+Apptainer> ldd /lib64/librpmio.so.3
+/lib64/librpmio.so.3: /tools/packages/miniconda3/envs/bag_py3d7_c/lib/liblzma.so.5: version `XZ_5.1.2alpha' not found (required by /lib64/librpmio.so.3)
+	linux-vdso.so.1 =>  (0x00007fffa8be8000)
+	libnss3.so => /lib64/libnss3.so (0x00007fd35c800000)
+	libbz2.so.1 => /lib64/libbz2.so.1 (0x00007fd35c400000)
+	libz.so.1 => /tools/packages/miniconda3/envs/bag_py3d7_c/lib/libz.so.1 (0x00007fd35d356000)
+	libelf.so.1 => /lib64/libelf.so.1 (0x00007fd35c000000)
+	libpopt.so.0 => /lib64/libpopt.so.0 (0x00007fd35bc00000)
+	liblzma.so.5 => /tools/packages/miniconda3/envs/bag_py3d7_c/lib/liblzma.so.5 (0x00007fd35d32c000)
+	liblua-5.1.so => /lib64/liblua-5.1.so (0x00007fd35b800000)
+	libm.so.6 => /lib64/libm.so.6 (0x00007fd35b400000)
+	libaudit.so.1 => /lib64/libaudit.so.1 (0x00007fd35b000000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00007fd35ac00000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x00007fd35a800000)
+	libc.so.6 => /lib64/libc.so.6 (0x00007fd35a400000)
+	libnssutil3.so => /lib64/libnssutil3.so (0x00007fd35a000000)
+	libplc4.so => /lib64/libplc4.so (0x00007fd359c00000)
+	libplds4.so => /lib64/libplds4.so (0x00007fd359800000)
+	libnspr4.so => /lib64/libnspr4.so (0x00007fd359400000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fd35d000000)
+	librt.so.1 => /lib64/librt.so.1 (0x00007fd359000000)
+	libcap-ng.so.0 => /lib64/libcap-ng.so.0 (0x00007fd358c00000)
+```
+This is where `liblzma.so.5` should be coming from:
+```
+Apptainer> ldconfig -p | grep liblzma   
+	liblzma.so.5 (libc6,x86-64) => /lib64/liblzma.so.5
+	liblzma.so.5 (libc6) => /lib/liblzma.so.5
+```
+
+This isn't an issue for BAG, but it does mean that Virtuoso will issue a warning, as RPM doesn't work, and therefor the checksystem version script fails. To temporarily make RPM work (at the expense of BAG), simply remove the BAG conda env locations from $LD_LIBRARY_PATH.
 
 
+### Qt Plugin Issue
 
-
-
-
-
-# It works! Now let's try building a generator
-
-looks like I'm getting some issues with a Qt GUI starting:
+When running `./meas_cell.sh` I'm getting some issues with a Qt GUI starting:
 
 ```bash
 [2023-06-16 10:17:12.535] [sim_db] [info] Returning previous simulation data
@@ -458,11 +485,18 @@ But check it, there is also:
 /run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c/lib/python3.7/site-packages/PyQt5/Qt/lib/libQt5XcbQpa.so.5
 ```
 
-After this, I got two more errors:
+The solution was modifying the LD_LIBRARY_PATH:
+
+```
+export LD_LIBRARY_PATH=/run/media/kcaisley/scratch/miniconda3/envs/bag_py3d7_c/lib/python3.7/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+```
+
+But I think I should just fix the bashrc file? Maybe add things to the end of the path.
+
+### XDG_RUNTIME_PATH issue
 
 ```
 QStandardPaths: XDG_RUNTIME_DIR points to non-existing path '/run/user/2002', please create it with 0700 permissions.
-Qt: Session management error: None of the authentication protocols specified are supported
 ```
 
 These were fixed by:
@@ -471,6 +505,13 @@ https://unix.stackexchange.com/questions/162900/what-is-this-folder-run-user-100
 
 ```
 export XDG_RUNTIME_DIR=/run/media/kcaisley/scratch/space
+```
+
+
+### Session Manager Issue
+
+```
+Qt: Session management error: None of the authentication protocols specified are supported
 ```
 
 https://stackoverflow.com/questions/59057653/qt-session-management-error-none-of-the-authentication-protocols-specified-are
@@ -512,10 +553,52 @@ Now, nothing is appearing graphically, but I see:
 
 I suppose it looks like it's working now?
 
-## Understanding Flow
+# Generator Workflow Flow
 
 
-`./meas_cell.sh`, and it's kind are simple wrapper scripts, which just call their corresponding python equivalents:
+`./meas_cell.sh`, and it's kind are simple wrapper scripts, which just call their corresponding python equivalents, in `BAG_framework/run_scripts/`
 
-there are 13 of these top level scripts
+```
+dsn_cell.py
+extract_cell.py
+gen_cell.py
+import_sch_cellview.py
+meas_cell.py
+sim_cell.py
+
+There are also additional .py file there:
+
+export_layout.py
+copy_pytest_outputs.py
+gds_filter.py
+gds_import.py
+generate_verilog.py
+gen_wrapper.py
+import_layout.py
+meas_cell_old.py
+netlist_config.py
+reformat_schematic.py
+run_em_cell.py
+setup_submodules.py
+verify.py
+write_tech_info.py
+```
+
+
+```
+├── data    (process specific data, in submodules, for corresponding generators)
+│   ├── aib_ams
+│   ├── bag3_digital
+│   └── bag3_testbenches
+
+
+
+├── gen_libs    (init empty, holds generated OA cell views)
+│   └── AAA_INV
+├── gen_outputs (initially empty)
+│   ├── inv3
+│   └── mos_char_nch_18n
+├── gen_outputs_scratch -> /run/media/kcaisley/scratch/space/simulations/gen_outputs
+
+```
 
