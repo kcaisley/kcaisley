@@ -232,3 +232,21 @@ Should radiation hardness be a factor? Or should be simply just perform our meas
 
 Assume a standardized jitter for clocks available across the pixel matrix
 
+# More basic approach
+
+To optimize the circuit, I need a good equivalent circuit model for the characteristics of the signal, including noise, distortion, and detector capacitance. I know that the most basic detector is a PN junction? Or is it?
+
+In any case, once I have an equivalent model, I believe it will be in the form of a current source with finite output impedance.
+
+My goal is to measure the integrated area of a pulse, relative to some baseline.
+Once issues with that is processing time. I have to observe a signal to it's completion to make a statement about it's integrated area.
+There are different camps here. On camp integrates (accumulates) in a continuous fashion, and then measures (digitizes) the integrated quantity
+Another camp integrates in smaller intervals, relative to the system dynamics, digitizes each, and adds up the result.
+Image/video sensors are a example of the latter, as the signal of interest is generally continually present and varying, and so the system just defines a rate for sampling, relative probably to the rate of dynamics in the light signal of interest. If you're interested in faster changing events, you have to sample faster.
+
+What does sampling theory tell us about pulse signals through, localized in time. Are we still faithfully trying to 'recreate' that waveform? Perhaps not.
+
+
+
+
+
