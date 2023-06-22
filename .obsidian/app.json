@@ -1,10 +1,10 @@
 {
-  "promptDelete": false,
+  "promptDelete": true,
   "alwaysUpdateLinks": true,
   "useMarkdownLinks": true,
   "newLinkFormat": "relative",
   "showInlineTitle": false,
   "readableLineLength": true,
-  "attachmentFolderPath": "images",
+  "attachmentFolderPath": "/",
   "autoPairBrackets": false
 }
