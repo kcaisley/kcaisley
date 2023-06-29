@@ -858,16 +858,27 @@ The order of execution flow between the Python files and the YAML file is as fol
 
 
 
-5. The run_main() function is called with the BagProject object (_prj) and the parsed arguments (_args).
-5. The run_main() function reads the YAML file specified in the args.specs argument using the read_yaml() function.
-6. The prj.generate_cell() method is called with the YAML specifications, as well as other arguments based on the command line options (args).
-7. Inside prj.generate_cell(), the specified YAML file is used to generate a cell. The specs and other options are passed to the generate_cell() method of the BagProject object.
-8. The generate_cell() method in BagProject class is responsible for generating the cell based on the specifications.
-9. During cell generation, the YAML parameters are used to create an instance of the bag3_digital__inv class from the bag3_digital.schematic.inv module.
-10. The bag3_digital__inv class is a subclass of the Module class, and its __init__ method is called to initialize the instance with the specified parameters.
-11. The design() method of the bag3_digital__inv class is called to perform the design of the cell using the provided parameters.
-12. The design() method implements the logic to design the cell based on the given parameters and connections.
-13. After the cell is generated, further processing may be performed based on the command line options, such as running DRC, LVS, generating GDS/netlist files, etc.
+5. The run_main() function is called with the BagProject object (_prj) and the parsed arguments (_args). Note, this is defined inside the same run script still. `_prj` is the current project being worked on, which is gathered from the environment variable. `_args` is the YAML file and additional flags like `-raw`.
+
+6. The `run_main()` function reads the YAML file specified in the `args.specs` argument using the `read_yaml()` function.
+7. The `prj.generate_cell()` method is called with the YAML specifications, as well as other arguments based on the command line options (`args`). This is the point at which the runscript ends.
+
+    ```
+    prj.generate_cell(specs, raw=args.raw, gen_lay=args.gen_lay, run_drc=args.run_drc,
+                        gen_sch=args.gen_sch, run_lvs=args.run_lvs, run_rcx=args.run_rcx,
+                        gen_lef=args.gen_lef, flat=args.flat, sim_netlist=args.gen_sim,
+                        gen_hier=args.gen_hier, gen_model=args.gen_mod,
+                        gen_shell=args.gen_shell, export_lay=args.export_lay,
+                        gen_netlist=args.gen_netlist)
+    ```
+
+8. Now inside `core.py` which defines `prj.generate_cell()`, the specified YAML file is used to generate a cell. The specs and other options are passed to the generate_cell() method of the BagProject object.
+9. The generate_cell() method in BagProject class is responsible for generating the cell based on the specifications.
+10. During cell generation, the YAML parameters are used to create an instance of the bag3_digital__inv class from the bag3_digital.schematic.inv module.
+11. The bag3_digital__inv class is a subclass of the Module class, and its __init__ method is called to initialize the instance with the specified parameters.
+12. The design() method of the bag3_digital__inv class is called to perform the design of the cell using the provided parameters.
+13. The design() method implements the logic to design the cell based on the given parameters and connections.
+14. After the cell is generated, further processing may be performed based on the command line options, such as running DRC, LVS, generating GDS/netlist files, etc.
 
 In summary, the execution flow starts with the bash command, passes the command line arguments to the Python script, which then reads the YAML file, generates a cell based on the specifications, and performs additional processing as specified by the command line options. The YAML file provides the specifications for the cell design, and the Python script controls the execution flow and interacts with the BagProject and Module classes to generate the desired cell.
 
