@@ -6,5 +6,6 @@
   "showInlineTitle": false,
   "readableLineLength": true,
   "attachmentFolderPath": "/",
-  "autoPairBrackets": false
+  "autoPairBrackets": false,
+  "autoPairMarkdown": false
 }

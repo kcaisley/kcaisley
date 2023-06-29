@@ -555,8 +555,7 @@ I suppose it looks like it's working now?
 
 # Generator Workflow Flow
 
-
-`./meas_cell.sh`, and it's kind are simple wrapper scripts, which just call their corresponding python equivalents, in `BAG_framework/run_scripts/`
+`./gen_cell.sh`, and it's kind are simple wrapper scripts, which just call their corresponding python equivalents, in `BAG_framework/run_scripts/`
 
 ```
 dsn_cell.py
@@ -590,15 +589,252 @@ write_tech_info.py
 │   ├── aib_ams
 │   ├── bag3_digital
 │   └── bag3_testbenches
-
-
-
 ├── gen_libs    (init empty, holds generated OA cell views)
 │   └── AAA_INV
 ├── gen_outputs (initially empty)
 │   ├── inv3
 │   └── mos_char_nch_18n
 ├── gen_outputs_scratch -> /run/media/kcaisley/scratch/space/simulations/gen_outputs
-
 ```
 
+Let's first consider the input files, for an inverter schematic generator:
+
+Running a schematic generator of a simple inverter:
+
+```
+$ ./gen_cell.sh data/bag3_digital/specs_blk/inv/gen_sch.yaml
+```
+
+This first script is just a wrapper for the basic `run_bag.sh` script.
+
+```
+#contents of gen_cell.sh
+
+./run_bag.sh BAG_framework/run_scripts/gen_cell.py $@
+```
+
+This script, in turn, is just a wrapper for executing the subsequent python script with the environment's version of python:
+
+```bash
+source .bashrc_pypath
+
+if [ -z ${BAG_PYTHON} ]
+then
+    echo "BAG_PYTHON is unset"
+    exit 1
+fi
+
+exec ${BAG_PYTHON} $@
+```
+
+Next, examining the .yaml file, we see the following:
+
+```yaml
+dut_class: bag3_digital.schematic.inv.bag3_digital__inv
+impl_lib: AAA_INV
+impl_cell: AA_inv
+root_dir: gen_outputs/inv
+
+params:
+  lch: 36
+  w_p: 4
+  w_n: 4
+  th_p: standard
+  th_n: standard
+  seg_p: 4
+  seg_n: 4
+```
+
+This, in turn gives the dot notation identifier of the class in: `./bag3_digital/src/bag3_digital/schematic/inv.py`, which looks like the following:
+
+```python
+from typing import Dict, Any, List, Optional
+
+import os
+import pkg_resources
+
+from pybag.enum import TermType
+
+from bag.design.module import Module
+from bag.design.database import ModuleDB
+from bag.util.immutable import Param
+
+
+# noinspection PyPep8Naming
+# This class inherits from the Module superclass
+class bag3_digital__inv(Module):
+    """Module for library bag3_digital cell inv.
+
+    Fill in high level description here.
+    """
+
+    yaml_file = pkg_resources.resource_filename(__name__,
+                                                os.path.join('netlist_info',
+                                                             'inv.yaml'))
+
+	# constructor method automatically called when object is created from class
+	# we can see that the super class Module.__init__ method is also called
+	# self is passed as argument so that method can access other class components
+	# arguments have type annotations (eg :Param) for the expected type/class
+	# there is no return, to 'None' is type hint
+    def __init__(self, database: ModuleDB, params: Param, **kwargs: Any) -> None:
+        Module.__init__(self, self.yaml_file, database, params, **kwargs)
+
+    @classmethod
+    def get_params_info(cls) -> Dict[str, str]:
+        return dict(
+            lch='channel length in resolution units.',
+            w_p='pmos width, in number of fins or resolution units.',
+            w_n='nmos width, in number of fins or resolution units.',
+            th_p='pmos threshold flavor.',
+            th_n='nmos threshold flavor.',
+            seg='segments of transistors',
+            seg_p='segments of pmos',
+            seg_n='segments of nmos',
+            stack_p='number of transistors in a stack.',
+            stack_n='number of transistors in a stack.',
+            p_in_gate_numbers='a List indicating input number of the gate',
+            n_in_gate_numbers='a List indicating input number of the gate',
+            has_vtop='True if PMOS drain is not connected to VDD, but instead VTOP',
+            has_vbot='True if NMOS drain is not connected to VSS, but instead VBOT',
+        )
+
+    @classmethod
+    def get_default_param_values(cls) -> Dict[str, Any]:
+        return dict(
+            seg=-1,
+            seg_p=-1,
+            seg_n=-1,
+            stack_p=1,
+            stack_n=1,
+            p_in_gate_numbers=None,
+            n_in_gate_numbers=None,
+            has_vtop=False,
+            has_vbot=False,
+        )
+
+    def design(self, seg: int, seg_p: int, seg_n: int, lch: int, w_p: int, w_n: int, th_p: str,
+               th_n: str, stack_p: int, stack_n: int, has_vtop: bool, has_vbot: bool,
+               p_in_gate_numbers: Optional[List[int]] = None,
+               n_in_gate_numbers: Optional[List[int]] = None) -> None:
+        if seg_p <= 0:
+            seg_p = seg
+        if seg_n <= 0:
+            seg_n = seg
+        if seg_p <= 0 or seg_n <= 0:
+            raise ValueError('Cannot have negative number of segments.')
+
+        self.instances['XN'].design(w=w_n, lch=lch, seg=seg_n, intent=th_n, stack=stack_n)
+        self.instances['XP'].design(w=w_p, lch=lch, seg=seg_p, intent=th_p, stack=stack_p)
+
+        self._reconnect_gate('XP', stack_p, p_in_gate_numbers, 'VSS')
+        self._reconnect_gate('XN', stack_n, n_in_gate_numbers, 'VDD')
+
+        if has_vbot:
+            self.reconnect_instance_terminal('XN', 's', 'VBOT')
+            self.add_pin('VBOT', TermType.inout)
+        if has_vtop:
+            self.reconnect_instance_terminal('XP', 's', 'VTOP')
+            self.add_pin('VTOP', TermType.inout)
+
+    def _reconnect_gate(self, inst_name: str, stack: int, idx_list: Optional[List[int]], sup: str
+                        ) -> None:
+        if stack > 1:
+            g_term = f'g<{stack - 1}:0>'
+            if idx_list:
+                glist = [sup] * stack
+                for i in idx_list:
+                    glist[i] = 'in'
+                self.reconnect_instance_terminal(inst_name, g_term, ','.join(glist))
+            else:
+                self.reconnect_instance_terminal(inst_name, g_term, 'in')
+        else:
+            self.reconnect_instance_terminal(inst_name, 'g', 'in')
+```
+
+## Generate Scripts
+
+From the AIB instruction notes, I found:
+
+For each block, there will be a gds (.gds), lef (.lef), lib (.lib),
+netlist (.net or .cdl), model (.v or .sv) and a shell (.v). There will
+also be log files and some extra files containing the data necessary to
+generate these results, but this document only shows the final outputs.
+
+**Example: DCC Delay Line**
+
+Gen cell command:
+```
+./run_bag.sh BAG_framework/run_scripts/gen_cell.py
+data/aib_ams/specs_ip/dcc_delay_cell.yaml -raw -mod -lef
+```
+
+Gen Lib command:
+```
+./run_bag.sh bag3_digital/scripts_util/gen_lib.py data/aib_ams/specs_ip/dcc_delay_cell_lib.yaml
+```
+
+Output files:
+```
+gen_outputs/ip_blocks/dcc_delay_cell/
+```
+
+Should have the files:
+
+-  `dcc_delay_cell.gds`
+
+-  `dcc_delay_cell_shell.v`
+
+-  `dcc_delay_cell_tt_25_0p900_0p800.lib`
+
+-  `dcc_delay_cell.cdl`
+
+-  `dcc_delay_cell.lef`
+
+-  `dcc_delay_cell.sv`
+
+## Design Scripts:
+
+A design script will run through a design procedure for the given block,
+and if successful in execution will generate similar collateral to the
+previous generation scripts. Please note that since we are reusing the
+lib file generation from the gen cell commands, the lib file is
+generated in the same location as it was previously.
+
+All the commands will follow the format of:
+
+```
+./run_bag.sh BAG_framework/run_scripts/dsn_cell.py
+data/aib_ams/specs_dsn/\*.yaml
+```
+
+With the exact full command and output files detailed below.
+
+**Example: DCC Delay Line:**
+
+Yaml file: `dcc_delay_line.yaml`
+
+Full command:
+```
+./run_bag.sh BAG_framework/run_scripts/dsn_cell.py
+data/aib_ams/specs_dsn/dcc_delay_line.yaml
+```
+
+Folder:
+```
+gen_outputs/dsn_delay_line_final
+```
+
+Generated collateral:
+- `aib_delay_line.gds`
+
+- `aib_delay_line.cdl`
+
+- `aib_delay_line.lef`
+
+- `aib_delay_line_shell.v`
+
+Lib file location:
+```
+gen_outputs/ip_blocks/dcc_delay_line/dcc_delay_line_tt_25_0p900_0p800.lib
+```
