@@ -601,15 +601,13 @@ Let's first consider the input files, for an inverter schematic generator:
 
 Running a schematic generator of a simple inverter:
 
-```
+```bash
 $ ./gen_cell.sh data/bag3_digital/specs_blk/inv/gen_sch.yaml
 ```
 
-This first script is just a wrapper for the basic `run_bag.sh` script.
+This first script is just a wrapper for the basic `run_bag.sh` script:
 
-```
-#contents of gen_cell.sh
-
+```bash
 ./run_bag.sh BAG_framework/run_scripts/gen_cell.py $@
 ```
 
@@ -627,7 +625,83 @@ fi
 exec ${BAG_PYTHON} $@
 ```
 
-Next, examining the .yaml file, we see the following:
+So for example, the expanded command would be: `/usr/bin/python gen_cell.py gen_sch.yaml -raw -mod -lef`
+
+
+Python is used to executed the runscript `gen_cell.py`:
+
+```python
+import argparse
+
+from bag.io import read_yaml
+from bag.core import BagProject
+from bag.util.misc import register_pdb_hook
+
+register_pdb_hook()
+
+
+def parse_options() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Generate cell from spec file.')
+    parser.add_argument('specs', help='YAML specs file name.')
+    parser.add_argument('-d', '--drc', dest='run_drc', action='store_true', default=False,
+                        help='run DRC.')
+    parser.add_argument('-v', '--lvs', dest='run_lvs', action='store_true', default=False,
+                        help='run LVS.')
+    parser.add_argument('-x', '--rcx', dest='run_rcx', action='store_true', default=False,
+                        help='run RCX.')
+    parser.add_argument('-raw', dest='raw', action='store_true', default=False,
+                        help='generate GDS/netlist files instead of OA cellviews.')
+    parser.add_argument('-flat', dest='flat', action='store_true', default=False,
+                        help='generate flat netlist.')
+    parser.add_argument('-lef', dest='gen_lef', action='store_true', default=False,
+                        help='generate LEF.')
+    parser.add_argument('-hier', '--gen-hier', dest='gen_hier', action='store_true', default=False,
+                        help='generate Hierarchy.')
+    parser.add_argument('-mod', '--gen-model', dest='gen_mod', action='store_true', default=False,
+                        help='generate behavioral model files.')
+    parser.add_argument('-sim', dest='gen_sim', action='store_true', default=False,
+                        help='generate simulation netlist instead.')
+    parser.add_argument('-shell', dest='gen_shell', action='store_true', default=False,
+                        help='generate verilog shell file.')
+    parser.add_argument('-lay', dest='export_lay', action='store_true', default=False,
+                        help='export layout file.')
+    parser.add_argument('-netlist', dest='gen_netlist', action='store_true', default=False,
+                        help='generate netlist file.')
+    parser.add_argument('--no-layout', dest='gen_lay', action='store_false', default=True,
+                        help='disable layout.')
+    parser.add_argument('--no-sch', dest='gen_sch', action='store_false', default=True,
+                        help='disable schematic.')
+    args = parser.parse_args()
+    return args
+
+
+def run_main(prj: BagProject, args: argparse.Namespace) -> None:
+    specs = read_yaml(args.specs)
+    prj.generate_cell(specs, raw=args.raw, gen_lay=args.gen_lay, run_drc=args.run_drc,
+                      gen_sch=args.gen_sch, run_lvs=args.run_lvs, run_rcx=args.run_rcx,
+                      gen_lef=args.gen_lef, flat=args.flat, sim_netlist=args.gen_sim,
+                      gen_hier=args.gen_hier, gen_model=args.gen_mod,
+                      gen_shell=args.gen_shell, export_lay=args.export_lay,
+                      gen_netlist=args.gen_netlist)
+
+
+if __name__ == '__main__':
+    _args = parse_options()
+
+    local_dict = locals()
+    if 'bprj' not in local_dict:
+        print('creating BAG project')
+        _prj = BagProject()
+    else:
+        print('loading BAG project')
+        _prj = local_dict['bprj']
+
+    run_main(_prj, _args)
+```
+
+
+
+Next, examining the agument `gen_sch.yaml` file, we see the following:
 
 ```yaml
 dut_class: bag3_digital.schematic.inv.bag3_digital__inv
@@ -752,7 +826,55 @@ class bag3_digital__inv(Module):
             self.reconnect_instance_terminal(inst_name, 'g', 'in')
 ```
 
-## Generate Scripts
+## Play-by-play breakdown of execution:
+
+The order of execution flow between the Python files and the YAML file is as follows:
+
+1. The bash command `python gen_cell.py gen_sch.yaml -raw -mod -lef` is executed in the command line.
+2. The command line arguments (`gen_sch.yaml`, `-raw`, `-mod`, `-lef`) are passed to the gen_cell.py script.
+3. The `gen_cell.py` script imports necessary modules and defines functions and classes. The `register_pdb_hook()` function is called which sets the standard exception behavior for batch mode (but not interactive). In other words, it's setting the unhandled exception hook to called the default Python Debugger `pdb` for post mortem analysis.
+4. The `parse_options()` function is called to parse the command line arguments and return an argparse.Namespace object containing the parsed arguments, which is saved in `_args` variable.
+
+
+    The `parser.parse_args()` function in the `argparse` module parses the command-line arguments based on the defined arguments in the `ArgumentParser` object (`parser`). Although `parse_args()` doesn't take any arguments explicitly, it accesses the command-line arguments provided to the script when it is executed.
+
+    When you call `parser.parse_args()`, the function internally reads the command-line arguments from `sys.argv`, which is a list that contains the command-line arguments passed to the script. It uses the argument definitions in the `ArgumentParser` object to determine how to parse and interpret the command-line arguments.
+
+    Here's a breakdown of how `parse_args()` works:
+
+    - When you execute the Python script with command-line arguments, for example:
+    ```
+    $ python script.py arg1 arg2 --option1 value1
+    ```
+    - The `parse_args()` function internally reads the command-line arguments from `sys.argv`. It considers `sys.argv[1:]`, excluding the script name itself (`script.py`), as the list of arguments to parse.
+    - `parse_args()` looks at the argument definitions specified in the `ArgumentParser` object (`parser`) to determine how to interpret each argument.
+    - It identifies positional arguments based on their order and assigns them to the corresponding attributes of the `args` object.
+    - It identifies optional arguments (those with flags like `-f` or `--flag`) and their corresponding values, and assigns them to the appropriate attributes of the `args` object.
+    - Once all the arguments have been parsed and assigned, `parse_args()` returns the populated `args` object.
+
+    By defining the arguments using `add_argument()` on the `ArgumentParser` object before calling `parse_args()`, you provide instructions to `parse_args()` on how to parse the command-line arguments and store them in the `args` object.
+
+    Note that `parse_args()` can raise an error if the command-line arguments are not valid according to the defined arguments in the `ArgumentParser`. It performs argument type validation, checks for missing or incorrect arguments, and provides error messages accordingly.
+
+
+
+5. The run_main() function is called with the BagProject object (_prj) and the parsed arguments (_args).
+5. The run_main() function reads the YAML file specified in the args.specs argument using the read_yaml() function.
+6. The prj.generate_cell() method is called with the YAML specifications, as well as other arguments based on the command line options (args).
+7. Inside prj.generate_cell(), the specified YAML file is used to generate a cell. The specs and other options are passed to the generate_cell() method of the BagProject object.
+8. The generate_cell() method in BagProject class is responsible for generating the cell based on the specifications.
+9. During cell generation, the YAML parameters are used to create an instance of the bag3_digital__inv class from the bag3_digital.schematic.inv module.
+10. The bag3_digital__inv class is a subclass of the Module class, and its __init__ method is called to initialize the instance with the specified parameters.
+11. The design() method of the bag3_digital__inv class is called to perform the design of the cell using the provided parameters.
+12. The design() method implements the logic to design the cell based on the given parameters and connections.
+13. After the cell is generated, further processing may be performed based on the command line options, such as running DRC, LVS, generating GDS/netlist files, etc.
+
+In summary, the execution flow starts with the bash command, passes the command line arguments to the Python script, which then reads the YAML file, generates a cell based on the specifications, and performs additional processing as specified by the command line options. The YAML file provides the specifications for the cell design, and the Python script controls the execution flow and interacts with the BagProject and Module classes to generate the desired cell.
+
+
+
+
+# Example Generate Scripts
 
 From the AIB instruction notes, I found:
 
@@ -765,8 +887,7 @@ generate these results, but this document only shows the final outputs.
 
 Gen cell command:
 ```
-./run_bag.sh BAG_framework/run_scripts/gen_cell.py
-data/aib_ams/specs_ip/dcc_delay_cell.yaml -raw -mod -lef
+./run_bag.sh BAG_framework/run_scripts/gen_cell.py data/aib_ams/specs_ip/dcc_delay_cell.yaml -raw -mod -lef
 ```
 
 Gen Lib command:
@@ -793,7 +914,7 @@ Should have the files:
 
 -  `dcc_delay_cell.sv`
 
-## Design Scripts:
+# Example Design Scripts:
 
 A design script will run through a design procedure for the given block,
 and if successful in execution will generate similar collateral to the
@@ -804,8 +925,7 @@ generated in the same location as it was previously.
 All the commands will follow the format of:
 
 ```
-./run_bag.sh BAG_framework/run_scripts/dsn_cell.py
-data/aib_ams/specs_dsn/\*.yaml
+./run_bag.sh BAG_framework/run_scripts/dsn_cell.py data/aib_ams/specs_dsn/\*.yaml
 ```
 
 With the exact full command and output files detailed below.
@@ -816,8 +936,7 @@ Yaml file: `dcc_delay_line.yaml`
 
 Full command:
 ```
-./run_bag.sh BAG_framework/run_scripts/dsn_cell.py
-data/aib_ams/specs_dsn/dcc_delay_line.yaml
+./run_bag.sh BAG_framework/run_scripts/dsn_cell.py data/aib_ams/specs_dsn/dcc_delay_line.yaml
 ```
 
 Folder:
@@ -838,3 +957,6 @@ Lib file location:
 ```
 gen_outputs/ip_blocks/dcc_delay_line/dcc_delay_line_tt_25_0p900_0p800.lib
 ```
+
+And here is the `inv.py` file:
+
