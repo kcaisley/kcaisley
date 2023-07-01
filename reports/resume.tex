@@ -12,7 +12,9 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{cite}
 \input{glyphtounicode}
+
 
 %----------FONT OPTIONS----------
 % sans-serif
@@ -102,38 +104,27 @@
 
 \begin{center}
     \textbf{\Huge \scshape Kennedy Caisley} \\ \vspace{1pt}
-    \small +491631507498 $|$ \href{mailto:kcaisley@uni-bonn.de}{\underline{kcaisley@uni-bonn.de}}
-$|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
+    \small +49 163 1507498 $|$ \href{mailto:kcaisley@uni-bonn.de}{\underline{kcaisley@uni-bonn.de}}
+    $|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
 \end{center}
 
-%-----------EDUCATION-----------
-\section{Education}
-  \resumeSubHeadingListStart
-
-  \resumeSubheading
-    {University of Bonn}{Aug. 2022 -- Present}
-    {PhD in Physics}{Bonn, Germany}
-
-  \resumeSubheading
-    {Ohio State University}{Aug. 2019 -- Jan. 2022}
-    {Master's in Electrical Engineering}{Columbus, OH, USA}
-  \resumeParagraph{Representative Coursework:  Analog IC Design, Data Converters, High-Speed IO, VLSI Design, Semiconductor Devices, Semiconductor Physics, RF Systems Engineering, Microwave Engineering, Optics}
-
-  \resumeSubheading
-    {University of Idaho}{Aug. 2015 -- May 2019}
-    {Bachelors of Science in Electrical Engineering}{Moscow, ID, USA}
-  \resumeParagraph{Representative Coursework: FPGAs/HDLs, Embedded Systems, Power Electronics, Numerical Methods}
-
-  \resumeSubHeadingListEnd
-
-
 %-----------EXPERIENCE-----------
-\section{Experience}
+\section{Appointments}
   \resumeSubHeadingListStart
+
+  \resumeSubheading
+    {Graduate Research Associate}{Aug. 2022 -- Present}
+    {Univeristy of Bonn}{Bonn, Germany}
+    \resumeParagraph{
+    Design of mixed-signal blocks (PLL, TDC, AFE) in 28 nm \& 65 nm for detector readout ICs.
+    Emphasis on design automation using open source packages (Python \& C++).
+    Installation and management of PDK data and ASIC, TCAD, PCB, and FPGA design tools (Cadence, Mentor, Synopsys, Xilinx).
+    Administration of IT infrastructure (Fedora \& CentOS) including NFS file servers, LDAP user accounts, and EDA license servers.
+    }
   
-	\resumeSubheading
+  \resumeSubheading
     {ASIC Design Intern}{May 2021 -- Dec. 2022}
-    {Lawrence Berkeley National Laboratory}{Berkeley, CA, USA}
+    {Lawrence Berkeley National Laboratory}{Berkeley, CA, United States}
     \resumeParagraph{
     Designed a radiation-hard monolithic test bench for characterizing charge-sensitive analog front ends in 28 nm bulk CMOS.
     Test bench includes a programmable charge-injection circuit and 10 ps RMS precision time-to-digital converter.
@@ -143,7 +134,7 @@ $|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
 
   \resumeSubheading
     {Graduate Research Associate}{Aug. 2019 -- May. 2021}
-    {Ohio State University}{Columbus, OH, USA}
+    {Ohio State University}{Columbus, OH, United States}
     \resumeParagraph{
     Assisted in design, layout, and testing of 65 nm readout IC for pCVD diamond detectors, for use in Beam Conditions Monitor (BCM) of ATLAS experiment at CERN.  
     Designed differential time-over-threshold circuit. Characterized effect of detector capacitance on noise in front-end charge sensitive amplifier.
@@ -152,7 +143,7 @@ $|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
 
   \resumeSubheading
     {Hardware Engineering Intern}{Oct. 2018 -- May 2019}
-    {Schweitzer Engineering Laboratories, Inc.}{Pullman, WA, USA}
+    {Schweitzer Engineering Laboratories, Inc.}{Pullman, WA, United States}
     \resumeParagraph{
     Designed board-level industrial communications equipment for use in high-noise and high-radiation environments.
     Contributed circuit designs including zero-crossing detectors, switching power supplies, ESD protection, and drivers for off-board coaxial and twisted-pair links.
@@ -161,22 +152,38 @@ $|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
 
   \resumeSubheading
     {System Modeling Intern}{Jun. 2017 -- Aug. 2017}
-    {ISO New England, Inc.}{Holyoke, MA, USA}
+    {ISO New England, Inc.}{Holyoke, MA, United States}
     \resumeParagraph{
-    Worked in Transmission Planning group to develop Python models for Newton-Raphson numerical analysis of the New England power grid.
-    Performed power-flow studies for long-term load forecasting, examined impact of no-fault and breaker-open contingencies, and wrote scripts to automate daily reporting tasks.
+    Developed models for Newton-Raphson numerical analysis of the New England power grid, in Python.
+    Conducted power-flow studies for long-term load forecasting, examined impact of no-fault and breaker-open contingencies, and wrote scripts to automate reporting.
     }
 
   \resumeSubHeadingListEnd
 
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \textbf{Languages}{: Python, Tcl/Tk, SKILL, SystemVerilog, Bash, C} \\ \vspace{5pt}
-     \textbf{Software}{: Virtuoso, Spectre/SPICE, Calibre DRC/LVS, Unix/Linux, KiCAD} \\ \vspace{5pt}
-     \textbf{Laboratory}{: Spectrum Analyzer, Oscilloscope, VNA, Micro Soldering, EMC Testing} \\
-    }}
- \end{itemize}
- 
+%-----------PUBLICATIONS-----------
+\section{Publications}
+  \resumeParagraph{M. Mansour, S. Smith, H. Kagan, \textbf{K. Caisley}, B. Tar; A. Naguib; A. Gorišek; B. Hiti; M. Mali, M. Mikuž, et al. A Fast, Low Jitter, and Low Time-Walk Multi-Channel Front-End IC for Diamond and Silicon Radiation Detectors. \textit{IEEE Transactions on Nuclear Science}. 2023. DOI: \href{https://doi.org/10.1109/tns.2023.3283220}{\underline{10.1109/TNS.2023.3283220}}.
+  }
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of Bonn}{Aug. 2022 -- In Progress}
+    {PhD in Physics}{Bonn, Germany}
+    \vspace{5pt}
+
+  \resumeSubheading
+    {Ohio State University}{Aug. 2019 -- Jan. 2022}
+    {Master's in Electrical Engineering}{Columbus, OH, United States}
+    \vspace{5pt}
+
+  \resumeSubheading
+    {University of Idaho}{Aug. 2015 -- May 2019}
+    {Bachelor's in Electrical Engineering}{Moscow, ID, United States}
+    \vspace{5pt}
+
+  \resumeSubHeadingListEnd
+
 \end{document}
