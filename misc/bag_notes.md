@@ -861,7 +861,7 @@ The order of execution flow between the Python files and the YAML file is as fol
 5. The run_main() function is called with the BagProject object (_prj) and the parsed arguments (_args). Note, this is defined inside the same run script still. `_prj` is the current project being worked on, which is gathered from the environment variable. `_args` is the YAML file and additional flags like `-raw`.
 
 6. The `run_main()` function reads the YAML file specified in the `args.specs` argument using the `read_yaml()` function.
-7. The `prj.generate_cell()` method is called with the YAML specifications, as well as other arguments based on the command line options (`args`). This is the point at which the runscript ends.
+7. The `prj.generate_cell()` method is called with the YAML specifications, as well as other arguments based on the command line options (`args`). This is the point at which the runscript's role ends.
 
     ```
     prj.generate_cell(specs, raw=args.raw, gen_lay=args.gen_lay, run_drc=args.run_drc,
@@ -872,8 +872,18 @@ The order of execution flow between the Python files and the YAML file is as fol
                         gen_netlist=args.gen_netlist)
     ```
 
-8. Now inside `core.py` which defines `prj.generate_cell()`, the specified YAML file is used to generate a cell. The specs and other options are passed to the generate_cell() method of the BagProject object.
-9. The generate_cell() method in BagProject class is responsible for generating the cell based on the specifications.
+8. Now inside `core.py` which defines `prj.generate_cell()`, the specified YAML file is used to generate a cell. The specs and other options are passed to the generate_cell() method of the BagProject object. The generate_cell() method in BagProject class is responsible for generating the cell based on the specifications.
+
+
+
+
+
+
+
+
+
+
+
 10. During cell generation, the YAML parameters are used to create an instance of the bag3_digital__inv class from the bag3_digital.schematic.inv module.
 11. The bag3_digital__inv class is a subclass of the Module class, and its __init__ method is called to initialize the instance with the specified parameters.
 12. The design() method of the bag3_digital__inv class is called to perform the design of the cell using the provided parameters.
