@@ -981,3 +981,71 @@ gen_outputs/ip_blocks/dcc_delay_line/dcc_delay_line_tt_25_0p900_0p800.lib
 
 And here is the `inv.py` file:
 
+# Gen Cells Explanation
+
+Reproduce a copy of the gen_cell.generate_cell() method, but only including the sections that would run if `gen_sch` boolean is true, and all the other booleans are false.
+
+1. Okay, so by default `gen_lay` and `gen_sch` are true, and all the other booleans are false. That includes raw, run_drc, run_lvs, run_rcx, lay_db, sch_db, gen_lef, sim_netlist, flat, gen_hier, gen_model, mismatch, gen_shell, export_lay, and gen_netlist.
+
+2. As there are very few parameters in the YAML file, and no arguments are passed. 
+
+    root_dir: It will be set to the value of the key root_dir from the YAML, which is "gen_outputs/inv".
+
+    impl_lib: It will be set to the value of the key impl_lib from the YAML, which is "AAA_INV".
+
+    impl_cell: It will be set to the value of the key impl_cell from the YAML, which is "AA_inv".
+
+    params: It will be set to the value of the key params from the YAML, which is a dictionary containing various parameter settings:
+
+This line is critical, it checks the class of the `dut_class` and `layout_cls` key value pairs in the specs.yaml file, and returns some booleans. 
+
+```
+has_lay, lay_cls, sch_cls = self.get_dut_class_info(specs)
+```
+
+In this case, since `dut_class` is specfied as a subclass of `Module` e.g. it is a schematic generator. Therefore `has_lay = False`, `lay_cls=None`, and `sch_cls=Module`.
+
+
+
+Next, there is a set of code which uses the `DesignOutputs` enum:
+
+```python
+class DesignOutput(IntEnum):
+    LAYOUT = 0
+    GDS = 1
+    SCHEMATIC = 2
+    YAML = 3
+    CDL = 4
+    VERILOG = 5
+    SYSVERILOG = 6
+    SPECTRE = 7
+    OASIS = 8
+```
+
+To set some file types:
+
+```python
+lay_type_specs: Union[str, List[str]] = specs.get('layout_type', 'GDS')
+mod_type: DesignOutput = DesignOutput[mod_type_str]
+#...etc...
+if isinstance(lay_type_specs, str):
+    lay_type_list: List[DesignOutput] = [DesignOutput[lay_type_specs]]
+else:
+    lay_type_list: List[DesignOutput] = [DesignOutput[v] for v in lay_type_specs]
+```
+
+In this code, `lay_type_list` will at least contain `GDS` and `mod_type` will be `SYSVERILOG` by default.
+
+Next, there are a bunch of variables which are skipped, in our simple case, related to DRC, layout, models, Verilog, etc. Despite the fact that `gen_lay=True`, if is constantly A big if-else pair evaluates, and:
+
+```python
+
+if has_lay:
+    #etc
+else:
+    sch_params = params
+```
+
+Keep in mind there an instances where a schematic isn't explicitly generated, where having one would still be necessary. These are, for example, when LVS or RCX extraction are enabled.
+
+

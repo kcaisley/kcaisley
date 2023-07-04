@@ -100,7 +100,12 @@ Y-->V[("Layout
 - **gdstk(prev. gdspy)**: Python -> GDSII, Python [Code](https://github.com/heitzmann/gdstk)
 - **MAGICAL**: [Code](https://github.com/magical-eda/MAGICAL)
 - **ALIGN**: Netlist -> GDSII, Python, FOSS [Code](https://github.com/ALIGN-analoglayout/ALIGN-public)
-- **Anagen** - (Closed source, Infineon) [Pres](https://m.youtube.com/watch?v=IzJbVG-FHJc)
+- **Anagen** - Closed source, Infineon [Pres](https://m.youtube.com/watch?v=IzJbVG-FHJc)
+- **IIP Framework**: Fraunhaufer IIS, Closed source, [Pres](https://publica-rest.fraunhofer.de/server/api/core/bitstreams/c8d21689-7db1-405f-b1b8-a2298eedf7a3/content) [Web](https://www.eas.iis.fraunhofer.de/en/business_areas/efficient_electronics/automation-analog-design.html) [Paper](https://ieeexplore.ieee.org/document/7520725)
+- **LayGO2**:
+- **FASoC**: UMichigan [Link](https://fasoc.engin.umich.edu/) [Git](https://github.com/idea-fasoc/fasoc) [Paper](https://ieeexplore.ieee.org/document/9344104/authors#authors)
+- **OpenFASoC**: UMichigan [Docs](https://openfasoc.readthedocs.io/en/latest/getting-started.html) [Git](https://github.com/idea-fasoc/OpenFASOC) 
+
 
 ## Potential Issues
 - OpenAccess & Cadence
