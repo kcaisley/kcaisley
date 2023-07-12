@@ -14,3 +14,8 @@ Poly must be kept >0.05 um from unrelated oxides (transistor to body contact)
 
 In assembling the SRAM, GPDK45 standard cells were used wherever possible; however, the core of the SRAM was custom-designed, including the 6T SRAM cells, bit-line drivers, and sense amplifiers. The full schematic for the SRAM memory is shown in Fig. 3.
 
+
+kcaisley
+IN.0h0vYK]Em
+
+IN.0h0vYK]Em
