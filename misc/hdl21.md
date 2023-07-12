@@ -29,6 +29,18 @@ Coming to VSCode:
 * Low hanging fruit: simulation modes matrix, basic examples -> will open starter issues
 
 
+* Note how HDL21 doesn't address the layout implementation of cells. There's no strong notion of a layout cell paired with a corresponding schematic.
+    * I might choose to use Layout21 libraies w/ tooling on top to accomplish this portion, or I might instead choose to use a mix of:
+        * GDSFactory (cell)
+        * Laygo2 (structural)
+        * BAG+Xbase (cell + structural)
+        * Klayout (structural)
+    * This is a bit unfortunate, of course, as a large portion of my work will require silicon tested design.
+    * I might like to customize the HDL21 flow a bit, so that the generation of layout cells is done in tandom with schematic cells.
+    * This would be done before the structural level work is completed.
+    * Also, I should like some way to exchange between netlist+model vs behavioral representations of systems.
+    * Perhaps I do this by simply having a parrallel set of python classes, build on something like OpenVAF?
+
 # Questions
 
 * Best way to communicate? 
