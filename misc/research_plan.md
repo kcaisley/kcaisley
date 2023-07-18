@@ -21,4 +21,4 @@ Before making any plans for the near future, I need to understand what some good
 Can I create an inverter with ideal transistors, compile it to a SKY130 version, then send to ngspice for sim? Then plot?
 Then compile it to a 28nm version, and then send it to cadence for simulation? This is my job tonight.
 
-
+Let's just focus on Spice class design and simulation. This means we'll just use HDL21.
