@@ -69,7 +69,7 @@ date:
 - "White Box" mechanistic modeling & optimization
 - Capture known solution to known problem
 - Limited simulation for parameters -> fast
-- Top-to-bottom: 'feedforward'
+- Top-to-bottom: 'feed-forward'
 ::::
 
 :::: column
@@ -97,7 +97,7 @@ date:
 
 ![](../images/IMG_1501.png)
 
-[*'Metaheuristics', Wikipedia*](https://en.m.wikipedia.org/wiki/Metaheuristic)
+[*'Metaheuristic', Wikipedia*](https://en.m.wikipedia.org/wiki/Metaheuristic)
 
 ::::
 
@@ -108,14 +108,14 @@ date:
 Choice of generator should vary by task:
 
 - Sizing vs Layout: Either works for schematics; layout should probably be procedural
-- Simulation vs Implementation: Real implementions are complex, so rely on templates
+- Simulation vs Implementation: Real implementations are complex, so rely on templates
 - Analog vs Digital: Use the correct paradigm (continuous vs discrete time)
-- Device vs System: Increased complexity mandates abstration and constraints
+- Device vs System: Increased complexity mandates abstraction and constraints
 - Regular vs Non-regular Arch.: Uniformity allows for simplicity
 
 # Generators: Dos and don'ts
 - **DO** create a deterministic generator (avoid random optimization convergence)
-- **DO** use constraints (specs, schem/layout templates, routing grids, abstracted PDK/DRC)
+- **DO** use constraints (specs, schematic/layout templates, routing grids, abstracted PDK/DRC)
 - **DO** work in GP languages: flexibility, shared w/ real-world testing, readability, source control, sharing w/o NDA
 - **DO** combine the procedural + synthesis (mimic what designers already do intuitive)
 - **DO** partition generator code by cell view
@@ -143,8 +143,8 @@ Choice of generator should vary by task:
 ::: columns
 
 :::: column
-- **Phase Freq. Detector**: Optimize at gate-level for speed, jitter, and noise margin. Then structually compose.
-- **Charge Pump**: Optimize at trasistor-level for power and jitter, using iterative SPICE simulation and design eqns.
+- **Phase Freq. Detector**: Optimize at gate-level for speed, jitter, and noise margin. Then structurally compose.
+- **Charge Pump**: Optimize at transistor-level for power and jitter, using iterative SPICE simulation and design equations.
 - **Low Pass Filter**: Optimize a LTI system model, then translate to passive devices.
 
 ::::
@@ -152,7 +152,7 @@ Choice of generator should vary by task:
 :::: column
 
 - **Volt. Cont. Oscillator**: Typical performance bottleneck. Determine topology, then use optimization approach to size transistors.
-- **Divider**: Again, just optimize lower-level gates for speed, jitter, and noise margin. Then structually compose.
+- **Divider**: Again, just optimize lower-level gates for speed, jitter, and noise margin. Then structurally compose.
 
 ![](../images/IMG_1502.jpeg)
 
