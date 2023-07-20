@@ -70,7 +70,7 @@ date:
 # Remaining Work + Problems
 - 3 Servers (Faust02/Jupiter/Juno) still on CentOS7
 - ~6 (of 20) workstations still on CentOS7
-- Apollo decommision (is on CentOS 6)
+- Apollo decommission (is on CentOS 6)
 - faust02 renamed to -> faust
 - How to organize the lab? 
 - Bandwidth of access to NFS shares doesn't work well
