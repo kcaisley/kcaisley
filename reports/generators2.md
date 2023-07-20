@@ -1,5 +1,3 @@
-# Steps
-
 - Create basic VCO generator
 - Work through Ravazi PLL book, comparing against real circuits
 - Implement noise simulation via Spectre in HDL21
@@ -24,6 +22,3 @@ Don't do anything that would require having visual access to cadence yet. This i
 
 - Generating for Both 28nm and 65nm TSMC.
 
-https://github.com/aviralpandey/CT-DS-ADC_generator/blob/main/characterize_technology.py
-
-https://github.com/aviralpandey/CT-DS-ADC_generator/blob/main/database_query.py

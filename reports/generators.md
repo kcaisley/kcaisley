@@ -1,131 +1,178 @@
-# Prior Work: Tech
-- 2007-2011: 130nm, 2012-Present: 65nm
-- 28nm available now, but:
+---
+title:
+- Generator-based approaches to IC design
+author:
+- Kennedy Caisley
+date:
+- 05 June, 2023
+---
+
+
+# Prior Work @ SiLab: Process Nodes
+
+- Our designs have migrated over time
+	- 2007-2011: 130nm
+	- 2012-Present: 65nm
+- Now 28nm is available, but:
 	- 2-4x transistors -> longer simulation, layout, verification
 	- 3x PDK/DRC rules
 	- 2x cost (8k EUR/mm^2)
-- Choice depends: A vs D performance, power, area, cost
-- ISSCC stats reflect this
+- Smaller != better
+	- Must consider A vs D performance, power, area, cost
+- ISSCC trend anecdote: 65nm is still most popular node
 
-# Prior Work: PLL Designs
+# Prior Work @ SiLab: PLL Designs
+
+::: columns
+
+:::: column
+**Early DHP PLL, in 90nm, later ported to 65nm**
 ![](../images/dhptpll.png)
-*Early DHP PLL, in 90nm, later ported to 65nm*
+::::
 
+:::: column
+**Early RD53 PLL, 65nm, later grew to 600ux150u**
 ![](../images/rd53pll.jpeg)
-*Early RD53 PLL, 65nm, layer grew to 600x150u*
+
+::::
+
+:::
 
 |Design|Fin(Hz)|Fout(Hz)|Jitter(s)|Power(W)|TID(Rad)|
 |---|---|---|---|---|---|
-|DHP|80M|1.6G,800M,320M|20p|1.25m VCO|10-20M|
+|DHP|80M|1.6G|20p|1.25m VCO|20M|
 |RD53|80M|1.28G|5p|6.5m|500M|
 
 # Generators: What & Why
+
+::: columns
+
+:::: column
 - Common analog 'IP' (IBias, VRef, PLL, IO, ADC, DAC) 
 - Portable and/or parallel design (65nm or 28nm?)
 - Record design method/intent (Why this W/L?)
 - Faster modification (e.g. layout ECOs)
 - General-purpose tooling (Python, C++, YAML)
+::::
 
-## Example Workflow
+:::: column
+![](../images/flow.png)
+::::
 
-```mermaid
-graph TD
+:::
 
-A[("Design Specs
-(.yaml)")]-->B("Schematic Generator (.py)")
-C[("Circuit Template
-i.e. Unsized Netlist
-(.cir | .oa)")]-->B
-D[("Device Params.
-(.yaml)")]-->B
-B-->E[("Sized Netlist
-(.cir | .oa)")]
+# Generators: Procedural approach
 
-W[("Placement Template
-(.yaml)")]-->Y("Layout Generator (.py)")
-E-->Y
-X[("Routing Grid
-(.yaml)")]-->Y
-Y-->V[("Layout
-(.gdsii | .oa)")]
-```
+::: columns
 
-# Generators: Procedural
-
+:::: column
 - "White Box" mechanistic modeling & optimization
 - Capture known solution to known problem
-- Limited simulation for parameters -> Fast
+- Limited simulation for parameters -> fast
 - Top-to-bottom: 'feedforward'
+::::
 
+:::: column
 ![](../images/IMG_1500.jpeg)
-*Rare 'procedural generator' specimen, circa 2013*
+*'Procedural generator' circa 2013*
+::::
 
-# Generators: Synthesis 
+:::
 
+
+# Generators: Synthesis approach
+
+::: columns
+
+:::: column
 - "Black Box" optimization; give computer constraints and objective and let it explore
 - More formally: *Metaheuristic optimization*
 	1. Produce a set of candidates
-	2. Evaluate via simulation -> Slow!
+	2. Evaluate via simulation -> slow
 	3. Retain best performing
 	4. Iterate if necessary: 'feedback'
+::::
+
+:::: column
 
 ![](../images/IMG_1501.png)
-[https://en.m.wikipedia.org/wiki/Metaheuristic](https://en.m.wikipedia.org/wiki/Metaheuristic)
+
+[*'Metaheuristics', Wikipedia*](https://en.m.wikipedia.org/wiki/Metaheuristic)
+
+::::
+
+:::
 
 # Generators: When to use which type?
 
-- Sizing vs Layout: Sizing can be either; or combination, analog layout should probably always be procedural
-- Linear ⇔ Non-Linear 
-- System vs device
-- Regular vs non-regular: more common in 28nm!!
-- Schematic vs layout
+Choice of generator should vary by task:
+
+- Sizing vs Layout: Either works for schematics; layout should probably be procedural
+- Simulation vs Implementation: Real implementions are complex, so rely on templates
+- Analog vs Digital: Use the correct paradigm (continuous vs discrete time)
+- Device vs System: Increased complexity mandates abstration and constraints
+- Regular vs Non-regular Arch.: Uniformity allows for simplicity
 
 # Generators: Dos and don'ts
-- **DO** create a deterministic generator (e.g. avoid random optimization convergence)
-- **DO** use constraints (specs, schem/layout templates, routing grids, abstract PDK/DRC)
+- **DO** create a deterministic generator (avoid random optimization convergence)
+- **DO** use constraints (specs, schem/layout templates, routing grids, abstracted PDK/DRC)
 - **DO** work in GP languages: flexibility, shared w/ real-world testing, readability, source control, sharing w/o NDA
-- **DO** combine the procedural + synthesis (Mimics what designers already do intuitive)
+- **DO** combine the procedural + synthesis (mimic what designers already do intuitive)
 - **DO** partition generator code by cell view
-- **DON'T** hide method in opaque neural networks (human or machine)
-	- Over-constrained procedural not reusable and ignores useful abstraction (e.g. drawing raw GDSII)
-	- Under-constrained statistical approach time-consuming and meaningless, (e.g. unsupervised learning
+- **DON'T** hide approach in neural network (human or machine)
+	- Over-constrained procedural not reusable and ignores useful abstraction (drawing raw GDSII)
+	- Under-constrained statistical approach time-consuming and meaningless (unsupervised learning)
 - **DON'T** use for one-off/unique blocks or top-level
 - **DON'T** expect SOTA performance, power, area
 
 # Generators: Survey of Tools
 
-- **PCell & PyCell**: W&L -> OA Layout+BSIM6, SKILL or Python/OA [Site](https://www.synopsys.com/cgi-bin/pycellstudio/req1.cgi) [Paper](https://arxiv.org/pdf/1607.00859.pdf)
-- **BAG**: OA Schem Template -> OA Schem, Python+SKILL [Docs](https://bag3-readthedocs.readthedocs.io/en/latest/workspaces.html) [Code](https://github.com/ucb-art/bag/tree/without_OA)
-- **Hdl21** / **Layout21**: [Code](https://github.com/dan-fritchman/Hdl21)
-- **gdstk(prev. gdspy)**: Python -> GDSII, Python [Code](https://github.com/heitzmann/gdstk)
-- **MAGICAL**: [Code](https://github.com/magical-eda/MAGICAL)
-- **ALIGN**: Netlist -> GDSII, Python, FOSS [Code](https://github.com/ALIGN-analoglayout/ALIGN-public)
-- **Anagen** - Closed source, Infineon [Pres](https://m.youtube.com/watch?v=IzJbVG-FHJc)
-- **IIP Framework**: Fraunhaufer IIS, Closed source, [Pres](https://publica-rest.fraunhofer.de/server/api/core/bitstreams/c8d21689-7db1-405f-b1b8-a2298eedf7a3/content) [Web](https://www.eas.iis.fraunhofer.de/en/business_areas/efficient_electronics/automation-analog-design.html) [Paper](https://ieeexplore.ieee.org/document/7520725)
-- **LayGO2**:
-- **FASoC**: UMichigan [Link](https://fasoc.engin.umich.edu/) [Git](https://github.com/idea-fasoc/fasoc) [Paper](https://ieeexplore.ieee.org/document/9344104/authors#authors)
-- **OpenFASoC**: UMichigan [Docs](https://openfasoc.readthedocs.io/en/latest/getting-started.html) [Git](https://github.com/idea-fasoc/OpenFASOC) 
+- **[PyCell & OA PCell](https://arxiv.org/pdf/1607.00859.pdf)**: Parametric device-level models and layouts, mostly proprietary
+- **[BAG](https://bag3-readthedocs.readthedocs.io)**: Device to block-level procedural generators; open source but Cadence dependent
+- **[Hdl21](https://github.com/dan-fritchman/Hdl21)**: Circuit-level Analog HDL in Python for netlists, with aux. tools for layout; open source
+- **[Gdstk](https://github.com/heitzmann/gdstk)**: Python lib, device-level layouts; open source
+- **[ALIGN](https://github.com/ALIGN-analoglayout/ALIGN-public)**: Netlist to GDSII synthesis; mostly open source
+- **[MAGICAL](https://github.com/magical-eda/MAGICAL)**: Netlist to GDSII synthesis; mostly open source
+- **[Anagen](https://m.youtube.com/watch?v=IzJbVG-FHJc)**: Schematic/layout generator built on Cadence; proprietary from Infineon
+- **[IIP Framework](https://www.eas.iis.fraunhofer.de/en/business_areas/efficient_electronics/automation-analog-design.html)**: Schematic/layout generator built on Cadence; proprietary from Fraunhaufer IIS
+- **[Laygo](https://laygo2.github.io/)**: Python library; generate system-level layouts from custom cells
+- **[OpenFASoC](https://openfasoc.readthedocs.io/)**: Generate analog netlists and layouts given Verilog netlist and standard cells; open source
 
+# Next Steps: Generator approaches for PLL building blocks
+
+::: columns
+
+:::: column
+- **Phase Freq. Detector**: Optimize at gate-level for speed, jitter, and noise margin. Then structually compose.
+- **Charge Pump**: Optimize at trasistor-level for power and jitter, using iterative SPICE simulation and design eqns.
+- **Low Pass Filter**: Optimize a LTI system model, then translate to passive devices.
+
+::::
+
+:::: column
+
+- **Volt. Cont. Oscillator**: Typical performance bottleneck. Determine topology, then use optimization approach to size transistors.
+- **Divider**: Again, just optimize lower-level gates for speed, jitter, and noise margin. Then structually compose.
+
+![](../images/IMG_1502.jpeg)
+
+[*'Design of CMOS Phase-Locked Loops', Razavi*](https://doi.org/10.1017/9781108626200)
+
+
+::::
+
+:::
+
+# Next Steps
+
+## Timeline
+
+- Use Hdl21 (successor of BAG) as generator tool of choice
+- Design generator that is 28 nm & 65 nm compatible
+- TSMC 28 nm submission of prototype PLL via Europractice
+- Apply generator concepts to new FE designs
 
 ## Potential Issues
 - OpenAccess & Cadence
 - Environment setup
 - Alternate abstraction to learn (pro & con)
-
-# Next Steps: Application
-
-- Phase/Freq. Detector:  Depending on Linear, Bang-Nonlinear. Noise Margin Suppresses Voltage Noise, mostly digital, this is a irregular but structural block, low gate/stage block, so this is best followed via a strictly procedural generation for schematic and layout. Can likely build from standard cells. Jitter does matter though.
-- Charge Pump: functional
-- Low Pass Filter: Passive, and so can be considered linear quite easily. Relatively straiforward to  solved with procedural sizing and layout.
-- Volt. Controlled Oscillator: Dominant source of jitter, can be very nonlinear
-- Divider: Straightforward for synchronous design, similar to PFD, take advantage of noise noise margin intrinsic to nonlinear operation, just pay attention to layout parasitic, jitter
-
-![](../images/IMG_1502.jpeg)
-
-[B. Razavi, Design of CMOS Phase-Locked Loops](https://doi.org/10.1017/9781108626200)
-
-# Next Steps: Timeline
-
-- Design generator that is 28 nm + 65 nm compatible
-- TSMC 28 nm submission of demonstrator PLL via Europractice
-- Apply generator concepts to new FE designs
