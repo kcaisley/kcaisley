@@ -7,105 +7,121 @@ date:
 - 26 July, 2023
 ---
 
-# General Architecture
+# Servers & Workstations
 
-- Organization of System (block diagram)
-- Shared network basics (not administered by us)
-    - DNS server
-    - Wireguard VPN server
-    - Printer Network
-    - Central switch, with fiber backhaul
-    - Documentation via 
-- Individual Infrastructure (Workstations and Servers, self administered)
-    - File storage: Raid array, NFS share, Samba share, shared read only data, user home directories, protected via groups, backup
-    - User sync: NFS mount, LDAP, User Permissions, (no FreeIPA yet)
-    - EDA tools: NFS mount, ASIC design, PDKs, TCAD, PCB, EM sim tools, plus associated revision control (SOS) and license (Cliosoft) servers
+![](../images/network.png)
 
-Mabye 'animate' this by showing increasily more? Maybe show applications to run
+# Services & Apps
 
+![](../images/network_half.png)
 
-# The Before Times: Problems to be fixed
+# Services & Apps
 
-- Hard drives failing in NFS server
-- Desktops were randomly crashing and not booting on CentOS7
-- Configuration management strategy was monolithic: couldn't understand it
-- CentOS7 was released in 2014, [EOL in 2024](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#RHEL_7).
-    - Repos very outdated for key software: gcc, Firefox, etc.
-    - Workaround have existed for tools, but aren't perfect
-    - [There's no CentOS8/9](https://arstechnica.com/gadgets/2020/12/centos-shifts-from-red-hat-unbranded-to-red-hat-beta/)
-    - Alternative clones like AlmaLinux8/9 and Rocky Linux8/9 are facing issues as RH [closed access to RHEL source](https://www.redhat.com/en/blog/furthering-evolution-centos-stream)
-- Documentation (on Confluence) was outdated and difficult to work with
-- BIOS firmware never updated on some machines
+![](../images/network_full.png)
 
-# Change: An OS Upgrade
-- Philosophy: Can live with self-vendoring software core to work, but the auxillary stuff should be easy
-- Ubuntu is a good choice too, but Fedora has:
-    - more built-in enterprise features (FreeIPA, Ansible support, to be discussed)
-    - more of the enterprise 'mindshare' and documentation
-    - upstream of RHEL, so some engineers apps may work out of the box
-- Updates 2x per year make apps like Slack, Zoom, desktop usage, more streamlined
-- Successful version upgrades 36 -> 37 -> 38 -> 39 (in Oct)
-- Bonus: Automatic firmware upgrades + network config
+# Motivations
 
-# Change: A Better Way to Configure Workstations
-- How to take a machine from a fresh install -> desired state (and keep it that way)
+- Hard drive failures in network file server (NFS)
+- Graphical login not working on some workstations
+- Workstation config opaque and backups time-consuming (Clonezilla)
+- CentOS 7 reaching end-of-life (released 2014)
+    - Software and drivers not receiving updates
+    - No CentOS 8 or 9 and similar EL projects at risk
+- Documentation not easily maintainable (Confluence)
+- BIOS never updated on some machines
+- Plus, it's interesting 
+
+# Project #1: An OS Upgrade
+
+The first three categories are:
+How much work would need to be invested initially + overtime in running these classes of software? This includes the mindshare, documentation, software availability, and ease software configuration.
+
+*Questions: How much did RHEL cost?
+How much does SLES cost?
+What is the real support for SUSE/Open Suse for EDA?*
+
+|Distribution | Design | Services | Desktop | Pricing | Future |
+|---|---|---|---|---|---|
+|RHEL       | ✅ | ✅ | 🆗 | 💰 | ✅ |
+|Rocky/Alma | ✅ | ✅ | 🆗 | ✅ | 😬 |
+|SUSE       | 🆗 | ✅ | 🆗 | 💰 | ✅ |
+|OpenSUSE   | 🆗 | 🆗 | 🆗 | ✅ | ✅ |
+|Ubuntu     | ❌ | 🆗 | ✅ | ✅ | ✅ |
+|Fedora     | 🆗 | ✅ | ✅ | ✅ | ✅ |
+
+We selected Fedora and so far the experience has reinforced the decision:
+
+- Fedora installed across 2 servers and 14 workstations
+- Some EDA tools work, and a work around has been found for others (to be discussed)
+- Enterprise services are well supported, RHEL docs are mostly relevant
+- Desktop apps are mostly available (Zoom, Slack, VSCode, etc)
+- Successful version upgrades 36 -> 37 -> 38 -> 39 (soon)
+- Bonus: Automatic firmware upgrades
+
+# Project #2: A Better Way to Configure Workstations
+
+*Need a better title*
+
+- Now that we have a bunch of fresh machines:
+    - How to take a machine from a fresh install -> desired state (and keep it that way)
+    - Remember the old way was to configure one, and use Clonezilla
 - Used for workstations only (just make root account, enable SSH), as we want the 12+8 machines to be the same
 - Now using Ansible, whenever it make sense
     - State based or 'idempotent', rather than action based
         - Example: Write line to file
     - Replaces monolithic Clonezilla; force us to know our stack
 
-## Demo
-
 1. Install `sudo dnf install ansible` on one controller machine
 2. Copy SSH public key to all target machines `ssh-copy-id asiclab001.physik.uni-bonn.de`
 3. List machines to target in `inventory.yaml`:
 
-```yaml
-workstations:
-  hosts:
-    asiclab001.physik.uni-bonn.de:
-      mac: 54:BF:64:98:25:D4
-    asiclab002.physik.uni-bonn.de:
-      mac: 54:BF:64:98:25:CC
-    asiclab003.physik.uni-bonn.de:
-      mac: 54:BF:64:98:25:BA
-    ...
-```
+    ```yaml
+    workstations:
+    hosts:
+        asiclab001.physik.uni-bonn.de:
+        mac: 54:BF:64:98:25:D4
+        asiclab002.physik.uni-bonn.de:
+        mac: 54:BF:64:98:25:CC
+        asiclab003.physik.uni-bonn.de:
+        mac: 54:BF:64:98:25:BA
+        ...
+    ```
 
 4. List desired machines state in `playbook.yaml`:
-```yaml
-...
-- name: Send a Wake-on-LAN magic packet
-    community.general.wakeonlan:
-    mac: '{{ mac }}'
-    delegate_to: localhost
-    tags: init
 
-- name: Install basic development tools
-    ansible.builtin.dnf:
-    name:
-        - vim
-        - tmux
-        - htop
-        - pandoc
-        - curl
-        - wget
-    state: latest
-    tags: update
-...
-```
+    ```yaml
+    ...
+    - name: Send a Wake-on-LAN magic packet
+        community.general.wakeonlan:
+        mac: '{{ mac }}'
+        delegate_to: localhost
+        tags: init
+
+    - name: Install basic development tools
+        ansible.builtin.dnf:
+        name:
+            - vim
+            - tmux
+            - htop
+            - pandoc
+            - curl
+            - wget
+        state: latest
+        tags: update
+    ...
+    ```
 
 5. Run on 
 
-```bash
-$ ansible-playbook -K playbook.yaml --tags nfs -i inventory.yaml --limit asiclab001
-```
+    ```bash
+    $ ansible-playbook -K playbook.yaml --tags nfs -i inventory.yaml --limit asiclab001
+    ```
 
 6. Profit
-```bash
-output showing it working``
-```
+
+    ```bash
+    output showing it working
+    ```
 
 # Changes: Files Storage
 - Installed Fedora on machine (`penelope`)
@@ -250,7 +266,7 @@ Copyright (C) 2011 Free Software Foundation, Inc.
 - 3/5 Servers (Faust02/Jupiter/Juno) still on CentOS7
 - Apollo decommission (is on CentOS 6)
 - faust02 renamed to -> faust
-- How to organize the lab? 
+- How to organize the lab? Still a mess.
 - Bandwidth of access to NFS shares doesn't work well
 - SSH keys don't work with LDAP users
 
