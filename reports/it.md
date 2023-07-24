@@ -1,47 +1,63 @@
 ---
-title:
-- Updates to IT Infrastructure in ASICLab
-author:
-- Kennedy Caisley
-date:
-- 26 July, 2023
+marp: true
+theme: gaia
 ---
 
-# Servers & Workstations
+<!-- _class: lead -->
+
+# ASICLab IT Upgrades 🖳
+
+#### Kennedy Caisley
+#### Marco Vogt
+
+26 July 2023
+
+
+---
+
+### The physical network...
+
+<!-- _backgroundColor: white -->
+<!-- _class: lead -->
 
 ![](../images/network.png)
 
-# Services & Apps
+---
 
+### ...with services running on top
+
+<!-- _backgroundColor: white -->
+<!-- _class: lead -->
 ![](../images/network_half.png)
 
-# Services & Apps
+---
 
-![](../images/network_full.png)
+### Motivations
 
-# Motivations
+❌ CentOS 7 reaching EOL with no upgrade path
 
-- Hard drive failures in network file server (NFS)
-- Graphical login not working on some workstations
-- Workstation config opaque and backups time-consuming (Clonezilla)
-- CentOS 7 reaching end-of-life (released 2014)
-    - Software and drivers not receiving updates
-    - No CentOS 8 or 9 and similar EL projects at risk
-- Documentation not easily maintainable (Confluence)
-- BIOS never updated on some machines
-- Plus, it's interesting 
+❌ Drive failures & low storage in file server
 
-# Project #1: An OS Upgrade
+❌ Workstations failing to boot & softwares outdated
 
-The first three categories are:
+❌ Config management opaque and slow
+
+❌ Docs not maintain-ed | able
+
+---
+<!-- _class: lead -->
+
+### Project #1: An OS Upgrade
+
+<!-- The first three categories are:
 How much work would need to be invested initially + overtime in running these classes of software? This includes the mindshare, documentation, software availability, and ease software configuration.
 
 *Questions: How much did RHEL cost?
 How much does SLES cost?
-What is the real support for SUSE/Open Suse for EDA?*
+What is the real support for SUSE/Open Suse for EDA?* -->
 
 |Distribution | Design | Services | Desktop | Pricing | Future |
-|---|---|---|---|---|---|
+|---|:---:|:---:|:---:|:---:|:---:|
 |RHEL       | ✅ | ✅ | 🆗 | 💰 | ✅ |
 |Rocky/Alma | ✅ | ✅ | 🆗 | ✅ | 😬 |
 |SUSE       | 🆗 | ✅ | 🆗 | 💰 | ✅ |
@@ -49,31 +65,50 @@ What is the real support for SUSE/Open Suse for EDA?*
 |Ubuntu     | ❌ | 🆗 | ✅ | ✅ | ✅ |
 |Fedora     | 🆗 | ✅ | ✅ | ✅ | ✅ |
 
-We selected Fedora and so far the experience has reinforced the decision:
+---
 
-- Fedora installed across 2 servers and 14 workstations
-- Some EDA tools work, and a work around has been found for others (to be discussed)
-- Enterprise services are well supported, RHEL docs are mostly relevant
-- Desktop apps are mostly available (Zoom, Slack, VSCode, etc)
-- Successful version upgrades 36 -> 37 -> 38 -> 39 (soon)
-- Bonus: Automatic firmware upgrades
+### `fedora`, I choose you!
 
-# Project #2: A Better Way to Configure Workstations
+✅ Installed across 14 workstations and 2 servers
 
-*Need a better title*
+🆗 Some EDA tools run; work-around for the rest
 
-- Now that we have a bunch of fresh machines:
+✅ Enterprise services are well-supported & documented (RHEL)
+
+✅ Desktop apps mostly available (`zoom`, `slack`, `code`)
+
+✅ Automatic driver & firmware upgrades
+
+✅ Successful upgrades since: **36 -> 37 -> 38 -> 39** *(soon)*
+
+---
+<!-- _class: lead -->
+
+### Project #2: Workstation Setup
+
+`clonezilla` isn't the right tool for *Configuration Management*:
+
+> The art of setting and maintaining a machine in a desired state.
+
+
+
+
+<!-- - Now that we have a bunch of fresh machines:
     - How to take a machine from a fresh install -> desired state (and keep it that way)
     - Remember the old way was to configure one, and use Clonezilla
 - Used for workstations only (just make root account, enable SSH), as we want the 12+8 machines to be the same
 - Now using Ansible, whenever it make sense
     - State based or 'idempotent', rather than action based
         - Example: Write line to file
-    - Replaces monolithic Clonezilla; force us to know our stack
+    - Replaces monolithic Clonezilla; force us to know our stack -->
 
-1. Install `sudo dnf install ansible` on one controller machine
-2. Copy SSH public key to all target machines `ssh-copy-id asiclab001.physik.uni-bonn.de`
-3. List machines to target in `inventory.yaml`:
+- `ansible`
+
+---
+
+1. `dnf install ansible` on a machine not being configured
+2. `ssh-copy-id ` to all target machines 
+3. List target machines in `inventory.yaml`:
 
     ```yaml
     workstations:
@@ -83,73 +118,144 @@ We selected Fedora and so far the experience has reinforced the decision:
         asiclab002.physik.uni-bonn.de:
         mac: 54:BF:64:98:25:CC
         asiclab003.physik.uni-bonn.de:
-        mac: 54:BF:64:98:25:BA
-        ...
-    ```
+        mac: 54:BF:64:98:25:BAs
+    ``````
+---
 
-4. List desired machines state in `playbook.yaml`:
-
+4. List desired state in `playbook.yaml`:
     ```yaml
-    ...
-    - name: Send a Wake-on-LAN magic packet
+    - name: Send a wake-on-LAN magic packet                                       
         community.general.wakeonlan:
-        mac: '{{ mac }}'
-        delegate_to: localhost
-        tags: init
-
-    - name: Install basic development tools
-        ansible.builtin.dnf:
-        name:
-            - vim
+            mac: '{{ mac }}'
+    - name: Ensure client.conf exists & contains CUPS hostname
+        ansible.builtin.lineinfile:
+            path: /etc/cups/client.conf
+            line: ServerName cups.physik.uni-bonn.de
+            create: yes
+    - name: Check development tools are installed
+        ansible.builtin.apt:
+            name:
+            - gcc
             - tmux
-            - htop
-            - pandoc
-            - curl
-            - wget
-        state: latest
-        tags: update
-    ...
+            - git-lfs
+            state: latest
     ```
+---
 
-5. Run on 
+5. Run playbook on target inventory:
 
     ```bash
-    $ ansible-playbook -K playbook.yaml --tags nfs -i inventory.yaml --limit asiclab001
+    [asiclab@penelope ~]$ ansible -K playbook.yaml -i inventory.yaml
     ```
 
-6. Profit
+Some additional useful arguments:
 
-    ```bash
-    output showing it working
-    ```
+- `--limit` to specific subset of machines
+- Only run playbook tasks with certain `--tag`
+- Be more `--verbose`
 
-# Changes: Files Storage
-- Installed Fedora on machine (`penelope`)
-- Built a new Raid6 array with 48 TB of total HDD storage
+---
 
-```bash
-command to show raid array
+Ansible output log:
+
+```log
+PLAY [Workstation Configuration] *********************************************
+
+TASK [Send a wake-on-LAN magic packet] ***************************************
+ok: [asiclab001.physik.uni-bonn.de]
+ok: [asiclab002.physik.uni-bonn.de]
+ok: [asiclab003.physik.uni-bonn.de]
+
+TASK [Ensure client.conf exists & contains CUPS hostname] ********************
+ok: [asiclab001.physik.uni-bonn.de]
+ok: [asiclab002.physik.uni-bonn.de]
+changed: [asiclab003.physik.uni-bonn.de]
+
+TASK [Check development tools are installed] *********************************
+ok: [asiclab001.physik.uni-bonn.de]
+changed: [asiclab002.physik.uni-bonn.de]
+changed: [asiclab003.physik.uni-bonn.de]
 ```
 
-- Copied design data over from manual back (3+ days)
-- Started NFS server on Fedora, with (renamed) `/tools` and `/users`
+<!-- - Config managment is a super complex field, and is mostly overboard for our group
+- But in cases where you have a list of repeated, common tasks, that need to be done
+on many machines, it's a very userful tool -->
+
+
+---
+
+<!-- _class: lead -->
+# Project 3: Fixing the File Server
+1.  Copied `/tools` and `/users` (~3 days)
+2.  Built `raid6` array with **5** new 16 TB drives:
+    - Capacity: 48 TB
+    - Speed gain: 3x read, but no write
+    - Fault tolerance: 2-drive failure (double parity)
+3. Copied back data (another ~3 days)
+
+---
+
+Raid array details, seen from `penelope` server
+
+```
+[asiclab@penelope ~]$ sudo mdadm --detail /dev/md127
+
+/dev/md127:
+     Creation Time : Sat Jan 14 14:46:26 2023
+        Raid Level : raid6
+        Array Size : 46877242368 (43.66 TiB 48.00 TB)
+     Used Dev Size : 15625747456 (14.55 TiB 16.00 TB)                            
+      Raid Devices : 5
+        Chunk Size : 512K
+
+    Number   Major   Minor   RaidDevice State
+       0       8       16        0      active sync   /dev/sdb
+       1       8       32        1      active sync   /dev/sdc
+       2       8       48        2      active sync   /dev/sdd
+       3       8       64        3      active sync   /dev/sde
+       4       8       80        4      active sync   /dev/sdf
+```
+---
+4. Enable new incremental backups with HRZ using IBM `dsmc`
+5. Enable automatic array checks with `raid-check.timer`
+5. Enable `nfs4` server for `/users` and `/tools`.
+
+A sanity check from `asiclab001` workstation:
+
+```log
+[asiclab@asiclab008 ~]$ showmount -e penelope.physik.uni-bonn.de                 
+
+Export list for penelope.physik.uni-bonn.de:
+
+/export/disk/tools   asiclab*,juno.physik.uni-bonn.de,noyce.physik.uni-bonn.de,
+jupiter.physik.uni-bonn.de,faust02.physik.uni-bonn.de,apollo.physik.uni-bonn.de
+
+/export/disk/users   asiclab*,juno.physik.uni-bonn.de,noyce.physik.uni-bonn.de,
+jupiter.physik.uni-bonn.de,faust02.physik.uni-bonn.de,apollo.physik.uni-bonn.de
+```
+
+---
+
+7. Use `ansible` to auto-mount NFS shares on all workstations:
 
 ```yaml
-- name: Create directory and mount /users
+- name: Create mount points and mount /users
     ansible.posix.mount:
-    src: penelope.physik.uni-bonn.de:/export/disk/users
-    path: /users
-    opts: rw
-    boot: true
-    state: mounted
-    fstype: nfs4
-    tags: nfs
+        src: penelope.physik.uni-bonn.de:/export/disk/users
+        path: /users
+        opts: rw
+        state: mounted
+        fstype: nfs4
+- name: Create mount points and mount /tools
+    ansible.posix.mount:
+        src: penelope.physik.uni-bonn.de:/export/disk/tools
+        path: /tools
+        opts: ro
+        state: mounted
+        fstype: nfs4
 ```
 
-```bash
-$ ls /
-dir dir dir dir dir tools users 
-```
+---
 
 # Changes: Identity Management
 - User data on `rw` NFS share
@@ -257,10 +363,31 @@ GNU bash, version 4.2.46(2)-release (x86_64-redhat-linux-gnu)
 Copyright (C) 2011 Free Software Foundation, Inc.
 ```
 
-# Changes: Documentation
-- Markdown, git repo (show screenshots)
-- Ansible is more or less 'self-documenting', for the workstations
+---
 
+# Project #5: Write the docs
+<!-- _class: lead-->
+
+Decision making framework:
+
+### `confluence.atlassian.com` is 📉
+
+### `.md` + `github.com` is 📈
+
+---
+<!-- _backgroundColor: white -->
+<!-- _class: lead -->
+
+![h:1000](../images/docs1.png)
+
+---
+
+<!-- _class: lead -->
+<!-- _backgroundColor: white -->
+
+![h:300](../images/docs2.png)
+
+---
 # Remaining Work + Problems
 - 6/20 workstations still on CentOS7
 - 3/5 Servers (Faust02/Jupiter/Juno) still on CentOS7
