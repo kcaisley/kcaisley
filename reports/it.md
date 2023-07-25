@@ -5,7 +5,9 @@ theme: gaia
 
 <!-- _class: lead -->
 
-# ASICLab IT Upgrades 🖳
+# ASICLab IT Upgrades 🖥️
+
+<!-- Better title? -->
 
 #### Kennedy Caisley
 #### Marco Vogt
@@ -17,7 +19,6 @@ theme: gaia
 
 ### The physical network...
 
-<!-- _backgroundColor: white -->
 <!-- _class: lead -->
 
 ![](../images/network.png)
@@ -26,23 +27,22 @@ theme: gaia
 
 ### ...with services running on top
 
-<!-- _backgroundColor: white -->
 <!-- _class: lead -->
-![](../images/network_half.png)
+![w:1100](../images/network_half.png)
 
 ---
 
 ### Motivations
 
-❌ CentOS 7 reaching EOL with no upgrade path
+![h:45](../images/centoslogo.png) CentOS 7 reaching EOL with no upgrade path
 
-❌ Drive failures & low storage in file server
+💽 Drive failures & low storage in file server
 
-❌ Workstations failing to boot & softwares outdated
+🖥️ Workstations failing to boot & softwares outdated
 
-❌ Config management opaque and slow
+🗃️ Config management opaque and slow
 
-❌ Docs not maintain-ed | able
+📗 Docs not maintain-ed | able
 
 ---
 <!-- _class: lead -->
@@ -58,16 +58,16 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 
 |Distribution | Design | Services | Desktop | Pricing | Future |
 |---|:---:|:---:|:---:|:---:|:---:|
-|RHEL       | ✅ | ✅ | 🆗 | 💰 | ✅ |
-|Rocky/Alma | ✅ | ✅ | 🆗 | ✅ | 😬 |
-|SUSE       | 🆗 | ✅ | 🆗 | 💰 | ✅ |
-|OpenSUSE   | 🆗 | 🆗 | 🆗 | ✅ | ✅ |
-|Ubuntu     | ❌ | 🆗 | ✅ | ✅ | ✅ |
-|Fedora     | 🆗 | ✅ | ✅ | ✅ | ✅ |
+|![h:45](../images/rhel.png) | ✅ | ✅ | 🆗 | 💰 | ✅ |
+|![h:30](../images/rocky.svg) | ✅ | ✅ | 🆗 | ✅ | 😬 |
+|**SLES** ![h:40](../images/suse.png) | 🆗 | ✅ | 🆗 | 💰 | ✅ |
+|Open**SUSE** ![h:40](../images/suse.png)| 🆗 | 🆗 | 🆗 | ✅ | ✅ |
+|![h:30](../images/ubuntu.png) | ❌ | 🆗 | ✅ | ✅ | ✅ |
+|![h:40](../images/fedora.png) | 🆗 | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
-### `fedora`, I choose you!
+### ![h:60](../images/fedora.png), I choose you!
 
 ✅ Installed across 14 workstations and 2 servers
 
@@ -75,11 +75,11 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 
 ✅ Enterprise services are well-supported & documented (RHEL)
 
-✅ Desktop apps mostly available (`zoom`, `slack`, `code`)
+✅ Desktop apps mostly available: i.e `zoom`, `slack`, `code`
 
 ✅ Automatic driver & firmware upgrades
 
-✅ Successful upgrades since: **36 -> 37 -> 38 -> 39** *(soon)*
+✅ Successful version updates: **36** ➡️ **37** ➡️ **38** ➡️ **39** (soon)
 
 ---
 <!-- _class: lead -->
@@ -88,7 +88,7 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 
 `clonezilla` isn't the right tool for *Configuration Management*:
 
-> The art of setting and maintaining a machine in a desired state.
+> The art of setting and maintaining a machine in its desired state.
 
 
 
@@ -100,9 +100,11 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 - Now using Ansible, whenever it make sense
     - State based or 'idempotent', rather than action based
         - Example: Write line to file
-    - Replaces monolithic Clonezilla; force us to know our stack -->
+    - Replaces monolithic Clonezilla; force us to know our stack 
+    contrast bash scripts, vs code, etc
+    -->
 
-- `ansible`
+![h:50](../images/ansible_logo2.png) **Ansible** provides a simple, *idempotent* approach
 
 ---
 
@@ -112,14 +114,14 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 
     ```yaml
     workstations:
-    hosts:
-        asiclab001.physik.uni-bonn.de:
-        mac: 54:BF:64:98:25:D4
-        asiclab002.physik.uni-bonn.de:
-        mac: 54:BF:64:98:25:CC
-        asiclab003.physik.uni-bonn.de:
-        mac: 54:BF:64:98:25:BAs
-    ``````
+        hosts:
+            asiclab001.physik.uni-bonn.de:
+            mac: 54:BF:64:98:25:D4
+            asiclab002.physik.uni-bonn.de:
+            mac: 54:BF:64:98:25:CC
+            asiclab003.physik.uni-bonn.de:
+            mac: 54:BF:64:98:25:BAs
+    ```
 ---
 
 4. List desired state in `playbook.yaml`:
@@ -148,11 +150,13 @@ What is the real support for SUSE/Open Suse for EDA?* -->
     [asiclab@penelope ~]$ ansible -K playbook.yaml -i inventory.yaml
     ```
 
-Some additional useful arguments:
+Some additional useful options:
 
-- `--limit` to specific subset of machines
-- Only run playbook tasks with certain `--tag`
-- Be more `--verbose`
+⚙️ Only `--limit` to specific subset of machines
+
+⚙️ Only run playbook tasks with certain `--tag`
+
+⚙️ Be more `--verbose`
 
 ---
 
@@ -185,7 +189,8 @@ on many machines, it's a very userful tool -->
 ---
 
 <!-- _class: lead -->
-# Project 3: Fixing the File Server
+### Project #3: Fixing the File Server
+
 1.  Copied `/tools` and `/users` (~3 days)
 2.  Built `raid6` array with **5** new 16 TB drives:
     - Capacity: 48 TB
@@ -257,50 +262,86 @@ jupiter.physik.uni-bonn.de,faust02.physik.uni-bonn.de,apollo.physik.uni-bonn.de
 
 ---
 
-# Changes: Identity Management
-- User data on `rw` NFS share
-- Ported old LDAP data to modern FreeIPA distribution (LDAP, SSSD, NSS)
-- Data protected using groups `base`, `icdesign`, `tsmc65`, etc
-- Downside: No IdM or NFS = no login or crashing
+<!-- _class: lead -->
 
+### Project #4: Identity Management
 
-Don't just manually add users
+Next, we want user accounts to match our directories:
 
 ```bash
-freeipa command to list users
+[kcaisley@asiclab008]$ ls /users
+dschuechter  kcaisley  krueger  mvogt  skahn  szhang  ...
 ```
 
-Also available on GUI:
-![FreeIPA GUI](img.png)
 
-Then on client client
-```bash
-SHOULD PUT THE ANSIBLE VERSION
-sudo realm join penelope.physik.uni-bonn.de
+Fedora includes a `ldap` + `nss` suite called **FreeIPA** ![h:50](../images/freeipa_logo.png)
+
+
+1. Simply `ipa-server-install`, and browse to machine address:
+
+---
+
+<!-- _class: lead -->
+
+![h:700](../images/freeipa.png)
+
+---
+
+
+2. Connect workstations to server with `ansible`'s `inventory.yaml`:
+
+```yaml
+ipaservers:
+    hosts: faust02.physik.uni-bonn.de
+    vars:
+        ipaadmin_principal: admin
+        ipaadmin_password: NotSoSecretPassword123
+ipaclients:
+    hosts:
+        asiclab001.physik.uni-bonn.de
+        asiclab002.physik.uni-bonn.de
+        asiclab003.physik.uni-bonn.de
 ```
 
-```bash
-$ ls /home
-asiclab
+3. Run `ansible` to cache LDAP users on all machines ✅
+---
 
-$ ls /users
-dschuechter  kcaisley  krueger  mvogt  skahn  szhang  ydieter  ...
-```
+### Project #5: Running EDA tools?
 
-# Changes: EDA Tools
-- Living on the read only NFS mount `tools`, executed on workstation
-    - Must query against FlexLM and SOS to start
-- EDA tools typically only certified on a handful of OSes (RHEL, Suse) [see here](https://www.cadence.com/content/dam/cadence-www/global/en_US/documents/support/2021-2024-cadence-compute-platform-roadmap-v1-public.pdf) 
-- We can't easily use RHEL equivalents with RHEL rebuilds due to CentOS EOL, and RHEL source now being closed
-- Turns out FPGA tools (ISE & Vivado) just work on Fedora
-- In other, what would be hands would be to be able to run the software inside of a complete `OS virtual environment`, so that the tools sees all the right package versions: i.e. we want Containerization
-- There are several choices (Docker, Podman, etc) but the best for our high-performance + GUI needs is `apptainer` best
+<!-- _class: lead -->
 
+EDA tools, are mounted ...
 
 ```bash
 $ ls /tools
 cadence  clio  containers  designs  kits  mentor  synopsys  xilinx ...
 ```
+
+... but some, like `virtuoso`, don't work on Fedora.
+
+---
+
+<!-- - Living on the read only NFS mount `tools`, executed on workstation
+    - Must query against FlexLM and SOS to start
+- EDA tools typically only certified on a handful of OSes (RHEL, Suse) [see here](https://www.cadence.com/content/dam/cadence-www/global/en_US/documents/support/2021-2024-cadence-compute-platform-roadmap-v1-public.pdf) 
+- We can't easily use RHEL equivalents with RHEL rebuilds due to CentOS EOL, and RHEL source now being closed
+- Turns out FPGA tools (ISE & Vivado) just work on Fedora
+- In other, what would be hands would be to be able to run the software inside of a complete `OS virtual environment`, so that the tools sees all the right package versions: i.e. we want Containerization
+- There are several choices (Docker, Podman, etc) but the best for our high-performance + GUI needs is `apptainer` best -->
+
+<!-- _class: lead -->
+
+The solution: 
+
+*OS-level virtual environments* aka **"Containers"**
+
+![h:60](../images/docker.webp) **Docker** is a popular tool, but..
+
+![h:60](../images/apptainer.png) **Apptainer** is designed for high-performance apps with GUI
+
+---
+
+### To build a container:
 
 1. Create a `.def` file, for target application. Add the following:
 
@@ -310,7 +351,7 @@ cadence  clio  containers  designs  kits  mentor  synopsys  xilinx ...
     Bootstrap: docker
     From: centos:7
     ```
-3. Create mount points for external locations; `$HOME` is already done
+3. Create mount points for external locations; `$HOME` is already done:
 
     ```docker
     %setup
@@ -318,30 +359,29 @@ cadence  clio  containers  designs  kits  mentor  synopsys  xilinx ...
     mkdir ${APPTAINER_ROOTFS}/users
     ```
 
-4. List packages to install on top of OS base image
+---
+
+4. List packages to install on top of OS base image:
 
     ```docker
     %post
     yum -y update && yum clean all
-    yum install -y csh tcsh glibc gdb ... etc
+    yum install -y csh tcsh glibc gdb                                          
     ```
 
 5. Compile the container image:
 
-```bash
-[kcaisley@asiclab008]$ sudo apptainer build demo.img demo.def
+    ```bash
+    [kcaisley@asiclab008]$ sudo apptainer build demo.img demo.def                    
 
-INFO:    Starting build...
-Getting image source signatures
-INFO:    Running setup scriptlet
-INFO:    Running post scriptlet
-...
-Complete!
-INFO:    Adding environment to container
-INFO:    Creating SIF file...
-...
-Done!
-```
+    INFO:    Starting build...
+    Getting image source signatures
+    INFO:    Running setup scriptlet
+    INFO:    Running post scriptlet
+    INFO:    Adding environment to container
+    INFO:    Creating SIF file...
+    ✅ Done! 
+    ```
 
 ```bash
 [kcaisley@asiclab008]$ cat /etc/redhat-release
@@ -365,42 +405,79 @@ Copyright (C) 2011 Free Software Foundation, Inc.
 
 ---
 
-# Project #5: Write the docs
+<!-- _backgroundColor: -->
+
+<!-- _class: lead -->
+
+![bg](../images/image0.png)
+
+---
+
+# Project #6: Write the docs
 <!-- _class: lead-->
 
-Decision making framework:
+Tool criteria:
+
+
 
 ### `confluence.atlassian.com` is 📉
 
 ### `.md` + `github.com` is 📈
 
 ---
-<!-- _backgroundColor: white -->
+
 <!-- _class: lead -->
 
-![h:1000](../images/docs1.png)
+![h:700](../images/docs3.png)
 
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: white -->
 
-![h:300](../images/docs2.png)
+![h:700](../images/docs4.png)
 
 ---
-# Remaining Work + Problems
-- 6/20 workstations still on CentOS7
-- 3/5 Servers (Faust02/Jupiter/Juno) still on CentOS7
-- Apollo decommission (is on CentOS 6)
-- faust02 renamed to -> faust
-- How to organize the lab? Still a mess.
+
+
+
+#### Summary & Discussion
+
+![h:50](../images/fedora.png) is a good distro for EDA environments
+
+![h:40](../images/ansible_logo2.png) **Ansible** is useful for workstations (but less so servers)
+
+`raid` + `nfs` can serve `$HOME` directories and tools (with some limits)
+
+![h:40](../images/freeipa_logo.png) **FreeIPA** makes LDAP user management easy
+
+![h:40](../images/apptainer.png) **Apptainer** can run EDA apps on unsupported distros
+
+`.md` in a `git` repo reduces documentation effort
+
+
+<!-- ❌ CentOS 7 reaching EOL with no upgrade path
+
+❌ Drive failures & low storage in file server
+
+❌ Workstations failing to boot & softwares outdated
+
+❌ Config management opaque and slow
+
+❌ Docs not maintain-ed | able -->
+
+
+<!-- # Remaining Work + Problems
+- 6 workstations & 3 servers still on CentOS 7
+- `apollo` decommission, `faust02` rename
+- Complete old LDAP -> new FreeIPA transition
 - Bandwidth of access to NFS shares doesn't work well
 - SSH keys don't work with LDAP users
+- How to organize the still messy ASICLab?
+- Discussion: Are any of these changes good for all of SiLab?
 
-- FreeIPA instance transfer
-- Discussion: Should we port any of these changes elsewhere in the lab
+---
 
 # Up Next
 - In two weeks
-- GUI-based design Cadence and the alternative of Python-based Circuit generators
+- GUI-based design Cadence and the alternative of Python-based Circuit generators -->
 
