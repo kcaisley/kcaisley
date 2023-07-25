@@ -59,10 +59,10 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 |Distribution | Design | Services | Desktop | Pricing | Future |
 |---|:---:|:---:|:---:|:---:|:---:|
 |![h:45](../images/rhel.png) | ✅ | ✅ | 🆗 | 💰 | ✅ |
-|![h:30](../images/rocky.svg) | ✅ | ✅ | 🆗 | ✅ | 😬 |
+|![h:40](../images/rocky.svg) | ✅ | ✅ | 🆗 | ✅ | 😬 |
 |**SLES** ![h:40](../images/suse.png) | 🆗 | ✅ | 🆗 | 💰 | ✅ |
 |Open**SUSE** ![h:40](../images/suse.png)| 🆗 | 🆗 | 🆗 | ✅ | ✅ |
-|![h:30](../images/ubuntu.png) | ❌ | 🆗 | ✅ | ✅ | ✅ |
+|![h:40](../images/ubuntu.png) | ❌ | 🆗 | ✅ | ✅ | ✅ |
 |![h:40](../images/fedora.png) | 🆗 | ✅ | ✅ | ✅ | ✅ |
 
 ---
@@ -405,8 +405,6 @@ Copyright (C) 2011 Free Software Foundation, Inc.
 
 ---
 
-<!-- _backgroundColor: -->
-
 <!-- _class: lead -->
 
 ![bg](../images/image0.png)
@@ -440,7 +438,7 @@ Tool criteria:
 
 
 
-#### Summary & Discussion
+#### Takeaways:
 
 ![h:50](../images/fedora.png) is a good distro for EDA environments
 
@@ -452,32 +450,4 @@ Tool criteria:
 
 ![h:40](../images/apptainer.png) **Apptainer** can run EDA apps on unsupported distros
 
-`.md` in a `git` repo reduces documentation effort
-
-
-<!-- ❌ CentOS 7 reaching EOL with no upgrade path
-
-❌ Drive failures & low storage in file server
-
-❌ Workstations failing to boot & softwares outdated
-
-❌ Config management opaque and slow
-
-❌ Docs not maintain-ed | able -->
-
-
-<!-- # Remaining Work + Problems
-- 6 workstations & 3 servers still on CentOS 7
-- `apollo` decommission, `faust02` rename
-- Complete old LDAP -> new FreeIPA transition
-- Bandwidth of access to NFS shares doesn't work well
-- SSH keys don't work with LDAP users
-- How to organize the still messy ASICLab?
-- Discussion: Are any of these changes good for all of SiLab?
-
----
-
-# Up Next
-- In two weeks
-- GUI-based design Cadence and the alternative of Python-based Circuit generators -->
-
+`.md` in a `git` repo simplifies documentation
