@@ -49,13 +49,6 @@ theme: gaia
 
 ### Project #1: An OS Upgrade
 
-<!-- The first three categories are:
-How much work would need to be invested initially + overtime in running these classes of software? This includes the mindshare, documentation, software availability, and ease software configuration.
-
-*Questions: How much did RHEL cost?
-How much does SLES cost?
-What is the real support for SUSE/Open Suse for EDA?* -->
-
 |Distribution | Design | Services | Desktop | Pricing | Future |
 |---|:---:|:---:|:---:|:---:|:---:|
 |![h:45](../images/rhel.png) | ✅ | ✅ | 🆗 | 💰 | ✅ |
@@ -90,20 +83,6 @@ What is the real support for SUSE/Open Suse for EDA?* -->
 
 > The art of setting and maintaining a machine in its desired state.
 
-
-
-
-<!-- - Now that we have a bunch of fresh machines:
-    - How to take a machine from a fresh install -> desired state (and keep it that way)
-    - Remember the old way was to configure one, and use Clonezilla
-- Used for workstations only (just make root account, enable SSH), as we want the 12+8 machines to be the same
-- Now using Ansible, whenever it make sense
-    - State based or 'idempotent', rather than action based
-        - Example: Write line to file
-    - Replaces monolithic Clonezilla; force us to know our stack 
-    contrast bash scripts, vs code, etc
-    -->
-
 ![h:50](../images/ansible_logo2.png) **Ansible** provides a simple, *idempotent* approach
 
 ---
@@ -122,6 +101,7 @@ What is the real support for SUSE/Open Suse for EDA?* -->
             asiclab003.physik.uni-bonn.de:
             mac: 54:BF:64:98:25:BAs
     ```
+
 ---
 
 4. List desired state in `playbook.yaml`:
@@ -142,6 +122,7 @@ What is the real support for SUSE/Open Suse for EDA?* -->
             - git-lfs
             state: latest
     ```
+
 ---
 
 5. Run playbook on target inventory:
@@ -180,11 +161,6 @@ ok: [asiclab001.physik.uni-bonn.de]
 changed: [asiclab002.physik.uni-bonn.de]
 changed: [asiclab003.physik.uni-bonn.de]
 ```
-
-<!-- - Config managment is a super complex field, and is mostly overboard for our group
-- But in cases where you have a list of repeated, common tasks, that need to be done
-on many machines, it's a very userful tool -->
-
 
 ---
 
@@ -273,7 +249,6 @@ Next, we want user accounts to match our directories:
 dschuechter  kcaisley  krueger  mvogt  skahn  szhang  ...
 ```
 
-
 Fedora includes a `ldap` + `nss` suite called **FreeIPA** ![h:50](../images/freeipa_logo.png)
 
 
@@ -286,7 +261,6 @@ Fedora includes a `ldap` + `nss` suite called **FreeIPA** ![h:50](../images/free
 ![h:700](../images/freeipa.png)
 
 ---
-
 
 2. Connect workstations to server with `ansible`'s `inventory.yaml`:
 
@@ -320,14 +294,6 @@ cadence  clio  containers  designs  kits  mentor  synopsys  xilinx ...
 ... but some, like `virtuoso`, don't work on Fedora.
 
 ---
-
-<!-- - Living on the read only NFS mount `tools`, executed on workstation
-    - Must query against FlexLM and SOS to start
-- EDA tools typically only certified on a handful of OSes (RHEL, Suse) [see here](https://www.cadence.com/content/dam/cadence-www/global/en_US/documents/support/2021-2024-cadence-compute-platform-roadmap-v1-public.pdf) 
-- We can't easily use RHEL equivalents with RHEL rebuilds due to CentOS EOL, and RHEL source now being closed
-- Turns out FPGA tools (ISE & Vivado) just work on Fedora
-- In other, what would be hands would be to be able to run the software inside of a complete `OS virtual environment`, so that the tools sees all the right package versions: i.e. we want Containerization
-- There are several choices (Docker, Podman, etc) but the best for our high-performance + GUI needs is `apptainer` best -->
 
 <!-- _class: lead -->
 
@@ -416,8 +382,6 @@ Copyright (C) 2011 Free Software Foundation, Inc.
 
 Tool criteria:
 
-
-
 ### `confluence.atlassian.com` is 📉
 
 ### `.md` + `github.com` is 📈
@@ -435,8 +399,6 @@ Tool criteria:
 ![h:700](../images/docs4.png)
 
 ---
-
-
 
 #### Takeaways:
 
