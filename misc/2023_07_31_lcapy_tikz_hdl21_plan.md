@@ -61,6 +61,12 @@ When dealing with complex systems, I find a purely simulator-driven methodology 
 
 We need to turn to books like Razavi to understand how to make things like noise and non-linearity tractable when they significantly arise in the systems we're building.
 
+For layout, check this out:
+
+https://github.com/DrPiBlacksmith/icLayoutRender
+
+Alternatively, perhaps there is some export features in Layout21 that supports 
+
 # Game plan
 
 Next I will start building a library of bottom up generators, including flip-flops, gates, and a basic VCO. I need complete testbenches for these, so that I have characterized versions which can be used in higher level design scripts.
