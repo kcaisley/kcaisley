@@ -554,10 +554,123 @@ full_name [TBD]: tsmc28-hdl21
 email [tbd@tbd.com]: kcaisley@uni-bonn.de
 repo_name [ExamplePdk]: Tsmc28
 pypi_name [examplepdk-hdl21]: tsmc28-hdl21
-pdk_name [examplepdk]: tsmc28_hdl21
+pdk_name [examplepdk]: tsmc28       #should have been tsmc28_hdl
 year [2023]: 2022
-vlsir_version [3.0]: 4.0
+vlsir_version [3.0]: 4.0            #should have been 4.0.0
 version [0.1]: 0.1
 ```
 
 Our next project is to fill out the `pdk.py` file.
+
+
+subckt-based models provided by physical PDKs are 'X' elements in a netlist. In spectre it's a `.subcircuit`
+
+And primitive devices are `.model` in Spectre or 'M' elements in more traditional netlists
+
+
+These are the BSIM4 model parameters for SKY130:
+
+```
+    A parameter class representing the MOSFET parameters for the Sky130 technology.
+    These parameters include various geometrical and electrical props of the MOSFET device,
+    such as width, length, number of fingers, drain and source areas, drain and source perimeters,
+    resistive values, spacings, and multipliers.
+
+    Attributes:
+    w (h.Scalar): Width of the MOSFET in PDK Units (µm). Default is 650 * MILLI.
+    l (h.Scalar): Length of the MOSFET in PDK Units (µm). Default is 150 * MILLI.
+    nf (h.Scalar): Number of fingers in the MOSFET. Default is 1.
+    m (h.Scalar): Multiplier for the MOSFET (alias for mult). Default is 1.
+
+    #! CAUTION: The following parameters are not recommended for design use.
+
+    ad (h.Literal): Drain area of the MOSFET. Default is 'int((nf+1)/2) * w/nf * 0.29'.
+    As (h.Literal): Source area of the MOSFET. Default is 'int((nf+2)/2) * w/nf * 0.29'.
+    pd (h.Literal): Drain perimeter of the MOSFET. Default is '2*int((nf+1)/2) * (w/nf + 0.29)'.
+    ps (h.Literal): Source perimeter of the MOSFET. Default is '2*int((nf+2)/2) * (w/nf + 0.29)'.
+    nrd (h.Literal): Drain resistive value of the MOSFET. Default is '0.29 / w'.
+    nrs (h.Literal): Source resistive value of the MOSFET. Default is '0.29 / w'.
+    sa (h.Scalar): Spacing between adjacent gate to drain. Default is 0.
+    sb (h.Scalar): Spacing between adjacent gate to source. Default is 0.
+    sd (h.Scalar): Spacing between adjacent drain to source. Default is 0.
+    mult (h.Scalar): Multiplier for the MOSFET. Default is 1.
+```
+
+
+# Deriving relations between 28nm instance params:
+
+
+
+M0 (vout vin vss vss) nch_lvt_mac l=30n w=100n multi=1 nf=1 sd=100n \
+ad=7.5e-15 as=7.5e-15 pd=350.0n ps=350.0n nrd=2.576626 \
+nrs=2.576626 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
+spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+
+M0 (vout vin vss vss) nch_lvt_mac l=50n w=200n multi=1 nf=1 sd=100n \
+ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 \
+nrs=2.828877 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
+sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
+spa2=100n spa3=100n sap=91.9776n sapb=120.93n spba=121.244n \
+spba1=123.39n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+
+l    50n
+w    200n
+ad
+as
+
+It's hard for me to derive anything from this, as I've changed both the length and width in the same run. I should try again with just width.
+
+
+
+In 28nm, toplevel.scs -> crn28ull_1d8_elk_v1d8_2p2_shrink0d9_embedded_usage.scs (.LIB TTMacro_MOS_MOSCAP) -> cln28ull_1d8_elk_v1d8_3.scs (TT_MOS_CAP)
+
+.... Looking in this file, we find:
+
+# The macro model
+
+```
+**********************************
+*       Macro   model            *
+**********************************
+*.subckt nch_mac n1 n2 n3 n4 l=length w=width multi='1' nf='1' factor='factor_mos' total='multi*nf'
+simulator lang=spectre
+inline subckt nch_mac (n1 n2 n3 n4) 
+nch_mac n1 n2 n3 n4 nch w=w+dw*nf l=ll ad=ad as=as pd=pd ps=ps nrd=nrdd nrs=nrss m=multi nf=nf sa=sa sb=sb sd=sd sca=sca scb=scb scc=scc sc=sc delvto=_delvto mulu0=_mulu0 total=total
+simulator lang=spice
+.param l=length w=width multi='1' nf='1' factor='factor_mos' total='multi*nf'
++_dmcg='3.35e-08' _dmci='3.35e-08' _xw2='2.000000e-08+dxwn_ms' _xl2='5.000000e-09+dxln_ms' _xw= '2.000000e-08' _xl= '5.000000e-09'
++ad='(nf*_dmcg+_dmci)/factor*(wef/factor+_xw2/factor)' as='(nf*_dmcg+_dmci)/factor*(wef/factor+_xw2/factor)'
++pd='2*(nf*_dmcg+_dmci)/factor+(nf+1)*(wef/factor+_xw2/factor)' ps='2*(nf*_dmcg+_dmci)/factor+(nf+1)*(wef/factor+_xw2/factor)'
++nrd='_dmcg/factor/nf/(wef/factor+_xw2/factor)' nrs='_dmcg/factor/nf/(wef/factor+_xw2/factor)'
++sd='2*_dmcg/factor'
++sca='0' scb='0' scc='0'
++dl=0 dw=0 dvt_dfm=0 dw1=0
++sc=0
++sa='saref/factor' sb='sbref/factor'
++sa1=sa sb1=sb sa2=sa sb2=sb sa3=sa sb3=sb sa4=sa sa5=sa sa6=sa sa7=sa
++spa='spavar/factor' spa1=spa  spa2=spa spa3=spa
++sap='pwr((sa4*factor+1e-9)*pwr(spa*factor+1e-9,2),1/3)/factor' 
++spba='sqrt(spbvar-spavar)*sqrt(spa2*factor+0.1*lef)/factor'
++spba1='sqrt((spa2*factor+0.1*lef)*(spbvar-spavar+0.1*lef))/factor'
++sapb='pwr((sa4*factor+1e-9)*pwr(spbvar-spavar,3),0.25)/factor'
++enx='2.0e-5/factor' eny='2.0e-5/factor' eny1=eny enx1=enx eny2=eny
++rex='sqrt((enx1*factor+1e-9)*(4.0e-5-2.0e-5+lef))/factor'
++rey='sqrt((eny2*factor+1e-9)*(4.0e-5-2.0e-5+lef))/factor'
++sodx='0.072e-6/factor' sodxa='sodx' sodxb='sodx'
++sodx1='pwr((sa5*factor+1.0e-7)*sqrt(sodx*factor),2/3)/factor'
++sodx2='pwr((pwr(1e-6,3)+10*pwr(sa6*factor,3))*sqrt(sodx*factor),2/7)/factor'
++sodx4='pwr(pwr(sa7*factor+1.0e-9,3)*sqrt(sodx*factor),2/7)/factor'
++sody='0.4545e-6/factor'
++spmt='spmref/factor' spomt='spomref/factor' spomt1='1/pwr((pwr(spomt*factor,0.5)/pwr(spmt*factor,1)+1e-30),2)/factor'
++spmb='spmref/factor' spomb='spomref/factor' spomb1='1/pwr((pwr(spomb*factor,0.5)/pwr(spmb*factor,1)+1e-30),2)/factor'
++dfm_flag=0
++_conum='max(1,int(((wef/factor-0.027*1e-6*2/factor)-0.036*1e-6/factor)/(0.099*1e-6/factor)+1))' _rc_nrsd='118/1.850000e+01/_conum/nf'
++_delvto=0 _mulu0=1 _ccoflag='ccoflag' _rcoflag='rcoflag' _rgflag='rgflag'
++mismatchflag='mismatchflag_mos' globalflag='globalflag_mos' totalflag='totalflag_mos'
+```
+
+this is by no means the full model (it's about 10k line long), but I think this is the default prameters.
