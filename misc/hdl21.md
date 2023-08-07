@@ -755,205 +755,79 @@ nch_
 nch_lvt
 nch_ulvt
 
+![Alt text](../images/image.png)
 
-# core voltage low vt devices
+![Alt text](../images/sasbsc.png)
 
-## minimum size
-M0 (vout vin vss vss) nch_lvt_mac l=30n w=100n multi=1 nf=1 sd=100n \
-        ad=7.5e-15 as=7.5e-15 pd=350.0n ps=350.0n nrd=2.576626 \
-        nrs=2.576626 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M1 (vout vin vdd vdd) pch_lvt_mac l=30n w=100n multi=1 nf=1 sd=100n \
-        ad=7.5e-15 as=7.5e-15 pd=350.0n ps=350.0n nrd=1.466664 \
-        nrs=1.466664 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+# Fit function for nrd and nrs:
+
+Looks like fit function should be `2.5*math.exp(-0.002*(800-100))`
+![Alt text](../images/image-3.png)
 
 
-## increase width, min length, 1 finger
+# Transistor sizing scheme
 
-M0 (vout vin vss vss) nch_lvt_mac l=30n w=200n multi=1 nf=1 sd=100n \
-        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 \
-        nrs=2.828877 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M1 (vout vin vdd vdd) pch_lvt_mac l=30n w=200n multi=1 nf=1 sd=100n \
-        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 \
-        nrs=1.688887 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=114.444n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-
-## increase length, minimum width, 1 finger
-M1 (vout vin vss vss) nch_lvt_mac l=50n w=100n multi=1 nf=1 sd=100n \
-        ad=7.5e-15 as=7.5e-15 pd=350.0n ps=350.0n nrd=2.576626 \
-        nrs=2.576626 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=120.93n spba=121.244n \
-        spba1=123.39n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M0 (vout vin vdd vdd) pch_lvt_mac l=50n w=100n multi=1 nf=1 sd=100n \
-        ad=7.5e-15 as=7.5e-15 pd=350.0n ps=350.0n nrd=1.466664 \
-        nrs=1.466664 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=120.93n spba=121.244n \
-        spba1=123.39n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-
-## increase length and width, still only one finger
-M1 (vout vin vss vss) nch_lvt_mac l=50n w=200n multi=1 nf=1 sd=100n \
-        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 \
-        nrs=2.828877 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=120.93n spba=121.244n \
-        spba1=123.39n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M0 (vout vin vdd vdd) pch_lvt_mac l=50n w=200n multi=1 nf=1 sd=100n \
-        ad=1.5e-14 as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 \
-        nrs=1.688887 sa=75.0n sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n \
-        sa4=75.0n sb1=75.0n sb2=75.0n sb3=75.0n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=91.9776n sapb=120.93n spba=121.244n \
-        spba1=123.39n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-
-## increased W, min L, 2 fingers
-M1 (vout vin vss vss) nch_lvt_mac l=30n w=200n multi=1 nf=2 sd=100n \
-        ad=1e-14 as=1.5e-14 pd=400n ps=700n nrd=1.653176 nrs=1.653176 \
-        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
-        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
-        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
-        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M0 (vout vin vdd vdd) pch_lvt_mac l=30n w=200n multi=1 nf=2 sd=100n \
-        ad=1e-14 as=1.5e-14 pd=400n ps=700n nrd=0.811627 nrs=0.811627 \
-        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
-        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
-        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
-        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-
-## increased W and L, 2 fingers
-M1 (vout vin vss vss) nch_lvt_mac l=50n w=200n multi=1 nf=2 sd=100n \
-        ad=1e-14 as=1.5e-14 pd=400n ps=700n nrd=1.653176 nrs=1.653176 \
-        sa=117.857n sb=117.857n sa1=94.4183n sa2=116.899n sa3=178.199n \
-        sa4=112.776n sb1=94.4183n sb2=116.899n sb3=178.199n spa=100n \
-        spa1=100n spa2=100n spa3=100n sap=105.202n sapb=135.36n \
-        spba=123.243n spba1=125.36n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M0 (vout vin vdd vdd) pch_lvt_mac l=50n w=200n multi=1 nf=2 sd=100n \
-        ad=1e-14 as=1.5e-14 pd=400n ps=700n nrd=0.811627 nrs=0.811627 \
-        sa=117.857n sb=117.857n sa1=94.4183n sa2=116.899n sa3=178.199n \
-        sa4=112.776n sb1=94.4183n sb2=116.899n sb3=178.199n spa=100n \
-        spa1=100n spa2=100n spa3=100n sap=105.202n sapb=135.36n \
-        spba=123.243n spba1=125.36n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+Example of simulations and sizing of a 28nm oscillator:
+[](https://www.hindawi.com/journals/tswj/2014/421321/)
 
 
+![Alt text](../images/image-1.png)
+
+We'll go with 50nm length devices
 
 
-# Core voltage standard vt devices
+![Alt text](../images/sizing_example2.png)
 
-## minimum size
-M0 (vout vin vdd vdd) pch_mac l=30n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
-        as=7.5e-15 pd=350.0n ps=350.0n nrd=1.466664 nrs=1.466664 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=30n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
-        as=7.5e-15 pd=350.0n ps=350.0n nrd=2.576626 nrs=2.576626 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
+From my thesis:
 
-## increase width, but only one finger, minimum length
-M0 (vout vin vdd vdd) pch_mac l=30n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
-        as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 nrs=1.688887 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=30n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
-        as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 nrs=2.828877 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=114.444n spba=115.715n spba1=117.043n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
+> In particular, minimum size devices should be avoided; device widths should be kept larger than 200 nm and length to 40 nm or more. Particularly long devices lengths of 1 μm or more should also be avoided.
 
-## increase length, minimum width, 1 finger
-M0 (vout vin vdd vdd) pch_mac l=50n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
-        as=7.5e-15 pd=350.0n ps=350.0n nrd=1.466664 nrs=1.466664 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=120.93n spba=121.244n spba1=123.39n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=50n w=100n multi=1 nf=1 sd=100n ad=7.5e-15 \
-        as=7.5e-15 pd=350.0n ps=350.0n nrd=2.576626 nrs=2.576626 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=120.93n spba=121.244n spba1=123.39n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
+So it looks like for things like oscillators, I could get device widths up to 10-20 micrometers, and lengths from 40-200nm.
 
-## increase length and width, still only one finger
-M0 (vout vin vdd vdd) pch_mac l=50n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
-        as=1.5e-14 pd=550.0n ps=550.0n nrd=1.688887 nrs=1.688887 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=120.93n spba=121.244n spba1=123.39n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=50n w=200n multi=1 nf=1 sd=100n ad=1.5e-14 \
-        as=1.5e-14 pd=550.0n ps=550.0n nrd=2.828877 nrs=2.828877 sa=75.0n \
-        sb=75.0n sa1=75.0n sa2=75.0n sa3=75.0n sa4=75.0n sb1=75.0n \
-        sb2=75.0n sb3=75.0n spa=100n spa1=100n spa2=100n spa3=100n \
-        sap=91.9776n sapb=120.93n spba=121.244n spba1=123.39n dfm_flag=0 \
-        spmt=1.11111e+15 spomt=0 spomt1=1.11111e+60 spmb=1.11111e+15 \
-        spomb=0 spomb1=1.11111e+60
+In finfets, increasing the number of fin is the same thing as making the device wider per finger. So fins and fingers determines total width.
+
+In most designs, it seems they have fixed length, and finger width, and all they tune in the number of fingers, i.e. total width. 
+
+I think I may be able to get away with a L=50n, but I'm not sure what I should choose for my unit finger width? I'm considering 100n, 200n, and 250n and my finger width.
+
+Hakhamaneshi's thesis has some tidbits.
 
 
-## increased W, min L, 2 fingers
-M0 (vout vin vdd vdd) pch_mac l=30n w=200n multi=1 nf=2 sd=100n ad=1e-14 \
-        as=1.5e-14 pd=400n ps=700n nrd=0.811627 nrs=0.811627 sa=112.742n \
-        sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n sa4=110.059n \
-        sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=104.359n sapb=125.813n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=30n w=200n multi=1 nf=2 sd=100n ad=1e-14 \
-        as=1.5e-14 pd=400n ps=700n nrd=1.653176 nrs=1.653176 sa=112.742n \
-        sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n sa4=110.059n \
-        sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=104.359n sapb=125.813n spba=115.715n \
-        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+### from laygo2 notes
 
-## increased W and L, 2 fingers
-M0 (vout vin vdd vdd) pch_mac l=50n w=200n multi=1 nf=2 sd=100n ad=1e-14 \
-        as=1.5e-14 pd=400n ps=700n nrd=0.811627 nrs=0.811627 sa=117.857n \
-        sb=117.857n sa1=94.4183n sa2=116.899n sa3=178.199n sa4=112.776n \
-        sb1=94.4183n sb2=116.899n sb3=178.199n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=105.202n sapb=135.36n spba=123.243n \
-        spba1=125.36n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
-M1 (vout vin vss vss) nch_mac l=50n w=200n multi=1 nf=2 sd=100n ad=1e-14 \
-        as=1.5e-14 pd=400n ps=700n nrd=1.653176 nrs=1.653176 sa=117.857n \
-        sb=117.857n sa1=94.4183n sa2=116.899n sa3=178.199n sa4=112.776n \
-        sb1=94.4183n sb2=116.899n sb3=178.199n spa=100n spa1=100n \
-        spa2=100n spa3=100n sap=105.202n sapb=135.36n spba=123.243n \
-        spba1=125.36n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
-        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+- All placement should rely on the PR boundary
+
+- X axis: base on poly pitch
+
+- Y axis: multiple of fin grid (in mine, this is finger width). This is equal to the height of the unit transistor.
+
+![Alt text](../images/image-3.png)
+
+Quantized routing grid and unit transistor:
+
+- M1/M2 are used to connect transistors (generally non-uniform)
+- TR (transistor) sizing: quantized to unit transistor (4 fins suggested)
+
+![Alt text](../images/image-4.png)
+
+Transistors are aranged in the following manner:
+
+- Core cell: active device, taps above/below, dummy fill on ends
+- Row boundary cell: poly pattern rules, isolating blocks
+- Local boundary cell: between core devices
+- Spacing cells, just for uniform placement and density rules
+
+Ah! We see in the image below, the core NMOS cell is `nf=2`.
+
+![Alt text](../images/image-2.png)
+
+Other devices
+– Define pin(or port) to be compatible with routing grid
+– Metal-Oxide-Metal (MOM) cap
+– Thick gate (IO) TR and diode for BGR generator
+
+![Alt text](../images/other_devices.png)
+
+# But now I should look at BAG2 and BAG3 XBase generators:
+
+I need to spend more time studying the two slide decks that are open.z
