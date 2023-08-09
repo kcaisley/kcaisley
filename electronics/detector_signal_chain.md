@@ -30,7 +30,7 @@ Basically, you want a high detection probability (low noise, )
 
 There is a correspondence/connection between:
 
-**Detector**: granularity, ENC, detection efficiency, timing resolution, timewalk, power per mm^2
+**Detector**: granularity, ENC, detection efficiency, timing resolution, timewalk, power per cm^2
 
 **Imagers**: Noise Equivalent Quanta, Detective Quantum Efficiency, and Quantum Effienciy.
 
@@ -145,7 +145,7 @@ I should check who worked on what, like Kunis, Kostas, Piotr, Tomek?
 
 * What exactly is the punch through effect?
 
-* What is the power consumption per pixel and per unit area for RD53? How does the width of the sensor stack compare?
+* What is the power consumption per pixel and per cm^2 for RD53? How does the width of the sensor stack compare?
 
 * Christian is testing...if the epi layer is fully depleting?
 
@@ -194,22 +194,74 @@ Probably Assuming analysis on a certain recovery time for the pixel and on a  ce
 * 4uA per pixel in analog circuits
 * <1 % hit loss from in pixel pile up
 * noise occupancy per pixel < 10^-6, for 50fF load, in a 25ns interval
-* <500mA/cm^2, so 1 W/cm^2 at 2V supply
-* min theshold of 600e- and min in-time (<25ns timewalk) threshold of 1200e-.
+* <500mA/cm^2 limit, so 0.6 W/cm^2 if it were at 1.2V supply
+* min threshold of 600e- and min in-time (<25ns timewalk) threshold of 1200e-.
 * all these specs must be met at 500Mrad dose
 
 signal to noise ratio: quantization noise and jitter/noise can be combined into one measurement
 
 pixel pitch/area may also be able to be combined into this parameter too, as the spacial resolution of the pixels ultimately just allows for
 
+It looks like, depending on the mode of operation, about 600e- of resolution and >= 4 bits of resolution are needed.
+
+At a 600e- input threshold, 99% of hits are detected, within 25ns, and 
+
+At 900e- threshold, 50% of hits are detected in any time, and at (+300e-) 1200e- 50% of hits are detected within 25ns. Only 1% of hits are allowed to be lost due to pileup. And with this threshold, only <10-6 of hits can be false positive.
+
+10^-6 probability of false hit corresponds to a Gaussian tail beyond 4.75σ, with a 600e- threshold this gives us an input-referred ENC << 126e-. (<< as threshold dispersion across the chip add in quadrature). So think like 70e- ENC.
+
+Total recovery time is <1 us.
+
+Assuming 25ns bunch crossing, we have a 40 MHz operating frequency. The TOT speed is 40 or 80 MHz, and has a 4b readout.
+
+Let's assume a high-resolution TDC (TOT or TOA) in-pixel; ideally on the order of 10-40ps RMS. It should be the input jitter of the signal will be around 50ps RMS. 
+
+
+
+The TOT was designed with a 4-bit counter (16 total counts). By setting the counter rate (40 MHZ) and return-to-baseline dissipator (respecting pile-up limits) we can tune how much input ke- corresponds to which bin. So for the first 8 counts, we want to reach 12ke-, for a gain of 1.5ke- per LSB in this region. For counts 8-15 though,  (above 12ke-) the gain increase by 4X, to 6ke- per LSB. 1.5×8+6×8 = 60ke total dynamic range, therefore.
+
+With this system, the quantization noise LSB/2 = 750 mV (midrise quantizer) is going to dominate the input noise. The input noise is like ~100e?
+
+But remember the system isn't just a charge and TOA digitized, it also needs to reject false noise hits below a certain threshold. This is unusual from a circuit perspective.
+
+In other terms
+
+# making sense of SNR and ENOB
+
+SNR of a signal make sense. But for a data converter, you need to essentially fix an input signal level for which you desire to measure. For example, if you have a TDC where you can add as many delay stages as you want, if you don't scale a signal, having more stages won't help, and if you do scale (amplify it), you will reduce the dynamic range while 
+
+There is a reason dynamic range is not the most important spec to quote for a data converter, and that's because dynamic range is relatively easy to increase. For a TDC, for example, you can just add more stages. What doesn't come cheaply is LSB. 
+
+> A converter’s differential linearity must be <1 LSB regardless of the specified resolution. Also, a converter’s integral linearity determines its distortion performance, so converters with higher resolution can achieve higher SFDR.
+
+In SNR, you are computing a relative ratio; it's unitless. Therefore, 
+
+
+# Explainer for in-time threshold
+
+In-time threshold, means a hit which can be correctly assigned to the correct 25ns bunch id. Hits close to the threshold may take a long time to be detected.
+
+![Alt text](image-2.png)
+
+In this example, a signal will be detected with 50% probability if it is 3000e-, but assuming any time delay is permissable. If we instead want to have that within 20ns, we find the 50% detection probability at that point is 1.7ke- (overdrive) higher at 4700e- at the *in-time threshold.*
+
+
+
+
+
 ## questions:
 
 * are the values for threshold (i.e. 600e-) input referred?
 * why is power limited to 0.5-1.0W per cm^2?   A: Because of the 
 
+### Some calculations from the above
+
+In a 1cm^2 area we have 40,000 pixels w/ 50um pitch
+Therefore, given total power of 0.6 W/cm^2, so we can spend around 0.6W/40000 = 15 uW per 'pixel'.
+Of course, the pixel has some digital periphery, and power is lower when there is no hit. So assuming that only 5uW can be consumed by the analog, 
 
 
-And equations: $f(x)=x^2$
+
 
 Power:
 
@@ -219,10 +271,6 @@ Power:
 
 Actually no, the power consumption should not simply be blindly reduced. Power consumption is a budget for performance! So assume a constant maximum power budget?, and simply optimize the best ways to spend this budget? Or perhaps increasing the decreasing power budget does actually improve performance, because mass matters?
 
-
-```julia, results="hidden"
-f = (x) -> x^2
-```
 
 Deadtime? Is there any need to have pixel dead times less than 25ns in the application of the LHC? 
 
