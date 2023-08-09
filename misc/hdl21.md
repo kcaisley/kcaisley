@@ -830,4 +830,5 @@ Other devices
 
 # But now I should look at BAG2 and BAG3 XBase generators:
 
-I need to spend more time studying the two slide decks that are open.z
+I need to spend more time studying the two slide decks that are open.
+
