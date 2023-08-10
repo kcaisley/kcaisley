@@ -216,26 +216,13 @@ Assuming 25ns bunch crossing, we have a 40 MHz operating frequency. The TOT spee
 
 Let's assume a high-resolution TDC (TOT or TOA) in-pixel; ideally on the order of 10-40ps RMS. It should be the input jitter of the signal will be around 50ps RMS. 
 
-
+> Hit rate: up to 3 GHz/cm^2 (75 kHz average pixel hit rate). This is less useful for considering pileup, but is good for knowing digital link capacity needed.
 
 The TOT was designed with a 4-bit counter (16 total counts). By setting the counter rate (40 MHZ) and return-to-baseline dissipator (respecting pile-up limits) we can tune how much input ke- corresponds to which bin. So for the first 8 counts, we want to reach 12ke-, for a gain of 1.5ke- per LSB in this region. For counts 8-15 though,  (above 12ke-) the gain increase by 4X, to 6ke- per LSB. 1.5×8+6×8 = 60ke total dynamic range, therefore.
 
-With this system, the quantization noise LSB/2 = 750 mV (midrise quantizer) is going to dominate the input noise. The input noise is like ~100e?
+With this system, the quantization noise LSB/2 = 750 e- (midrise quantizer) is going to dominate the input noise. The input noise is like ~100e?
 
 But remember the system isn't just a charge and TOA digitized, it also needs to reject false noise hits below a certain threshold. This is unusual from a circuit perspective.
-
-In other terms
-
-# making sense of SNR and ENOB
-
-SNR of a signal make sense. But for a data converter, you need to essentially fix an input signal level for which you desire to measure. For example, if you have a TDC where you can add as many delay stages as you want, if you don't scale a signal, having more stages won't help, and if you do scale (amplify it), you will reduce the dynamic range while 
-
-There is a reason dynamic range is not the most important spec to quote for a data converter, and that's because dynamic range is relatively easy to increase. For a TDC, for example, you can just add more stages. What doesn't come cheaply is LSB. 
-
-> A converter’s differential linearity must be <1 LSB regardless of the specified resolution. Also, a converter’s integral linearity determines its distortion performance, so converters with higher resolution can achieve higher SFDR.
-
-In SNR, you are computing a relative ratio; it's unitless. Therefore, 
-
 
 # Explainer for in-time threshold
 
@@ -244,10 +231,6 @@ In-time threshold, means a hit which can be correctly assigned to the correct 25
 ![Alt text](image-2.png)
 
 In this example, a signal will be detected with 50% probability if it is 3000e-, but assuming any time delay is permissable. If we instead want to have that within 20ns, we find the 50% detection probability at that point is 1.7ke- (overdrive) higher at 4700e- at the *in-time threshold.*
-
-
-
-
 
 ## questions:
 
@@ -260,10 +243,7 @@ In a 1cm^2 area we have 40,000 pixels w/ 50um pitch
 Therefore, given total power of 0.6 W/cm^2, so we can spend around 0.6W/40000 = 15 uW per 'pixel'.
 Of course, the pixel has some digital periphery, and power is lower when there is no hit. So assuming that only 5uW can be consumed by the analog, 
 
-
-
-
-Power:
+## Power, cont:
 
 * Pixel energy consumption inactive baseline when no in-pixel hit arrives
 
@@ -295,6 +275,45 @@ Image/video sensors are a example of the latter, as the signal of interest is ge
 What does sampling theory tell us about pulse signals through, localized in time. Are we still faithfully trying to 'recreate' that waveform? Perhaps not.
 
 
+# Comparison of RD53 Front-ends:
+
+https://agenda.infn.it/event/22737/contributions/113830/attachments/72078/90767/2020-04-20_RD53_frontEnds.pdf
+
+https://www.mdpi.com/2079-9292/12/9/2054
+
+https://indico.cern.ch/event/806731/contributions/3503810/attachments/1926267/3188644/vertex_gaioni.pdf
+
+# Things I'm interested in exploring:
+
+The pixel detector system is interesting.
+- It's asynchronously triggered, but needs to be well calibrated across an entire array.
+- It doesn't integrate hits over time, but instead need to have single hit sensitivity
+- Again, it's asynchronously triggered, but has a 25ns window in which it is free to digitize the signal. This means a signal *can* be freely expanded into this window.
+- The initial threshold of ~600e needs to have a high precision, in that input noise referred noise must be < ~75e (<10^-6 errors, accounting for noise and static/dynamic threshold dispersion). Does it make sense to talk about a SNR here? What about a resolution or a LSB? It's a 1-bit quantizer?
+- But then the subsequent conversions of higher amplitudes are of a LSB of around 1.5 ke- with 5-6 bits. What's the noise spec here? I think the SNR is like 35dB?
+- And furthermore, there is a potentially a TOA digitization which is being maybe desired. This would have maybe a 1-2ns dynamic range. The input jitter would be arond 50ps RMS, with the TDC capable of around 20ps RMS.
+
+*Therefore:*
+- Can a VCO be used as the initial integrator? Let's examine it's transfer function. It's a leaky integrator, and can have a very high gain.
+- If we still need a miller capacitance, perhaps we can still use the digital VCO output to create one?
+- Can we reuse the high precision discriminator (1-bit quantizer) for subsequent digitization. I'm thinking something like an asynchronous delta-signal modulator. Measure change in input signal in unit interval, digitize with 1-bit quantizer, then feed this back to input to
+  - digitally subtract from VCO output, if using that
+  - or use DAC to convert to voltage, and analogly subtract from CSE output (which is buffered)
+
+
+# making sense of SNR and ENOB
+
+For ADCs, it doesn't make much sense to specify the dynamic range often, as an input signal that is out of range can simply be amplified to fit within the full scale input range. (This amplification has some linearity(distortion) and noise penalty of course.)
+
+Therefore we often compare converters at some nominal input signal range.
+
+SNR of a signal make sense. But for a data converter, you need to essentially fix an input signal level for which you desire to measure. For example, if you have a TDC where you can add as many delay stages as you want, if you don't scale a signal, having more stages won't help, and if you do scale (amplify it), you will reduce the dynamic range while 
+
+There is a reason dynamic range is not the most important spec to quote for a data converter, and that's because dynamic range is relatively easy to increase. For a TDC, for example, you can just add more stages. What doesn't come cheaply is LSB. 
+
+> A converter’s differential linearity must be <1 LSB regardless of the specified resolution. Also, a converter’s integral linearity determines its distortion performance, so converters with higher resolution can achieve higher SFDR.
+
+In SNR, you are computing a relative ratio; it's unitless. Therefore, 
 
 
 
