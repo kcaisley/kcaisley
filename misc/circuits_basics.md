@@ -7,7 +7,7 @@ The circuit we would use to describe this is a voltage source connected across a
 
 Consdier what would happen if you look precisely at the voltage across the battery, and then looked at the voltage across the bulb? Are they exactly the same? This exposes the face that perhaps we shouldn't just assume our system to be a single voltage source and a single resistor. You begin to add in 'parasitic devices'.
 
-Consider what would happen if you began to rapidly change the voltage at the battery back and forth. This would point to the face that the system is linear, but that it must be described by differential equations.
+Consider what would happen if you began to rapidly change the voltage at the battery back and forth. This would point to the fact that the system is linear, but that it must be described by differential equations.
 
 Consider what would happen if you replaced the incandescant light bulb with a LED light bulb. Could you still model it with a resistor? If you begin changing the voltage across the device would indicate that the system is not linear! If you increase the voltage from the battery 
 

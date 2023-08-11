@@ -16,3 +16,27 @@ I have a privelage of doing a PhD in this field, I should take advantage of it w
 
 
 I will build out the analog/mixed-signal design portions with problems, from lecture notes, in tandem with doing PLL design.
+
+
+# addendum, august 11:
+
+I want to start putting more of my knowledge in a place where I get credit for it.
+
+The two places are:
+
+My person gitrepo:
+
+My group's gitrepo, either public or private, depending
+
+
+Some knowledge, like for example containers for running virtuoso, are something I would like to have both in my personal website
+but also in my group asiclab repo. Would I separate the two into a portion that is useful externally, vs the stuff that is only relevant to asiclab?
+
+Another element which would be difficult is Hdl21 PDK installs. A Hdl21 PDK package for 28nm won't include the PDK itself, but it also can contain some proprietary data. But it should be placed in the group github, as it could be useful to others.
+
+
+- ansible playbook for asiclab: internally useful, not externally useful, not proprietary, not on website
+- NFS setup notes: internally useful, not externally useful, not proprietary, not on website
+- git, dnf, misc shell commands: internally useful, not externally userful, not proprietary, not on website
+- containers for virtuoso and synopsys: externally useful, internally useful, not proprietary, could go on website?
+- 

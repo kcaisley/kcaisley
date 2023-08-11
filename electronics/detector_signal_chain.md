@@ -41,8 +41,6 @@ There is a correspondence/connection between:
 * http://www.hit.bme.hu/~papay/edu/DSP/adc2000.htm
 * https://www.youtube.com/watch?v=doTHd0W9QhA
 
-
-
 In general, arbitrarily high resolution is achievable up to the noise floor, at the maximum single stage speed can be achieved, if you if you are willing to spend more power via pipelines. Put differently, pipe-lining is a way to improve resolution, at a fixed speed, by spending more power. It is limited by device noise, most probably dominated by the those in the first stage. 
 
 Double sampling, flat-field correction, dark frame subtration, noise shaping, and oversampling are a way to reduce noise, by taking subsequent measurements. Correlated double sample is primarily to fixed each pixel's offset (although it does a bit of noise shaping), just as flat-field correction and dark frame subtraction.
@@ -286,6 +284,7 @@ https://indico.cern.ch/event/806731/contributions/3503810/attachments/1926267/31
 # Things I'm interested in exploring:
 
 The pixel detector system is interesting.
+
 - It's asynchronously triggered, but needs to be well calibrated across an entire array.
 - It doesn't integrate hits over time, but instead need to have single hit sensitivity
 - Again, it's asynchronously triggered, but has a 25ns window in which it is free to digitize the signal. This means a signal *can* be freely expanded into this window.
@@ -294,12 +293,12 @@ The pixel detector system is interesting.
 - And furthermore, there is a potentially a TOA digitization which is being maybe desired. This would have maybe a 1-2ns dynamic range. The input jitter would be arond 50ps RMS, with the TDC capable of around 20ps RMS.
 
 *Therefore:*
+
 - Can a VCO be used as the initial integrator? Let's examine it's transfer function. It's a leaky integrator, and can have a very high gain.
 - If we still need a miller capacitance, perhaps we can still use the digital VCO output to create one?
 - Can we reuse the high precision discriminator (1-bit quantizer) for subsequent digitization. I'm thinking something like an asynchronous delta-signal modulator. Measure change in input signal in unit interval, digitize with 1-bit quantizer, then feed this back to input to
   - digitally subtract from VCO output, if using that
   - or use DAC to convert to voltage, and analogly subtract from CSE output (which is buffered)
-
 
 # making sense of SNR and ENOB
 

@@ -1,8 +1,3 @@
----
-created: 2023-05-14T10:25:34+02:00
-modified: 2023-05-15T13:54:38+02:00
----
-
 # Lesson: A taxonomy of Electronics
 
 Start with questions. How many of you:

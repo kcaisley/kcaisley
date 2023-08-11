@@ -26,11 +26,3 @@ meld is great for diffing
 
 * command library from PyPI: 3rd party so don't want to use it
 * os module: deprecated
-
-
-
-
-
-
-
-
