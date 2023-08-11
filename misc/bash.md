@@ -95,5 +95,6 @@ locate
 updatedb
 grok
 alias cp to cp -iv
+ldd
 
 nohup (prevents shell exit from 'hang up' the processes aka killing the processes it started)
