@@ -16,8 +16,6 @@ $ rsync -r /Users/kcaisley/export/website/site/ kcaisley_kcaisley@ssh.phx.nearly
 ```
 
 
-
-
 # Slide Generation
 
 
