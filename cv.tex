@@ -1,0 +1,189 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+%\usepackage[empty]{fullpage}
+\usepackage[margin=1in]{geometry} %instead of above command
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{cite}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeParagraph}[1]{
+    \begin{itemize}[leftmargin=0.2in, rightmargin=0.4in, label={}]
+      \small{\item{{#1}}}
+    \end{itemize}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Kennedy Caisley} \\ \vspace{1pt}
+    \small +49 163 1507498 $|$ \href{mailto:kcaisley@uni-bonn.de}{\underline{kcaisley@uni-bonn.de}}
+    $|$ \href{www.kennedycaisley.com}{\underline{www.kennedycaisley.com}}
+\end{center}
+
+%-----------EXPERIENCE-----------
+\section{Appointments}
+  \resumeSubHeadingListStart
+
+  \resumeSubheading
+    {Graduate Research Associate}{Aug. 2022 -- Present}
+    {Univeristy of Bonn}{Bonn, Germany}
+    \resumeParagraph{
+    Design of mixed-signal blocks (PLL, TDC, AFE) in 28 nm \& 65 nm for detector readout ICs.
+    Emphasis on design automation using open source packages (Python \& C++).
+    Installation and management of PDK data and ASIC, TCAD, PCB, and FPGA design tools (Cadence, Mentor, Synopsys, Xilinx).
+    Administration of IT infrastructure (Fedora \& CentOS) including NFS file servers, LDAP user accounts, and EDA license servers.
+    }
+  
+  \resumeSubheading
+    {ASIC Design Intern}{May 2021 -- Dec. 2022}
+    {Lawrence Berkeley National Laboratory}{Berkeley, CA, United States}
+    \resumeParagraph{
+    Designed a radiation-hard monolithic test bench for characterizing charge-sensitive analog front ends in 28 nm bulk CMOS.
+    Test bench includes a programmable charge-injection circuit and 10 ps RMS precision time-to-digital converter.
+    Top-level chip assembled as system with 28 channels, verified with Calibre DRC/LVS.
+    Full-custom design, including a set of logic standard cells and low-power analog cells.
+    }
+
+  \resumeSubheading
+    {Graduate Research Associate}{Aug. 2019 -- May. 2021}
+    {Ohio State University}{Columbus, OH, United States}
+    \resumeParagraph{
+    Assisted in design, layout, and testing of 65 nm readout IC for pCVD diamond detectors, for use in Beam Conditions Monitor (BCM) of ATLAS experiment at CERN.  
+    Designed differential time-over-threshold circuit. Characterized effect of detector capacitance on noise in front-end charge sensitive amplifier.
+    Integrated multiple circuit blocks and performed top-level verification of analog subsystem using Calibre DRC/LVS.
+    }
+
+  \resumeSubheading
+    {Hardware Engineering Intern}{Oct. 2018 -- May 2019}
+    {Schweitzer Engineering Laboratories, Inc.}{Pullman, WA, United States}
+    \resumeParagraph{
+    Designed board-level industrial communications equipment for use in high-noise and high-radiation environments.
+    Contributed circuit designs including zero-crossing detectors, switching power supplies, ESD protection, and drivers for off-board coaxial and twisted-pair links.
+    Performed passive component tolerance analyses, trace impedance analyses/simulations, and EMC testing (emissions and susceptibility).
+    }
+
+  \resumeSubheading
+    {System Modeling Intern}{Jun. 2017 -- Aug. 2017}
+    {ISO New England, Inc.}{Holyoke, MA, United States}
+    \resumeParagraph{
+    Developed models for Newton-Raphson numerical analysis of the New England power grid, in Python.
+    Conducted power-flow studies for long-term load forecasting, examined impact of no-fault and breaker-open contingencies, and wrote scripts to automate reporting.
+    }
+
+  \resumeSubHeadingListEnd
+
+%-----------PUBLICATIONS-----------
+\section{Publications}
+  \resumeParagraph{M. Mansour, S. Smith, H. Kagan, \textbf{K. Caisley}, B. Tar; A. Naguib; A. Gorišek; B. Hiti; M. Mali, M. Mikuž, et al. A Fast, Low Jitter, and Low Time-Walk Multi-Channel Front-End IC for Diamond and Silicon Radiation Detectors. \textit{IEEE Transactions on Nuclear Science}. 2023. DOI: \href{https://doi.org/10.1109/tns.2023.3283220}{\underline{10.1109/TNS.2023.3283220}}.
+  }
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+
+  \resumeSubheading
+    {University of Bonn}{Aug. 2022 -- In Progress}
+    {PhD in Physics}{Bonn, Germany}
+    \vspace{5pt}
+
+  \resumeSubheading
+    {Ohio State University}{Aug. 2019 -- Jan. 2022}
+    {Master's in Electrical Engineering}{Columbus, OH, United States}
+    \vspace{5pt}
+
+  \resumeSubheading
+    {University of Idaho}{Aug. 2015 -- May 2019}
+    {Bachelor's in Electrical Engineering}{Moscow, ID, United States}
+    \vspace{5pt}
+
+  \resumeSubHeadingListEnd
+
+\end{document}
