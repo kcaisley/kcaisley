@@ -1,0 +1,194 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeParagraph}[1]{
+    \begin{itemize}[leftmargin=0.2in, rightmargin=0.4in, label={}]
+      \small{\item{{#1}}}
+    \end{itemize}
+}
+
+\newcommand{\resumeParagraphAlt}[1]{
+    \begin{itemize}[leftmargin=0.2in, rightmargin=0.4in, label={}]
+      \small{\item{{#1}}}
+    \end{itemize}\vspace{-7pt}
+}
+
+
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+
+\newcommand{\resumePubs}[2]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Lise Minaud} \\ \vspace{8pt}
+    \small +33(0)641682417 $|$ \href{mailto:lise.minaud@gmail.com}{\underline{lise.minaud@gmail.com}}
+$|$ \href{https://www.linkedin.com/in/lise-minaud-0a8524188}{\underline{linkedin.com/in/lise-minaud}}
+\end{center}
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Master's of Bioinformatics \& Biostatistics}{Sep. 2018 -- Sep. 2020}
+      {Université Paris-Saclay}{Orsay, France}
+
+    \resumeParagraph{ \underline{Coursework}: Biological Image Analysis, Biological Dynamic Systems, Database Optimization, Comparative Genomics, Next Generation Sequencing, Bio-statistics, Epidemiology, RNA Bioinformatics, Web Programming}
+
+    \resumeSubheading
+      {Bachelor's of Biology}{Sep. 2015 -- Jul. 2018}
+      {Sorbonne Université}{Paris, France}
+
+    \resumeParagraph{ \underline{Coursework}: Molecular Biology, Biochemistry, Cellular Biology and Development, Genetic, Physiology of Neuronal and Hormonal Signaling, Model Organisms in Developmental Biology, Ethology and Sociobiology}
+
+    \resumeSubheading
+      {Bachelor's of Law}{Sep. 2015 -- Jul. 2018}
+      {Université Panthéon-Assas}{Paris, France}
+      
+   \resumeSubheading
+      {Erasmus Exchange}{Sep. 2017 -- Jun. 2018}
+      {Charles University}{Prague, Czechia}
+      
+  \resumeSubHeadingListEnd
+  
+\section{Research Experience}
+  \resumeSubHeadingListStart
+      \resumeSubheading
+	{Data Scientist}{Apr. 2020 -- May 2023}
+	{Institute for Neurodegenerative Diseases, University of California San Francisco}{San Francisco, USA}
+       %\resumeSubheading{Advised by Dr. Michael Keiser - %\href{https://keiserlab.org}{\underline{Keiser lab}}}{}{}{}
+      \resumeParagraphAlt{Advised by Dr. Michael Keiser - \href{https://keiserlab.org}{\underline{Keiser lab}}
+      }
+        \begin{itemize}[topsep=0pt]\small
+            \item Trained convolutional neural network (w/ PyTorch) to automate the identification of Cerebral Amyloid Angiopathy vessel subtypes, replicating human expert performance with high precision (AUPRC = 0.88-0.90).
+            \item Developed whole slide image processing pipeline for histopathological analysis.
+            \item Deployed web application to collect labeled data from neuropathologists (120,000 annotations). 
+        \end{itemize}
+     %}
+          \resumeSubheading
+      {Bioinformatic Research Intern}{Jul. 2019 -- Aug. 2019}
+      {CEA Institute of Cellular and Molecular Radiobiology}{Fontenay-aux-Roses, France}
+      \resumeParagraphAlt{Advised by Dr. Annette Schmitz and Dr. Jan Baijer
+      }
+      \begin{itemize}[topsep=0pt]\small
+            \item Analyzed RNA-seq data from breast cancer patients using Next Generation Sequencing methods.
+            \item Extracted SNP biomarkers of radiotherapy patients to discriminate genes associated with radiosensitivity.
+            \item Utilized SAMtool and BEDtool packages in R lang.
+      \end{itemize}
+      %}
+   \resumeSubHeadingListEnd 
+ 
+\section{Presentations \& Works}
+  \resumeSubHeadingListStart
+      \resumePubs
+	{21st International Conference on Systems Biology}{Oct. 2022 -- \textit{Berlin, Germany}}
+      \resumeParagraph{\textit{Automated detection and regional classification of Cerebral Amyloid Angiopathy in digital whole slide images.} \underline{Lise Minaud}, Daniel R. Wong, Sina Ghandian, Harry V. Vinters et al.}
+
+      \resumePubs
+	{Alzheimer's Researchers' Symposium}{Aug. 2022 -- \textit{Stanford University, USA}}
+      \resumeParagraph{\textit{Automated detection and regional classification of Cerebral Amyloid Angiopathy in digital whole slide images.} \underline{Lise Minaud}, Daniel R. Wong, Sina Ghandian, Harry V. Vinters et al.}
+
+      \resumePubs
+	{97th American Association of Neuropathologists Meeting}{Jun. 2021 -- \textit{St. Louis, USA (Remote)}}
+      \resumeParagraph{\textit{Automated Detection of Cerebral Amyloid Angiopathy in Amyloid Beta Stained Slides Using Trained Machine Learning Models.} \underline{Lise Minaud}, Daniel R. Wong, Harry V. Vinters et al. \href{https://academic.oup.com/jnen/article/80/6/558/6292307}{\underline{https://doi.org/10.1093/jnen/nlab042}}}
+
+
+%      \resumePubs
+%	{CZI Neurodegeneration Chal. Network Ann. Meeting}{Jun. 2021 -- \textit{San Francisco, USA (Remote)}}
+%      \resumeParagraph{\textit{Automated detection and regional classification of Cerebral Amyloid Angiopathy in digital whole slide images.} \underline{Lise Minaud}, Daniel R. Wong, Harry V. Vinters et al.}
+  \resumeSubHeadingListEnd
+
+
+  \section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Tools}{: Python (PyTorch, scikit-learn, OpenCV, NumPy, pandas), R, Git, Linux/Unix Shell} \\ \vspace{5pt}
+     \textbf{Spoken Languages}{: French (Native), English (Fluent), Spanish (B2)} \\
+    }}
+ \end{itemize}
+
+\end{document}
